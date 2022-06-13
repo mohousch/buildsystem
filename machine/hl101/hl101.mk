@@ -9,6 +9,7 @@ CICAM ?= ci-cam
 SCART ?=
 LCD ?= vfd
 FKEYS ?=
+OSCAM_FLAVOUR ?= oscam
 
 #
 # kernel

@@ -304,6 +304,7 @@ include make/gstreamer.mk
 include make/root-etc.mk
 include make/python.mk
 include make/lua.mk
+include make/oscam.mk
 include make/tools.mk
 include make/release.mk
 include make/flashimage.mk
