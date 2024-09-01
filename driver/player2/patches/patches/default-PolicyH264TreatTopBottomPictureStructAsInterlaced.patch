@@ -1,0 +1,13 @@
+diff --git a/player/player/player_construct.cpp b/player/player/player_construct.cpp
+index 692d1d5..654617a 100644
+--- a/player/player/player_construct.cpp
++++ b/player/player/player_construct.cpp
+@@ -118,7 +118,7 @@ unsigned int    i;
+     SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyH264AllowBadPreProcessedFrames,			PolicyValueApply );
+     SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyH264TreatDuplicateDpbValuesAsNonReferenceFrameFirst,	PolicyValueApply );
+     SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyH264ForcePicOrderCntIgnoreDpbDisplayFrameOrdering,	PolicyValueDisapply );
+-    SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyH264TreatTopBottomPictureStructAsInterlaced,		PolicyValueDisapply );
++    SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyH264TreatTopBottomPictureStructAsInterlaced,		PolicyValueApply );
+ 
+     SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyMPEG2ApplicationType,				PolicyValueMPEG2ApplicationDvb );
+     SetPolicy( PlayerAllPlaybacks, PlayerAllStreams, PolicyMPEG2DoNotHonourProgressiveFrameFlag,		PolicyValueDisapply );

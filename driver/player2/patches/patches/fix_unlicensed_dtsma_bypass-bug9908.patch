@@ -1,0 +1,40 @@
+diff --git a/player/codec/codec_mme_audio_silence.cpp b/player/codec/codec_mme_audio_silence.cpp
+index 7e9300c..3145890 100644
+--- a/player/codec/codec_mme_audio_silence.cpp
++++ b/player/codec/codec_mme_audio_silence.cpp
+@@ -224,8 +224,24 @@ CodecStatus_t   Codec_MmeAudioSilence_c::FillOutTransformerInitializationParamet
+ CodecStatus_t   Codec_MmeAudioSilence_c::FillOutSetStreamParametersCommand( void )
+ {
+ 
+-    // if the stream is dtshd, then the "transcoding" is required
+-    TranscodeEnable = (ParsedAudioParameters->OriginalEncoding == AudioOriginalEncodingDtshd);
++    // if the stream is dtshd, then the "transcoding" might be required
++    if ( (ParsedAudioParameters->OriginalEncoding == AudioOriginalEncodingDtshdMA) || 
++         (ParsedAudioParameters->OriginalEncoding == AudioOriginalEncodingDtshd) )
++    {
++        if (ParsedAudioParameters->BackwardCompatibleProperties.SampleRateHz && ParsedAudioParameters->BackwardCompatibleProperties.SampleCount)
++        {
++            // a core is present, so transcode is possible
++            TranscodeEnable = true;
++        }
++        else
++        {
++            TranscodeEnable = false;
++        }
++    }
++    else
++    {
++        TranscodeEnable = false;
++    }
+ 
+     //
+     // Fillout the actual command
+@@ -282,7 +298,7 @@ CodecStatus_t   Codec_MmeAudioSilence_c::ValidateDecodeContext( CodecBaseDecodeC
+ 
+     memset( &AudioDecoderStatus, 0, sizeof(AudioDecoderStatus));    // SYSFS
+     
+-    if (TranscodeEnable && (ParsedAudioParameters->OriginalEncoding == AudioOriginalEncodingDtshd))
++    if (TranscodeEnable)
+     {
+         Codec_MmeAudioDtshd_c::TranscodeDtshdToDts(&LocalDecodeContext->BaseContext,
+                                                    LocalDecodeContext->TranscodeBufferIndex,

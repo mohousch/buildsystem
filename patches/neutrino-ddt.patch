@@ -1,0 +1,13 @@
+diff --git a/lib/jsoncpp/Makefile.am b/lib/jsoncpp/Makefile.am
+index 513c34e30..0393ddb3d 100644
+--- a/lib/jsoncpp/Makefile.am
++++ b/lib/jsoncpp/Makefile.am
+@@ -3,7 +3,7 @@ AM_CPPFLAGS = \
+ 	-I$(top_srcdir) \
+ 	-I$(srcdir)/include
+ 
+-AM_CXXFLAGS = -fno-rtti
++AM_CXXFLAGS = -fno-rtti -std=c++98
+ 
+ noinst_LIBRARIES = libjsoncpp.a
+ 

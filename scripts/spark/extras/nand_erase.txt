@@ -1,0 +1,16 @@
+ 
+update kernel: 
+
+flash_eraseall /dev/mtd5
+nandwrite -a -p -m /dev/mtd5 /boot/uImage
+
+########################################
+rootfs:
+
+flash_eraseall /dev/mtd6
+
+jffs2:
+nandwrite -a -m -p /dev/mtd6 /mnt/usb/e2jffs2.img
+
+yaffs2:
+nandwrite -a -o /dev/mtd6 /mnt/usb/e2yaffs2.img

@@ -1,0 +1,17 @@
+This is a short list of things that needs to be done.  They are in no specific
+order.  I will gladly accept patches for any of these items, or any other stuff
+people offer up.
+
+greg k-h
+greg@kroah.com
+gregkh@suse.de
+
+- more autoloaders (need to at least support what the bash scripts do.)  We
+  are missing the following at least:
+  	- input
+	- dasd
+	- ieee1394
+
+- documentation!  We really should document this boot process
+- man pages!
+

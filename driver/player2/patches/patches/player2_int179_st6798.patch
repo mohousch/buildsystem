@@ -1,0 +1,39 @@
+diff --git a/player/frame_parser/frame_parser_video_divx.cpp b/player/frame_parser/frame_parser_video_divx.cpp
+index 8103e23..658d863 100644
+--- a/player/frame_parser/frame_parser_video_divx.cpp
++++ b/player/frame_parser/frame_parser_video_divx.cpp
+@@ -679,7 +679,7 @@ FrameParserStatus_t  FrameParser_VideoDivx_c::ReadVolHeader( Mpeg4VolHeader_t
+ 		if( Vol->shape != SHAPE_RECTANGULAR )
+ 		{
+ 				report( severity_error, "Frame_Mpeg4Video_c::ReadVolHeader - ERROR **** VolHeader shape other than RECTANGULAR not supported\n" );
+-				Player->MarkStreamUnPlayable( Stream );
++				//Player->MarkStreamUnPlayable( Stream );
+ 				return FrameParserError;
+ 		}
+ 
+@@ -832,7 +832,7 @@ FrameParserStatus_t  FrameParser_VideoDivx_c::ReadVolHeader( Mpeg4VolHeader_t
+ 		if( Vol->scalability )
+ 		{
+ 				report( severity_error, "Frame_Mpeg4Video_c::ReadVolHeader - ERROR **** VolHeader scalability not supported.\n" );
+-				Player->MarkStreamUnPlayable( Stream );
++				//Player->MarkStreamUnPlayable( Stream );
+ 				return FrameParserError;
+ 		}
+ 
+@@ -840,14 +840,14 @@ FrameParserStatus_t  FrameParser_VideoDivx_c::ReadVolHeader( Mpeg4VolHeader_t
+ 		if( !Vol->complexity_estimation_disable )
+ 		{
+ 				report( severity_error, "Frame_Mpeg4Video_c::ReadVolHeader - ERROR **** VolHeader complexity_estimation_disable not set\n" );
+-				Player->MarkStreamUnPlayable( Stream );
++				//Player->MarkStreamUnPlayable( Stream );
+ 				return FrameParserError;
+ 		}
+ 
+ 		if( Vol->data_partitioning )
+ 		{
+ 				report( severity_error, "Frame_Mpeg4Video_c::ReadVolHeader - ERROR **** VolHeader data_partitioning not supported.\n" );
+-				Player->MarkStreamUnPlayable( Stream );
++				//Player->MarkStreamUnPlayable( Stream );
+ 				return FrameParserError;
+ 		}
+ 

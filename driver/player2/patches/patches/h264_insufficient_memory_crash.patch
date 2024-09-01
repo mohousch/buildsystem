@@ -1,0 +1,14 @@
+diff --git a/player/codec/codec_mme_video.cpp b/player/codec/codec_mme_video.cpp
+index a383e03..d8af9d6 100644
+--- a/player/codec/codec_mme_video.cpp
++++ b/player/codec/codec_mme_video.cpp
+@@ -336,8 +336,7 @@ CodecBufferState_t	 *State;
+     Status	= FillOutDecodeCommand();
+     if( Status != CodecNoError )
+     {
+-	// Nick changed to fatal, because if this happens we are heading for deadlock anyway
+-	report( severity_fatal, "Codec_MmeVideo_c::Input(%s) - Failed to fill out a decode command.\n", Configuration.CodecName );
++	report( severity_error, "Codec_MmeVideo_c::Input(%s) - Failed to fill out a decode command.\n", Configuration.CodecName );
+ 	ReleaseDecodeContext( DecodeContext );
+ 
+ 	return Status;

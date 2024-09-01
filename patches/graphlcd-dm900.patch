@@ -1,0 +1,17 @@
+diff --git a/graphlcd.conf b/graphlcd.conf
+index 270cae8..d256e4b 100644
+--- a/graphlcd.conf
++++ b/graphlcd.conf
+@@ -117,6 +117,12 @@
+ 
+ ########################################################################
+ 
++[dm900/dm920]
++# Driver setting for DM900/DM920
++Driver=dreambox
++Width=400
++Height=240
++
+ [ax206dpf]
+ #  THIS IS AN EXPERIMENTAL DRIVER!
+ #  You have to uncomment the variable HAVE_DRIVER_AX206DPF

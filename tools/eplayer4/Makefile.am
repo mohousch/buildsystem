@@ -1,0 +1,11 @@
+ACLOCAL_AMFLAGS = -I m4
+
+AM_CPPFLAGS = \
+	@GSTREAMER_CFLAGS@
+
+bin_PROGRAMS = eplayer4
+
+eplayer4_SOURCES = eplayer4.c
+
+eplayer4_LDADD = @GSTREAMER_LIBS@
+

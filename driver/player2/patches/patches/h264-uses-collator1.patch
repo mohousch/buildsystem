@@ -1,0 +1,22 @@
+diff --git a/linux/drivers/media/dvb/stm/backend/player_factory.cpp b/linux/drivers/media/dvb/stm/backend/player_factory.cpp
+index 5d6d87d..089fa21 100644
+--- a/linux/drivers/media/dvb/stm/backend/player_factory.cpp
++++ b/linux/drivers/media/dvb/stm/backend/player_factory.cpp
+@@ -14,7 +14,7 @@
+ #include "backend_ops.h"
+ #include "player.h"
+ #include "collator_pes_video_mpeg2.h"
+-#include "collator2_pes_video_h264.h"
++#include "collator_pes_video_h264.h"
+ #include "collator_pes_video_vc1.h"
+ #include "collator_pes_video_wmv.h"
+ #include "collator_pes_video_divx.h"
+@@ -112,7 +112,7 @@ static void* CollatorPesVideoMpeg2Factory  (void)
+ static void* CollatorPesVideoH264Factory  (void)
+ {
+     PLAYER_DEBUG("\n");
+-    return new Collator2_PesVideoH264_c ();
++    return new Collator_PesVideoH264_c ();
+ }
+ 
+ static void* CollatorPesVideoVc1Factory  (void)

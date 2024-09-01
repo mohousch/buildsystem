@@ -1,0 +1,11 @@
+--- a/configure.ac	2017-06-05 09:29:14.000000000 +0200
++++ b/configure.ac.new	2021-02-02 10:06:21.274290150 +0100
+@@ -273,7 +273,7 @@
+     [GNU bash >= 3.1],
+     [bash],
+     [bash],
+-    ['^GNU bash, version (3\.[1-9]|4)'])
++    ['^GNU bash, version (3\.[1-9]|4|5)'])
+ 
+ # We need a awk that *is* GNU awk
+ ACX_PROG_VERSION_REQ_STRICT([AWK],

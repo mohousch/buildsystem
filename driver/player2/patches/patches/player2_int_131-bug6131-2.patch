@@ -1,0 +1,16 @@
+ST bug #6131 2nd patch
+
+diff --git a/linux/components/inline/osinline.c b/linux/components/inline/osinline.c
+index 52bf528..b42f9fd 100644
+--- a/linux/components/inline/osinline.c
++++ b/linux/components/inline/osinline.c
+@@ -572,6 +572,9 @@ void* __builtin_new(size_t size)
+ #ifdef ENABLE_MALLOC_POISONING
+ 	if (p)
+ 	    memset(p, 0xcc, size);
++#else
++	if (p)
++	    memset(p, 0, size);
+ #endif
+ 
+ 	return p;

@@ -1,0 +1,68 @@
+diff --git a/Makefile.am b/Makefile.am
+index 5ad0dbb..e589dfa 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,7 +1,7 @@
+ AUTOMAKE_OPTIONS = gnu
+ 
+ SUBDIRS = \
+-	include tuxwetter input getrc shellexec fx2
++	include tuxwetter input getrc shellexec fx2 tuxcom tuxcal
+ #	include tuxcom tuxwetter msgbox input getrc shellexec fx2
+ #	include tuxmail tuxtxt tuxcom tuxcal tuxclock fx2 vncviewer enigma shellexec tuxwetter sysinfo clock logomask blockads links
+ 
+diff --git a/configure.ac b/configure.ac
+index 8005300..59b4c85 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -53,6 +53,7 @@ fx2/vierg/Makefile
+ fx2/sol/Makefile
+ fx2/sudoku/Makefile
+ fx2/solitair/Makefile
++tuxcom/Makefile
+ ])
+ #AC_OUTPUT([
+ #Makefile
+diff --git a/tuxcom/tuxcom.c b/tuxcom/tuxcom.c
+index 7c57f00..59e5022 100644
+--- a/tuxcom/tuxcom.c
++++ b/tuxcom/tuxcom.c
+@@ -982,20 +982,12 @@ int main()
+ 	}
+ 
+ 	/* open Remote Control */
+-#if HAVE_SPARK_HARDWARE || HAVE_DUCKBOX_HARDWARE || HAVE_ARM_HARDWARE || HAVE_MIPS_HARDWARE
+-	rc = open("/dev/input/nevis_ir", O_RDONLY);
+-#if defined(HAVE_SPARK_HARDWARE) || defined(HAVE_DUCKBOX_HARDWARE) || defined(HAVE_ARM_HARDWARE)
+-	if (rc < 0)
+-#if HAVE_DUCKBOX_HARDWARE || BOXMODEL_VUPLUS_ALL
++#if HAVE_DUCKBOX_HARDWARE || HAVE_MIPS_HARDWARE || HAVE_ARM_HARDWARE
+ 		rc = open("/dev/input/event0", O_RDONLY);
+ #elif BOXMODEL_H7 || BOXMODEL_H9COMBO || BOXMODEL_H9
+ 		rc = open("/dev/input/event2", O_RDONLY);
+ #else
+ 		rc = open("/dev/input/event1", O_RDONLY);
+-#endif
+-#endif
+-#else
+-#error your hardware is not yet implemented.
+ #endif
+ 	if(rc == -1) {
+ 		perror("TuxCom <open remote control>");
+diff --git a/tuxwetter/io.c b/tuxwetter/io.c
+index eff37bb..62fc46b 100644
+--- a/tuxwetter/io.c
++++ b/tuxwetter/io.c
+@@ -29,10 +29,10 @@ static int rc;
+ int InitRC(void)
+ {
+ 	rc = open(RC_DEVICE, O_RDONLY | O_CLOEXEC);
+-#ifdef MARTII
++
+ 	if (rc < 0)
+ 		rc = open(RC_DEVICE_FALLBACK, O_RDONLY);
+-#endif
++
+ 	if(rc == -1)
+ 	{
+ 		perror("tuxwetter <open remote control>");

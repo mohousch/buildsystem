@@ -1,0 +1,20 @@
+
+/*
+#define DCRAM_COMMAND			(0x20 & 0xf0)
+#define CGRAM_COMMAND			(0x40 & 0xf0)
+#define ADRAM_COMMAND			(0x60 & 0xf0)
+#define NUM_DIGIT_COMMAND		(0xE0 & 0xf0)
+#define LIGHT_ON_COMMAND		(0xE8 & 0xFC)
+#define DIMMING_COMMAND			(0xE4 & 0xFC)
+#define GRAY_LEVEL_DATA_COMMAND		(0xA0 & 0xF8)
+#define GRAY_LEVEL_ON_COMMAND		(0xC0 & 0xE0)
+
+
+#define VFDDCRAMWRITE			0xc0425a00
+#define VFDBRIGHTNESS			0xc0425a03
+#define VFDDISPLAYWRITEONOFF		0xc0425a05
+#define VFDDRIVERINIT			0xc0425a08
+#define VFDICONDISPLAYONOFF		0xc0425a0a
+*/
+
+static int len_vfd = 16;

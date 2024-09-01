@@ -1,0 +1,15 @@
+wyplay bug #3798
+
+diff --git a/player/frame_parser/frame_parser_video_h264.cpp b/player/frame_parser/frame_parser_video_h264.cpp
+index a30e473..314c803 100644
+--- a/player/frame_parser/frame_parser_video_h264.cpp
++++ b/player/frame_parser/frame_parser_video_h264.cpp
+@@ -5518,7 +5518,7 @@ report( severity_info, "NickQ NonPairedOutput - (%d %d) (%d %d) (%d %d)\n",
+     // framerate is ridiculous, then we use the default value.
+     //
+ 
+-    if( !inrange( ParsedVideoParameters->Content.FrameRate, 8, 120 ) )
++    if ( UserSpecifiedDefaultFrameRate || !inrange( ParsedVideoParameters->Content.FrameRate, 8, 120 ) )
+ 	ParsedVideoParameters->Content.FrameRate	= DefaultFrameRate;
+ 
+ 

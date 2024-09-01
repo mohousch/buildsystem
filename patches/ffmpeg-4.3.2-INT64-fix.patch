@@ -1,0 +1,17 @@
+--- a/libavutil/common.h_org
++++ b/libavutil/common.h
+@@ -30,6 +30,14 @@
+ #error missing -D__STDC_CONSTANT_MACROS / #define __STDC_CONSTANT_MACROS
+ #endif
+ 
++#ifndef INT64_MAX
++#define INT64_MAX 0x7fffffffffffffffLL
++#endif
++
++#ifndef INT64_MIN
++#define INT64_MIN (-INT64_MAX - 1LL)
++#endif
++
+ #include <errno.h>
+ #include <inttypes.h>
+ #include <limits.h>

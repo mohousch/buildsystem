@@ -1,0 +1,16 @@
+--- a/Makefile.orig
++++ b/Makefile
+@@ -6,9 +6,9 @@
+ CFLAGS	=	-O2 -Wall -W -Wshadow
+ 	#-pedantic -Wconversion
+ 
+-LIBS	=	-lcrypt -ldl -lnsl -lresolv -lutil
+-LINK	=	-Wl,-s
+-#LDFLAGS	=	-fPIE -pie -Wl,-z,relro -Wl,-z,now
++LIBS	=	-lcrypt -lcrypto -lssl
++LINK	=
++LDFLAGS	=	-fPIE -pie -Wl,-z,relro -Wl,-z,now
+ 
+ OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
+ 		tunables.o ftpdataio.o secbuf.o ls.o \
+

@@ -1,0 +1,147 @@
+#!/bin/sh
+
+start()
+{
+	echo ""
+	echo "[makedev] Starting makedev..."
+	MACHINE=`uname -m`
+	if [ $MACHINE == "sh4" ]; then
+		MAKEDEV="/sbin/MAKEDEV -p /etc/passwd -g /etc/group"
+		BOXTYPE=`cat /etc/hostname`
+	else
+		# Expecting to be in /dev
+		if [ ! -e ../etc/passwd ] || [ ! -e ../etc/group ]; then
+			MAKEDEV="../sbin/MAKEDEV -p ../var/etc/passwd -g ../var/etc/group"
+			BOXTYPE=`cat ../var/etc/hostname`
+		else
+			MAKEDEV="../sbin/MAKEDEV -p ../etc/passwd -g ../etc/group"
+			BOXTYPE=`cat ../etc/hostname`
+		fi
+	fi
+
+	# Decide if we have CI and/or TWIN/TRIPLET
+	CI="No"
+	for BOXLIST in ufs910 ufs912 ufs913 ufs922 ufc960 fortis_hdbox atevio7500 octagon1008 hs7110 hs7810a hs7119 hs7819 hl101 tf7700 cuberevo cuberevo_mini cuberevo_mini2 cuberevo_9500hd cuberevo_3000hd ipbox9900; do
+		if [ "${BOXTYPE}" == "${BOXLIST}" ]; then
+			CI="Yes"
+			break
+		fi
+	done
+
+	TUNER="1"
+	for BOXLIST in ufs913 ufs922 fortis_hdbox atevio7500 adb_box tf7700 cuberevo cuberevo_9500hd ipbox9900; do
+		if [ "${BOXTYPE}" == "${BOXLIST}" ]; then
+			TUNER="2"
+			break
+		fi
+	done
+
+	for BOXLIST in spark7162; do
+		if [ "${BOXTYPE}" == "${BOXLIST}" ]; then
+			TUNER="3"
+			break
+		fi
+	done
+
+	# Decide if we support HDMI CEC
+	HDMI_CEC="No"
+	for BOXLIST in ufs912 ufs913 atevio7500 hs7110 hs7810a hs7119 hs7819 spark spark7162; do
+		if [ "${BOXTYPE}" == "${BOXLIST}" ]; then
+			HDMI_CEC="Yes"
+			break
+		fi
+	done
+
+	echo ""
+	echo " Boxtype    : ${BOXTYPE}"
+	echo " CI-slot(s) : ${CI}"
+	echo " Tuners     : ${TUNER}"
+	echo " HDMI CEC   : ${HDMI_CEC}"
+	echo ""
+
+	${MAKEDEV} std
+	${MAKEDEV} fd
+	${MAKEDEV} hda hdb
+	${MAKEDEV} sda sdb sdc sdd
+	${MAKEDEV} scd0 scd1
+	${MAKEDEV} st0 st1
+	${MAKEDEV} sg
+	${MAKEDEV} ptyp ptyq
+	${MAKEDEV} console
+	${MAKEDEV} ttyAS0 ttyAS1 ttyAS2 ttyAS3
+	${MAKEDEV} lp par audio video fb rtc lirc st200 alsasnd
+	${MAKEDEV} ppp busmice
+	${MAKEDEV} input
+	${MAKEDEV} tundev
+	${MAKEDEV} fuse
+	ln -s -f /dev/input/mouse0 mouse
+	${MAKEDEV} i2c mtd
+
+	${MAKEDEV} dvb
+	if [ "${CI}" == "Yes" ]; then
+		${MAKEDEV} dvb_ci
+		${MAKEDEV} dvb_ca
+	else
+		${MAKEDEV} dvb_ca_no
+	fi
+
+	if [ "${TUNER}" == "2" ] || [ "${TUNER}" == "3" ]; then
+		${MAKEDEV} dvb_2nd
+		if [ "${CI}" == "Yes" ]; then
+			${MAKEDEV} dvb_ca_2nd
+		else
+			${MAKEDEV} dvb_ca_2nd_no
+		fi
+	fi
+
+	if [ "${TUNER}" == "3" ]; then
+		${MAKEDEV} dvb_3rd
+		if [ "${CI}" == "Yes" ]; then
+			${MAKEDEV} dvb_ca_3rd
+		else
+			${MAKEDEV} dvb_ca_3rd_no
+		fi
+	fi
+
+	${MAKEDEV} mme bpamem
+	${MAKEDEV} vfd
+	${MAKEDEV} rc
+	${MAKEDEV} hdmi
+
+	if [ "${HDMI_CEC}" == "Yes" ]; then
+		${MAKEDEV} hdmi_cec
+	fi
+
+	${MAKEDEV} ttyusb
+	${MAKEDEV} rfkill
+
+	if [ "${BOXTYPE}" == "fortis_hdbox" ]; then
+		${MAKEDEV} sci_fortis
+	else
+		${MAKEDEV} sci
+	fi
+
+	# Additional box specific stuff
+	for BOXLIST in spark spark7162; do
+		if [ "${BOXTYPE}" == "${BOXLIST}" ]; then
+			${MAKEDEV} uinput
+		break
+		fi
+	done
+
+	mkdir pts
+	mkdir shm
+	touch .devfsd
+
+	echo "[makedev] done."
+	echo ""
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	*)
+		echo $"Usage: $0 {start}"
+		RETVAL=0
+esac

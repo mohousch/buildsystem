@@ -1,0 +1,64 @@
+
+hotplug-ng - a /sbin/hotplug replacement and auto module loader in c
+
+To use:
+
+- You must be running a 2.6 version of the Linux kernel.
+
+- Your 2.6 kernel must have had CONFIG_HOTPLUG enabled when it was built.
+
+- Build the project:
+	make
+
+  Note:
+      There are a number of different flags that you can use when building
+      hotplug-ng.  They are as follows:
+	prefix
+		set this to the default root that you want hotplug-ng to be
+		installed into.  This works just like the 'configure --prefix'
+		script does.  Default value is ''.  Only override this if you
+		really know what you are doing.
+	USE_KLIBC
+		if set to 'true', hotplug-ng is built and linked against the
+		included version of klibc.  Default value is 'false'.
+	USE_LOG
+		if set to 'true', hotplug-ng will emit messages to the syslog
+		when it creates or removes device nodes.  This is helpful to
+		see what hotplug-ng is doing.  This is enabled by default.
+		Note, if you are building hotplug-ng against klibc it is
+		recommended that you disable this option (due to klibc's syslog
+		implementation.)
+	DEBUG
+		if set to 'true', debugging messages will be sent to the syslog
+		as hotplug-ng is run.  Default value is 'false'.
+	KERNEL_DIR
+		If this is not set it will default to /lib/modules/`uname -r`/build
+		This is used if USE_KLIBC=true to find the kernel include
+		directory that klibc needs to build against.  This must be set
+		if you are not building hotplug-ng while running a 2.6 kernel.
+
+      So, if you want to build hotplug using klibc with debugging messages, you
+      would do:
+	make USE_KLIBC=true DEBUG=true
+
+- Install the project:
+	make install
+
+- Add and remove devices from the system and marvel as modules are automatically
+  loaded faster than they ever have been.
+
+- If you later get sick of it, uninstall it:
+	make uninstall
+
+
+Development and documentation help is very much appreciated, see the TODO
+file for a list of things left to be done.
+
+Any comment/questions/concerns please let me and the other hotplug developers
+know by sending a message to the linux-hotplug-devel mailing list at:
+	linux-hotplug-devel@lists.sourceforge.net
+
+greg k-h
+greg@kroah.com
+gregkh@suse.de
+

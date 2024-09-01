@@ -1,0 +1,15 @@
+diff --git a/player/manifestor/manifestor_video_stmfb.cpp b/player/manifestor/manifestor_video_stmfb.cpp
+index f2518de..39ea189 100644
+--- a/player/manifestor/manifestor_video_stmfb.cpp
++++ b/player/manifestor/manifestor_video_stmfb.cpp
+@@ -1297,6 +1297,10 @@ void Manifestor_VideoStmfb_c::InitialFrameDisplayCallback      (struct StreamBuf
+     InitialFrameState           = InitialFrameOnDisplay;
+     OS_SemaphoreSignal (&InitialFrameDisplayed);
+ 
++    // Again Julian, sorry for this hack.
++    ManifestorLastDisplayedBuffer = &DisplayBuffer[BufferOnDisplay];
++    wake_up_interruptible (&g_ManifestorLastWaitQueue);
++
+     DisplayAddress              = (unsigned char*)(DisplayBuffer[Buffer->BufferIndex].src.ulVideoBufferAddr);
+     DisplaySize                 = DisplayBuffer[Buffer->BufferIndex].src.ulVideoBufferSize;
+ 

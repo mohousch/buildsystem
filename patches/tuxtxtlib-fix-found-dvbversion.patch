@@ -1,0 +1,12 @@
+diff -Nur libtuxtxt/acinclude.m4 libtuxtxt.patched/acinclude.m4
+--- libtuxtxt/acinclude.m4	2022-06-21 11:20:57.099491131 +0200
++++ libtuxtxt.patched/acinclude.m4	2022-06-21 11:11:05.171312000 +0200
+@@ -189,7 +189,7 @@
+ #include <linux/dvb/version.h>
+ version DVB_API_VERSION
+ 	]])])
+-	DVB_API_VERSION=`(eval "$ac_cpp conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD | $EGREP "^version" | sed "s,version\ ,,"`
++	DVB_API_VERSION=`(eval "$ac_cpp -traditional-cpp conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD | $EGREP "^version" | sed "s,version\ ,,"`
+ 	rm -f conftest*
+ 
+ 	AC_MSG_NOTICE([found dvb version $DVB_API_VERSION])

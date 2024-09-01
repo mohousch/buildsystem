@@ -1,0 +1,28 @@
+#!/bin/bash
+# removes ".." at the end of an absolute path
+# along with the according directories.
+# Necessary to get the same path from all
+# subdirs
+
+if [ "${1:0:1}" != "/" ]; then
+    echo "error: \$PWD has relative path: $1"
+    exit 1
+fi
+
+SPLIT=${1//\// }
+UP=0;
+TOTAL=0;
+for i in $SPLIT; do 
+    if [ "$i" = ".." ]; then
+	let UP=$UP+2
+    fi
+    let TOTAL=$TOTAL+1
+done
+FINAL=""
+for i in $SPLIT; do
+    if [ $TOTAL -gt $UP ]; then
+        FINAL=${FINAL}/$i
+	let TOTAL=$TOTAL-1
+    fi
+done
+echo $FINAL

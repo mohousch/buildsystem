@@ -1,0 +1,43 @@
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/var/bin"
+
+TERM=xterm
+
+if [ ! -e /etc/localtime ]; then
+	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
+				# for an explanation of how to set this to your local timezone.
+	export TZ
+fi
+
+if [ "$BASH" ]; then
+  PS1='\u@\H:\w\$ '
+else
+  if [ "`id -u`" -eq 0 ]; then
+    #PS1='\u@\h:\w\# '
+    PS1='\h:\w\# '
+  else
+    PS1='\$ '
+  fi
+fi
+
+umask 022
+
+# aliase
+#BEGIN
+alias l='ls -al'
+alias ll='ls -l'
+alias dir='ls -lA'
+alias ..='cd ..'
+alias mc='mc -u'
+alias sc='setconsole'
+alias sr='setconsole -r'
+#END
+
+# export
+#BEGIN
+export PATH PS1 TERM
+#END
+
+DEBUG=0

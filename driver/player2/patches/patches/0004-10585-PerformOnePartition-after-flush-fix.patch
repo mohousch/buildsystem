@@ -1,0 +1,17 @@
+diff --git a/player/collator2/collator2_base.cpp b/player/collator2/collator2_base.cpp
+index 8f20650..e659d7d 100644
+--- a/player/collator2/collator2_base.cpp
++++ b/player/collator2/collator2_base.cpp
+@@ -998,7 +998,11 @@ bool			PreservedNonBlocking;
+     OS_LockMutex( &PartitionLock );
+     AccumulateOnePartition();
+ 
+-    PartitionPointSafeToOutputCount	= PartitionPointMarkerCount;		// If we are flushing, then we should move the marker and safe to output pointers
++    if( PlayDirection == PlayForward )
++	PartitionPointSafeToOutputCount	= 0;
++    else
++	PartitionPointSafeToOutputCount	= PartitionPointMarkerCount;	// If we are flushing, then we should move the marker and safe to output pointers
++
+     PartitionPointMarkerCount		= PartitionPointUsedCount;
+ 
+     PreservedNonBlocking	= NonBlockingInput;

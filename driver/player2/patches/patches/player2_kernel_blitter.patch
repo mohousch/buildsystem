@@ -1,0 +1,34 @@
+diff --git a/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c b/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c
+index 717cc2a..cc397f7 100644
+--- a/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c
++++ b/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c
+@@ -365,7 +365,7 @@ static int linuxdvb_v4l2_capture_thread (void *data)
+ 				      ? STM_BLITTER_FLAGS_SRC_COLOURSPACE_709
+ 				      : 0);
+ 			op.ulFlags |= ldvb->capture->flags;
+-			//op.ulFlags |= STM_BLITTER_FLAGS_SRC_XY_IN_FIXED_POINT;
++			op.ulFlags |= STM_BLITTER_FLAGS_SRC_XY_IN_FIXED_POINT;
+ 			op.srcSurface.ulMemory       = buffer.src.ulVideoBufferAddr;
+ 			op.srcSurface.ulSize         = buffer.src.ulVideoBufferSize;
+ 			op.srcSurface.ulWidth        = buffer.src.ulStride / (buffer.src.ulPixelDepth / 8);
+@@ -381,7 +381,7 @@ static int linuxdvb_v4l2_capture_thread (void *data)
+ 			op.dstSurface.ulStride = ldvb->capture->stride;
+ 			op.dstSurface.format   = ldvb->capture->buffer_format;
+ 
+-			if (stm_display_blitter_blit(pipeline_data.blitter, &op, &srcrect, &dstrect))
++			if (stm_display_blitter_blit(pipeline_data.blitter_kernel, &op, &srcrect, &dstrect))
+ 				printk("%s:%d Error during blitter operation\n",__FUNCTION__,__LINE__);
+ 
+ 			ldvb->capture->complete = 1;
+@@ -643,11 +643,9 @@ int linuxdvb_ioctl(struct stm_v4l2_handles *handle,struct stm_v4l2_driver *drive
+ 
+ 		ldvb->capture->physical_address = addr;
+ 		ldvb->capture->size             = buf->length;
+-#if 0
+ 		ldvb->capture->flags = ((buf->flags & V4L2_BUF_FLAG_FULLRANGE)
+ 					? STM_BLITTER_FLAGS_DST_FULLRANGE
+ 					: 0);
+-#endif
+ 
+ 		break;
+ 	}

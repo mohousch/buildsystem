@@ -1,0 +1,2 @@
+
+mkyaffs2 -o spark_oob.img rootfs_dir e2yaffs2.img

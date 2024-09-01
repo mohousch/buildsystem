@@ -1,0 +1,64 @@
+Summary of changes v001 to v002
+============================================
+
+Christian Borntraeger:
+  o fix segfault when no parameters are used for agents
+  o typo in make uninstall
+
+Greg KH:
+  o Add manpage to the install/uninstall rules
+  o delete klibc/klibc.spec, which is a generated file
+
+Greg Kroah-Hartman:
+  o fix 'make release' to work properly with git
+  o update makefile to allow me to do a tarball interm release for someone
+  o fix up argc test in module_form.c
+  o make the release tarballs have writable files
+
+Kay Sievers:
+  o rename LOG to USE_LOG
+  o cleanup logging.h and list.h
+  o libsysfs: new version
+  o remove old klibc_fixups
+  o klibc: version 1.0.3
+
+Pozsar Balazs:
+  o Add ieee1394 support
+  o fix width of pci ids
+
+Tobias Klauser:
+  o Manpage for hotplug-ng
+
+
+Summary of changes up to v001
+============================================
+
+Greg Kroah-Hartman:
+  o fix permissions on module_scsi.c
+  o update documentation
+  o lots of makefile cleanups (now installs and uninstalls.)
+  o delete more unneeded subdirs
+  o delete the test subdir for now
+  o ok, now the scsi code works
+  o more scsi cleanups
+  o fix scsi code to work
+  o update bk ignore list
+  o add framework for scsi support
+  o fun with #defines, it's easier to create a module_ file now
+  o bk ignore update
+  o add pci support
+  o make ccdv work better with vim
+  o fix up 'make clean'
+  o delet extras directory
+  o update bk ignore list
+  o module_usb now works
+  o add module_usb program
+  o add usb.c file from diethotplug package
+  o make /etc/hotplug.d/ be configurable (for whatever reason...)
+  o rip out all the unneeded udev remanants
+  o make hotplug work properly if there is no argv[1] (which can happen)
+  o updated bk ignore list
+  o add hotplug to the build
+  o add hotplug.c
+  o Import changeset
+

@@ -1,0 +1,202 @@
+diff -Nur enigma2.git/configure.ac enigma2.git.patched/configure.ac
+--- enigma2.git/configure.ac	2023-03-20 19:28:54.658490288 +0100
++++ enigma2.git.patched/configure.ac	2023-05-05 17:51:00.842193681 +0200
+@@ -35,13 +35,14 @@
+ AM_CONDITIONAL(HAVE_FAKE_GIT_DIR, test -f "$srcdir/.git/last_commit_info")
+ 
+ dnl versions of gstreamer and plugins-base
+-AC_ARG_WITH(gstversion,
+-	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
+-	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=0.10])
++#AC_ARG_WITH(gstversion,
++#	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
++#	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=0.10])
+ 
+ PKG_CHECK_MODULES(TUXTXT, tuxbox-tuxtxt)
+-PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
+-PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 sigc++-2.0 libssl libcrypto])
++#PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
++#PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 sigc++-2.0 libssl libcrypto])
++PKG_CHECK_MODULES(BASE, [freetype2 fribidi glib-2.0 libdvbsi++ libpng libxml-2.0 sigc++-2.0 libssl libcrypto])
+ PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
+ AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
+ PKG_CHECK_MODULES(AVAHI, avahi-client)
+diff -Nur enigma2.git/data/fonts/Makefile.am enigma2.git.patched/data/fonts/Makefile.am
+--- enigma2.git/data/fonts/Makefile.am	2023-03-20 20:10:42.177314463 +0100
++++ enigma2.git.patched/data/fonts/Makefile.am	2023-05-05 17:51:55.471793640 +0200
+@@ -14,9 +14,9 @@
+ 	LiberationSans-Regular.ttf \
+ 	wqy-microhei.ttc
+ 
+-install-data-hook:
+-	cd $(DESTDIR)$(datadir)/fonts && \
+-	$(LN_S) wqy-microhei.ttc fallback.font
++#install-data-hook:
++#	cd $(DESTDIR)$(datadir)/fonts && \
++#	$(LN_S) wqy-microhei.ttc fallback.font
+ 
+ if VUULTIMO
+ dist_install_DATA += analog.ttf MyriadPro-Regular.otf MyriadPro-Semibold.otf MyriadPro-SemiboldIt.otf
+diff -Nur enigma2.git/lib/base/estring.cpp enigma2.git.patched/lib/base/estring.cpp
+--- enigma2.git/lib/base/estring.cpp	2023-03-20 19:28:54.806482379 +0100
++++ enigma2.git.patched/lib/base/estring.cpp	2023-05-05 17:53:49.466134865 +0200
+@@ -935,9 +935,11 @@
+ 
+ std::string strip_non_graph(std::string s)
+ {
++#if 0
+ 	s = std::regex_replace(s, std::regex("[[^:graph:]]"), " ");
+ 	s = std::regex_replace(s, std::regex("\\s{2,}"), " ");
+ 	s = std::regex_replace(s, std::regex("^\\s+|\\s+$"), "");
++#endif
+ 	return s;
+ }
+ 
+diff -Nur enigma2.git/lib/dvb/streamserver.cpp enigma2.git.patched/lib/dvb/streamserver.cpp
+--- enigma2.git/lib/dvb/streamserver.cpp	2023-03-20 19:28:54.830481097 +0100
++++ enigma2.git.patched/lib/dvb/streamserver.cpp	2023-05-05 17:54:38.447550368 +0200
+@@ -20,6 +20,9 @@
+ #include <lib/dvb/streamserver.h>
+ #include <lib/dvb/encoder.h>
+ 
++
++#define TCP_USER_TIMEOUT	18
++
+ eStreamClient::eStreamClient(eStreamServer *handler, int socket, const std::string remotehost)
+  : parent(handler), encoderFd(-1), streamFd(socket), streamThread(NULL), m_remotehost(remotehost), m_timeout(eTimer::create(eApp))
+ {
+diff -Nur enigma2.git/lib/dvb_ci/dvbci.cpp enigma2.git.patched/lib/dvb_ci/dvbci.cpp
+--- enigma2.git/lib/dvb_ci/dvbci.cpp	2023-03-20 19:28:54.830481097 +0100
++++ enigma2.git.patched/lib/dvb_ci/dvbci.cpp	2023-05-05 18:09:17.982522984 +0200
+@@ -337,7 +337,7 @@
+ 	m_stream_finish_mode = finish_none;
+ 
+ 	eDebug("[CI] scanning for common interfaces..");
+-
++/*
+ 	for (;;)
+ 	{
+ 		path.str("");
+@@ -414,6 +414,7 @@
+ 			eDebug("[CI] Streaming CI finish interface not advertised, assuming \"tuner\" method");
+ 		}
+ 	}
++*/
+ }
+ 
+ eDVBCIInterfaces::~eDVBCIInterfaces()
+diff -Nur enigma2.git/lib/gui/elistboxcontent.cpp enigma2.git.patched/lib/gui/elistboxcontent.cpp
+--- enigma2.git/lib/gui/elistboxcontent.cpp	2023-03-20 19:28:54.838480669 +0100
++++ enigma2.git.patched/lib/gui/elistboxcontent.cpp	2023-05-05 18:17:24.095762082 +0200
+@@ -469,8 +469,11 @@
+ 						if (eConfigManager::getConfigBoolValue("config.usage.show_slider_value", true))
+ 						{
+ 							value_area = 100;
++							std::stringstream value_string;
++							value_string << value;
+ 							painter.setFont(fnt2);
+-							painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), std::to_string(value), gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
++							//painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), std::to_string(value), gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
++							painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value_string.str(), gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
+ 						}
+ 							/* calc. slider length */
+ 						int width = (m_itemsize.width() - m_seperation - 15 - value_area) * value / size;
+diff -Nur enigma2.git/lib/service/Makefile.inc enigma2.git.patched/lib/service/Makefile.inc
+--- enigma2.git/lib/service/Makefile.inc	2023-03-20 19:28:54.954474470 +0100
++++ enigma2.git.patched/lib/service/Makefile.inc	2023-05-05 18:14:16.724597339 +0200
+@@ -10,8 +10,6 @@
+ 	service/servicedvb.cpp \
+ 	service/servicedvbrecord.cpp \
+ 	service/servicefs.cpp \
+-	service/servicemp3.cpp \
+-	service/servicemp3record.cpp \
+ 	service/servicem2ts.cpp \
+ 	service/servicedvbstream.cpp \
+ 	service/servicehdmi.cpp \
+@@ -28,8 +26,6 @@
+ 	service/servicedvb.h \
+ 	service/servicedvbrecord.h \
+ 	service/servicefs.h \
+-	service/servicemp3.h \
+-	service/servicemp3record.h \
+ 	service/servicem2ts.h \
+ 	service/servicedvbstream.h \
+ 	service/servicehdmi.h \
+@@ -44,9 +40,9 @@
+ 	service/servicexine.h
+ endif
+ 
+-if HAVE_LIBDDVD
+-service_libenigma_service_a_SOURCES += \
+-	service/servicedvd.cpp
+-serviceinclude_HEADERS += \
+-	service/servicedvd.h
+-endif
++#if HAVE_LIBDDVD
++#service_libenigma_service_a_SOURCES += \
++#	service/servicedvd.cpp
++#serviceinclude_HEADERS += \
++#	service/servicedvd.h
++#endif
+diff -Nur enigma2.git/main/bsod.cpp enigma2.git.patched/main/bsod.cpp
+--- enigma2.git/main/bsod.cpp	2023-03-20 19:28:54.962474043 +0100
++++ enigma2.git.patched/main/bsod.cpp	2023-05-05 18:22:13.445304083 +0200
+@@ -268,6 +268,7 @@
+ 	os.clear();
+ 	os_text.clear();
+ 
++	std::stringstream value_string;
+ 	
+ 	if (!bsodpython)
+ 	{	
+@@ -283,9 +284,17 @@
+ 	{	
+ 		std::string txt;
+ 		if (!bsodmax && bsodcnt < bsodmaxmax)
+-			txt = "not (max " + std::to_string(bsodmaxmax) + " times)";	
++		{
++			//txt = "not (max " + std::to_string(bsodmaxmax) + " times)";
++			value_string << bsodmaxmax;
++			txt = "not (max " + value_string.str() + " times)";
++		}	
+ 		else if (bsodmax - bsodcnt > 0)
+-			txt = "if it happens "+ std::to_string(bsodmax - bsodcnt) + " more times";
++		{
++			//txt = "if it happens "+ std::to_string(bsodmax - bsodcnt) + " more times";
++			value_string << (bsodmaxmax - bsodcnt);
++			txt = "if it happens "+ value_string.str() + " more times";
++		}
+ 		else
+ 			txt = "if it happens next times";
+ 		os_text << "We are really sorry. Your receiver encountered "
+diff -Nur enigma2.git/main/enigma.cpp enigma2.git.patched/main/enigma.cpp
+--- enigma2.git/main/enigma.cpp	2023-03-20 19:28:54.962474043 +0100
++++ enigma2.git.patched/main/enigma.cpp	2023-05-05 18:02:37.014140503 +0200
+@@ -38,7 +38,7 @@
+ #include "bsod.h"
+ #include "version_info.h"
+ 
+-#include <gst/gst.h>
++//#include <gst/gst.h>
+ 
+ #include <lib/base/eerroroutput.h>
+ ePtr<eErrorOutput> m_erroroutput;
+@@ -272,7 +272,7 @@
+ 	atexit(object_dump);
+ #endif
+ 
+-	gst_init(&argc, &argv);
++	//gst_init(&argc, &argv);
+ 
+ 	for (int i = 0; i < argc; i++)
+ 	{
+@@ -445,7 +445,8 @@
+ 
+ const char *getGStreamerVersionString()
+ {
+-	return gst_version_string();
++	//return gst_version_string();
++	return NULL;
+ }
+ 
+ #include <malloc.h>

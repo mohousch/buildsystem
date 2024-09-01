@@ -1,0 +1,11 @@
+diff -Nur ffmpeg-2.8.16.orig/configure ffmpeg-2.8.16/configure
+--- ffmpeg-2.8.16.orig/configure	2020-04-27 23:48:23.000000000 +0200
++++ ffmpeg-2.8.16/configure	2022-05-09 02:37:59.446465836 +0200
+@@ -5679,7 +5679,6 @@
+     check_cflags -Werror=return-type
+     check_cflags -Werror=vla
+     check_cflags -Wformat
+-    check_cflags -fdiagnostics-color=auto
+     enabled extra_warnings || check_disable_warning -Wno-maybe-uninitialized
+ elif enabled llvm_gcc; then
+     check_cflags -mllvm -stack-alignment=16

@@ -1,0 +1,21 @@
+--- a/Include/modsupport.h.org
++++ b/Include/modsupport.h
+@@ -96,7 +96,7 @@
+    without actually needing a recompile.  */
+ #endif /* MS_WINDOWS */
+ 
+-#if SIZEOF_SIZE_T != SIZEOF_INT
++#if 0 // SIZEOF_SIZE_T != SIZEOF_INT
+ /* On a 64-bit system, rename the Py_InitModule4 so that 2.4
+    modules cannot get loaded into a 2.5 interpreter */
+ #define Py_InitModule4 Py_InitModule4_64
+@@ -106,7 +106,7 @@
+  /* When we are tracing reference counts, rename Py_InitModule4 so
+     modules compiled with incompatible settings will generate a
+     link-time error. */
+- #if SIZEOF_SIZE_T != SIZEOF_INT
++ #if 0  // SIZEOF_SIZE_T != SIZEOF_INT
+  #undef Py_InitModule4
+  #define Py_InitModule4 Py_InitModule4TraceRefs_64
+  #else
+

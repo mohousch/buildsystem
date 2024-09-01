@@ -1,0 +1,13 @@
+#ifndef _LIBMMEIMG_ERROR_H
+#define _LIBMMEIMG_ERROR_H
+
+#define LIBMMEIMG_ERROR unsigned int
+
+#define LIBMMEIMG_SUCCESS      0
+#define LIBMMEIMG_MISC_ERROR   1
+#define LIBMMEIMG_NOMEM        2
+#define LIBMMEIMG_INVALIDARG   3
+#define LIBMMEIMG_NO_DEVACCESS 4
+#define LIBMMEIMG_DECODE_ERROR 5
+
+#endif

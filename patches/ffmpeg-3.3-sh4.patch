@@ -1,0 +1,11 @@
+diff -Nur ffmpeg-3.3/configure ffmpeg-3.3.patched/configure
+--- ffmpeg-3.3/configure	2017-04-13 03:55:54.000000000 +0200
++++ ffmpeg-3.3.patched/configure	2022-06-28 22:37:33.133626959 +0200
+@@ -6288,7 +6288,6 @@
+     check_cflags -Werror=return-type
+     check_cflags -Werror=vla
+     check_cflags -Wformat
+-    check_cflags -fdiagnostics-color=auto
+     enabled extra_warnings || check_disable_warning -Wno-maybe-uninitialized
+ elif enabled llvm_gcc; then
+     check_cflags -mllvm -stack-alignment=16

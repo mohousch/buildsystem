@@ -1,0 +1,31 @@
+diff --git a/player/frame_parser/frame_parser_video_h264.cpp b/player/frame_parser/frame_parser_video_h264.cpp
+index 0a740d5..2fdb5ad 100644
+--- a/player/frame_parser/frame_parser_video_h264.cpp
++++ b/player/frame_parser/frame_parser_video_h264.cpp
+@@ -90,7 +90,7 @@ static SliceType_t SliceTypeTranslation[]  = { SliceTypeP, SliceTypeB, SliceType
+ #define Assert(L)		if( !(L) )											 	\
+ 				{													\
+ 				    report( severity_error, "Assertion fail %s %d\n", __FUNCTION__, __LINE__ );	\
+-				    Player->MarkStreamUnPlayable( Stream );								\
++				    /*Player->MarkStreamUnPlayable( Stream );*/								\
+ 				    return FrameParserError;										\
+ 				}
+ 
+@@ -101,7 +101,7 @@ static SliceType_t SliceTypeTranslation[]  = { SliceTypeP, SliceTypeB, SliceType
+ 				    if( Status != FrameParserNoError )						\
+ 				    {										\
+ 				        report( severity_error, "FrameParser_VideoH264_c::%s - Anti Emulation Test fail.\n", Text );	\
+-					Player->MarkStreamUnPlayable( Stream );					\
++					/*Player->MarkStreamUnPlayable( Stream );*/					\
+ 					return FrameParserError;						\
+ 				    }										\
+ 				}
+@@ -1189,7 +1189,7 @@ unsigned int				*FallbackScalingList[8];
+     {
+ 	report( severity_error, "FrameParser_VideoH264_c::ReadNalSequenceParameterSet - seq_parameter_set_id exceeds our soft restriction (%d,%d).\n", Header->seq_parameter_set_id, H264_MAX_SEQUENCE_PARAMETER_SETS-1 );
+ 	SPSBuffer->DecrementReferenceCount();
+-	Player->MarkStreamUnPlayable( Stream );
++	//Player->MarkStreamUnPlayable( Stream );
+ 	return FrameParserError;
+     }
+ 

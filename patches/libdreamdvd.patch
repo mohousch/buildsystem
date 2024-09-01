@@ -1,0 +1,8 @@
+--- a/Makefile.am	2022-04-12 14:50:26.101197412 +0200
++++ b/Makefile.am	2022-04-12 15:04:05.687583000 +0200
+@@ -1,4 +1,4 @@
+-AM_CFLAGS = @DVDNAV_CFLAGS@
++AM_CFLAGS = @DVDNAV_CFLAGS@ -std=gnu11
+ 
+ lib_LTLIBRARIES = libdreamdvd.la
+ 

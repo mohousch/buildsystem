@@ -1,0 +1,20 @@
+--- a/linux/drivers/media/dvb/stm/backend/havana_stream.cpp
++++ b/linux/drivers/media/dvb/stm/backend/havana_stream.cpp
+@@ -349,7 +349,7 @@ HavanaStatus_t HavanaStream_c::Init    (
+ 
+         VideoManifestor->GetOutputWindow (&X, &Y, &Width, &Height);
+         STREAM_TRACE ("Window is %dx%d at %d,%d\n", Width, Height, X, Y);
+-#if 0
++#if 1
+         if ((Width <= SCALING_THRESHOLD_WIDTH) || (Height < SCALING_THRESHOLD_HEIGHT))
+         {
+             STREAM_TRACE ("Enabling Decimation\n");
+@@ -1063,7 +1063,7 @@ HavanaStatus_t HavanaStream_c::SetOutput
+         }
+ 
+         VideoManifestor->GetOutputWindow (&X, &Y, &Width, &Height);
+-#if 0
++#if 1
+         if ((Width <= SCALING_THRESHOLD_WIDTH) || (Height < SCALING_THRESHOLD_HEIGHT))
+         {
+             STREAM_TRACE ("Enabling Decimation\n");

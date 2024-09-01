@@ -1,0 +1,134 @@
+#!/bin/sh
+
+. /etc/profile
+echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
+SYSDATE=`date +"%Y%m%d"`
+
+read model < /etc/model
+
+if [ -e /var/etc/.firstboot ]; then
+/usr/bin/passwd root <<EOF
+root
+root
+EOF
+  rm /var/etc/.firstboot
+fi
+
+mount -t proc proc /proc
+mount -t sysfs sys /sys
+mount -t tmpfs tmp /tmp
+mkdir -p /dev/pts
+mount -t devpts devpts /dev/pts
+
+# mdev
+echo "[rcS] starting mdev"
+echo /sbin/mdev >/proc/sys/kernel/hotplug
+mdev -s
+# coldplug modules
+find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
+
+echo "[rcS] starting mountall"
+/etc/init.d/mountall start
+
+#
+if [ -e /sys/class/net/lo ]; then
+	/sbin/ifconfig lo up
+fi
+if [ -e /sys/class/net/eth0 ]; then
+	/sbin/ifconfig eth0 up
+fi
+if [ -e /sys/class/net/eth1 ]; then
+	/sbin/ifconfig eth1 up
+fi
+if [ -e /sys/class/net/sys0 ]; then
+	/sbin/ifconfig sys0 up
+fi
+
+#
+echo "[rcS] setup network"
+NFS=$(grep -c nfs /proc/cmdline)
+if [ "$NFS" -eq "1" ]; then
+	echo "Booting from nfs, don't set network"
+elif [ -e /var/tuxbox/config/.bootargs ]; then
+	echo "using ip set via bootargs, don't reset network"
+else
+	if [ -e /etc/network/interfaces ]; then
+		ip addr flush eth0
+		/etc/init.d/networking stop
+		/etc/init.d/networking start
+	fi
+fi
+/sbin/ifconfig lo 127.0.0.1 up
+
+# get net-time
+(ntpd -n -q -p time.fu-berlin.de) &
+
+/etc/init.d/hostname start
+/etc/init.d/portmap start
+/usr/sbin/inetd
+# rpc.statd for nfs
+/etc/init.d/nfs-common start
+
+echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
+
+modprobe stb-core
+modprobe helper
+modprobe lcd
+modprobe tmp100
+modprobe tu1216
+modprobe cxd1981
+modprobe cu1216mk3
+modprobe lnb_ctrl
+modprobe si2166b
+modprobe si2169c
+modprobe bcm4506
+modprobe alps_bsbe1
+modprobe alps_bsbe1_c01a
+modprobe alps_bsbe2
+modprobe dreambox_rc2
+modprobe dreambox_keyboard
+modprobe bcm7405
+/etc/init.d/usbtftdisplay.sh
+
+echo 255 > /proc/stb/fp/oled_brightness
+echo "Booting... DDT" > /dev/dbox/oled0
+
+# set dummy time
+NTPDATE=`date +"%Y%m%d"`
+if [ "$SYSDATE" == "$NTPDATE" ];then
+	date -s "2017-01-01 00:00"
+	#date -s "200901011200"
+	echo "no ntp-date"
+	killall -9 ntpd
+	rm -f /tmp/ntpd.pid
+else
+	echo "[rcS] ntp-date is set > `date +'%d.%m.%Y %H:%M'`"
+	rm -f /tmp/ntpd.pid
+fi
+
+#
+until false
+do
+	/usr/bin/neutrino2
+	rtv=$?
+	echo "neutrino2 ended <- RTV: " $rtv
+	case "$rtv" in
+		0) echo "$rtv"
+			echo "RESTART"
+			sync
+			;;
+		1) echo "$rtv"
+			echo "SHUTDOWN"
+			init 0
+			;;
+		2) echo "$rtv"
+			echo "REBOOT"
+			init 6
+			;;
+		*) echo "*"
+			echo -e "\033[01;31mERROR: $rtv\033[00m"
+			init 6
+			;;
+	esac
+done
+

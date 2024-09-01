@@ -1,0 +1,15 @@
+ifeq ($(KERNELRELEASE),)
+DRIVER_TOPDIR:=$(shell pwd)/..
+include $(DRIVER_TOPDIR)/kernel.make
+else
+
+vfd-objs	+= adb_box_fp.o
+obj-m	+= vfd.o
+
+ifneq (,$(findstring 2.6.3,$(KERNELVERSION)))
+ccflags-y += $(CCFLAGSY)
+else
+CFLAGS += $(CCFLAGSY)
+endif
+endif
+

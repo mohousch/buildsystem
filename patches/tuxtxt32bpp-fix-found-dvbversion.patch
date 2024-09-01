@@ -1,0 +1,20 @@
+diff -Nur tuxtxt/acinclude.m4 tuxtxt.patched/acinclude.m4
+--- tuxtxt/acinclude.m4	2022-06-21 11:20:57.099491131 +0200
++++ tuxtxt.patched/acinclude.m4	2022-06-21 11:25:51.549745681 +0200
+@@ -189,7 +189,7 @@
+ #include <linux/dvb/version.h>
+ version DVB_API_VERSION
+ 	]])])
+-	DVB_API_VERSION=`(eval "$ac_cpp conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD | $EGREP "^version" | sed "s,version\ ,,"`
++	DVB_API_VERSION=`(eval "$ac_cpp -traditional-cpp conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD | $EGREP "^version" | sed "s,version\ ,,"`
+ 	rm -f conftest*
+ 
+ 	AC_MSG_NOTICE([found dvb version $DVB_API_VERSION])
+@@ -204,6 +204,7 @@
+ fi
+ ])
+ 
++
+ AC_DEFUN([TUXBOX_APPS_CAPTURE],[
+ AC_CHECK_HEADER(linux/dvb/avia/avia_gt_capture.h,[
+ 	AC_DEFINE(HAVE_OLD_CAPTURE_API,1,[Define this if you want to use the old dbox2 capture API])

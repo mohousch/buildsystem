@@ -1,0 +1,13 @@
+diff --git a/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c b/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c
+index 8df3685..300a14a 100644
+--- a/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c
++++ b/linux/drivers/media/dvb/stm/dvb/dvb_v4l2.c
+@@ -445,7 +445,7 @@ int linuxdvb_ioctl(struct stm_v4l2_handles *handle,struct stm_v4l2_driver *drive
+ 			VideoGetPixelAspectRatio (&DvbContext->DeviceContext[ldvb->input.index],
+ 						  &cropcap->pixelaspect.numerator, &cropcap->pixelaspect.denominator);
+ 
+-			printk("%s VIDIOC_CROPCAP, type = %d\n", __FUNCTION__, cropcap->type);
++			//printk("%s VIDIOC_CROPCAP, type = %d\n", __FUNCTION__, cropcap->type);
+ 		//}
+ 		break;
+ 	}

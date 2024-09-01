@@ -1,0 +1,71 @@
+diff --git a/player/frame_parser/frame_parser_video_vc1.cpp b/player/frame_parser/frame_parser_video_vc1.cpp
+index 63be88b..1467c90 100644
+--- a/player/frame_parser/frame_parser_video_vc1.cpp
++++ b/player/frame_parser/frame_parser_video_vc1.cpp
+@@ -322,6 +322,9 @@ FrameParserStatus_t   FrameParser_VideoVc1_c::Reset (void)
+     RangeMapUVFlag                              = false;
+     RangeMapUV                                  = 0;
+ 
++    FrameRateDefaultDen                         = 1001;
++    FrameRateDefaultNum                         = 24000;
++
+     return FrameParser_Video_c::Reset();
+ }
+ //}}}
+@@ -645,6 +648,12 @@ FrameParserStatus_t   FrameParser_VideoVc1_c::ReadHeaders (void)
+                 //report (severity_info, "VC1_END_OF_SEQUENCE\n");
+                 break;
+ 
++	    case 8:
++	        FrameRateDefaultDen = Bits.Get(32);
++		FrameRateDefaultNum = Bits.Get(32);
++		report (severity_error, "Received framerate %d / %d\n", FrameRateDefaultDen, FrameRateDefaultNum);
++		break;
++
+             default:
+                 #if 0
+                 {
+@@ -1977,6 +1986,14 @@ FrameParserStatus_t   FrameParser_VideoVc1_c::CommitFrameForDecode (void)
+     //
+ 
+     ParsedFrameParameters->KeyFrame                             = SliceType == SliceTypeI;
++//     if (SliceType != SliceTypeI)
++//       CodedFramePlaybackTimeValid = false;
++    //report (severity_error, "Slite type %d.\n", PictureHeader->ptype);
++    if (PictureHeader->ptype != 1) { //SliceType == SliceTypeB || PictureHeader->ptype == VC1_PICTURE_CODING_TYPE_BI) {
++//       ParsedFrameParameters->NormalizedPlaybackTime = INVALID_TIME;
++//       CodedFramePlaybackTimeValid = false;
++      //report (severity_error, "FrameParser_VideoVc1_c::CommitFrameForDecode - B or BI frame, ignoring PTS.\n");
++    }
+     ParsedFrameParameters->ReferenceFrame                       = (SliceType != SliceTypeB) && (PictureHeader->ptype != VC1_PICTURE_CODING_TYPE_BI);
+     ParsedFrameParameters->IndependentFrame                     = ParsedFrameParameters->KeyFrame;
+ 
+@@ -2036,11 +2053,12 @@ FrameParserStatus_t   FrameParser_VideoVc1_c::CommitFrameForDecode (void)
+ 
+             FrameRate   = Rational_t (90000, Pts - LastPts);
+             report (severity_info, "FrameParser_VideoVc1_c::CommitFrameForDecode - No framerate, use PTS (Not Implemented).\n");
+-                    FrameRate.IntegerPart(), FrameRate.RemainderDecimal());
++	    FrameRate.IntegerPart(), FrameRate.RemainderDecimal());
+         }
+ #endif
+-        ParsedVideoParameters->Content.FrameRate                = Rational_t (24000, 1001);
+-        //report (severity_error, "FrameParser_VideoVc1_c::CommitFrameForDecode - No framerate, use PTS (Not Implemented).\n");
++        //report (severity_error, "FrameParser_VideoVc1_c::CommitFrameForDecode - No framerate in ES.\n");
++        //ParsedVideoParameters->Content.FrameRate                = Rational_t (24000, 1001);
++        ParsedVideoParameters->Content.FrameRate                = Rational_t (FrameRateDefaultNum, FrameRateDefaultDen);
+     }
+ 
+     ParsedVideoParameters->Content.Progressive                  = ProgressiveSequence;
+diff --git a/player/frame_parser/frame_parser_video_vc1.h b/player/frame_parser/frame_parser_video_vc1.h
+index 76383cd..005b54a 100644
+--- a/player/frame_parser/frame_parser_video_vc1.h
++++ b/player/frame_parser/frame_parser_video_vc1.h
+@@ -73,6 +73,8 @@ private:
+     //  Frame rate details
+     bool                        FrameRateValid;
+     Rational_t                  FrameRate;
++    int32_t                     FrameRateDefaultDen;
++    int32_t                     FrameRateDefaultNum;
+ 
+ 
+     // Functions
