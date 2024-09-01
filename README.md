@@ -24,7 +24,7 @@ or
 $:~ make init
 ```
 
-**build images:**
+**build image:**
 ```bash
 $:~ make image-neutrino2
 ```
