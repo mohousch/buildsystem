@@ -38,7 +38,7 @@ KERNEL_PATCHES = \
 		0004-fcrypt-fix-bitoperation-for-gcc.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -82,8 +82,8 @@ DRIVER_DATE = 20190502
 DRIVER_SRC = dreambox-dvb-modules_$(DRIVER_VER)-$(BOXTYPE)-$(DRIVER_DATE)_$(BOXTYPE).tar.xz
 
 $(ARCHIVE)/$(DRIVER_SRC):
-#	$(WGET) https://sources.dreamboxupdate.com/download/opendreambox/2.0.0/dreambox-dvb-modules/$(DRIVER_SRC)
-	$(WGET) https://github.com/oe-mirrors/dreambox/raw/main/$(DRIVER_SRC)
+#	$(DOWNLOAD) https://sources.dreamboxupdate.com/download/opendreambox/2.0.0/dreambox-dvb-modules/$(DRIVER_SRC)
+	$(DOWNLOAD) https://github.com/oe-mirrors/dreambox/raw/main/$(DRIVER_SRC)
 	
 driver: $(D)/driver	
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel

@@ -18,7 +18,7 @@ KERNEL_CONFIG          = defconfig
 KERNEL_DIR             = $(BUILD_TMP)/linux-brcmstb-$(KERNEL_SRC_VER)
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -69,10 +69,10 @@ LIBGLES_SRC = edision-libv3d-$(LIBGLES_VER).tar.xz
 LIBGLES_URL = http://source.mynonpublic.com/edision
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) $(DRIVER_URL)/$(DRIVER_SRC)
+	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 $(ARCHIVE)/$(LIBGLES_SRC):
-	$(WGET) $(LIBGLES_URL/$(LIBGLES_SRC)
+	$(DOWNLOAD) $(LIBGLES_URL/$(LIBGLES_SRC)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -108,7 +108,7 @@ WLAN_QCOM_SOURCE = qcacld-2.0-$(WLAN_QCOM_VER).tar.gz
 WLAN_QCOM_URL    = https://source.codeaurora.org/external/wlan/qcacld-2.0/snapshot
 
 $(ARCHIVE)/$(WLAN_QCOM_SOURCE):
-	$(WGET) $(WLAN_QCOM_URL)/$(WLAN_QCOM_SOURCE)
+	$(DOWNLOAD) $(WLAN_QCOM_URL)/$(WLAN_QCOM_SOURCE)
 
 WLAN_QCOM_PATCH  = \
 	qcacld-2.0-support.patch
@@ -133,7 +133,7 @@ WLAN_QCOM_FIRMWARE_SOURCE = firmware-$(WLAN_QCOM_FIRMWARE_VER).zip
 WLAN_QCOM_FIRMWARE_URL    = http://source.mynonpublic.com/edision
 
 $(ARCHIVE)/$(WLAN_QCOM_FIRMWARE_SOURCE):
-	$(WGET) $(WLAN_QCOM_FIRMWARE_URL)/$(WLAN_QCOM_FIRMWARE_SOURCE)
+	$(DOWNLOAD) $(WLAN_QCOM_FIRMWARE_URL)/$(WLAN_QCOM_FIRMWARE_SOURCE)
 
 $(D)/wlan-qcom-firmware: $(D)/bootstrap $(ARCHIVE)/$(WLAN_QCOM_FIRMWARE_SOURCE)
 	$(START_BUILD)

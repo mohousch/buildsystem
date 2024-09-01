@@ -62,7 +62,7 @@ KERNEL_PATCHES = \
 		fix-multiple-defs-yyloc.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -107,7 +107,7 @@ DRIVER_DATE = 20151201
 DRIVER_SRC = dreambox-dvb-modules-$(BOXTYPE)-$(DRIVER_VER)-$(BOXTYPE)-$(DRIVER_DATE).tar.bz2
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) https://github.com/oe-mirrors/dreambox/raw/main/$(DRIVER_SRC)
+	$(DOWNLOAD) https://github.com/oe-mirrors/dreambox/raw/main/$(DRIVER_SRC)
 
 driver: $(D)/driver	
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -127,7 +127,7 @@ DM800SE_2ND_URL = https://github.com/oe-mirrors/dreambox/raw/main/$(DM800SE_2ND_
 2ND_FILE = secondstage-dm800se-84.bin
 
 $(ARCHIVE)/$(DM800SE_2ND_SOURCE):
-	$(WGET) $(DM800SE_2ND_URL)
+	$(DOWNLOAD) $(DM800SE_2ND_URL)
 
 $(D)/dm800se_2nd: $(ARCHIVE)/$(DM800SE_2ND_SOURCE)
 	$(START_BUILD)

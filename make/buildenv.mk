@@ -208,8 +208,8 @@ define apply_patches
     echo
 endef
 
-# wget tarballs into archive directory
-WGET = wget --no-check-certificate -t6 -T20 -c -P $(ARCHIVE)
+# download tarballs into archive directory
+DOWNLOAD = wget --no-check-certificate -t6 -T20 -c -P $(ARCHIVE)
 
 #
 #

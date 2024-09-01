@@ -9,15 +9,15 @@ STL_FTP = $(GITHUB)/Duckbox-Developers/stlinux/raw/master
 ## even reliable :-(
 $(ARCHIVE)/stlinux24-host-%.i386.rpm \
 $(ARCHIVE)/stlinux24-host-%noarch.rpm:
-	$(WGET) $(STL_FTP)/$(subst $(ARCHIVE)/,"",$@)
+	$(DOWNLOAD) $(STL_FTP)/$(subst $(ARCHIVE)/,"",$@)
 
 $(ARCHIVE)/stlinux24-host-%.src.rpm:
-	$(WGET) $(STL_FTP)/$(subst $(ARCHIVE)/,"",$@)
+	$(DOWNLOAD) $(STL_FTP)/$(subst $(ARCHIVE)/,"",$@)
 
 $(ARCHIVE)/stlinux24-sh4-%.sh4.rpm \
 $(ARCHIVE)/stlinux24-cross-%.i386.rpm \
 $(ARCHIVE)/stlinux24-sh4-%.noarch.rpm:
-	$(WGET) $(STL_FTP)/$(subst $(ARCHIVE)/,"",$@)
+	$(DOWNLOAD) $(STL_FTP)/$(subst $(ARCHIVE)/,"",$@)
 
 #
 # install the RPMs

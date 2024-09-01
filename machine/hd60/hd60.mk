@@ -39,7 +39,7 @@ KERNEL_PATCHES = \
 		fix-multiple-defs-yyloc.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -97,16 +97,16 @@ EXTRA_MALI_MODULE_PATCH = 0001-hi3798mv200-support.patch
 EXTRA_MALI_MODULE_URL = https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) $(DRIVER_URL)/$(DRIVER_SRC)
+	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 $(ARCHIVE)/$(EXTRA_PLAYERLIB_SRC):
-	$(WGET) $(EXTRA_PLAYERLIB_URL)/$(EXTRA_PLAYERLIB_SRC)
+	$(DOWNLOAD) $(EXTRA_PLAYERLIB_URL)/$(EXTRA_PLAYERLIB_SRC)
 
 $(ARCHIVE)/$(EXTRA_MALILIB_SRC):
-	$(WGET) $(EXTRA_MALILIB_URL)/$(EXTRA_MALILIB_SRC)
+	$(DOWNLOAD) $(EXTRA_MALILIB_URL)/$(EXTRA_MALILIB_SRC)
 
 $(ARCHIVE)/$(EXTRA_MALI_MODULE_SRC):
-	$(WGET) $(EXTRA_MALI_MODULE_URL)/$(EXTRA_MALI_MODULE_SRC);name=driver
+	$(DOWNLOAD) $(EXTRA_MALI_MODULE_URL)/$(EXTRA_MALI_MODULE_SRC);name=driver
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -193,10 +193,10 @@ BLOCK_SIZE = 512
 BLOCK_SECTOR = 2
 
 $(ARCHIVE)/$(FLASH_BOOTARGS_SRC):
-	$(WGET) http://source.mynonpublic.com/gfutures/$(FLASH_BOOTARGS_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/gfutures/$(FLASH_BOOTARGS_SRC)
 
 $(ARCHIVE)/$(FLASH_PARTITONS_SRC):
-	$(WGET) http://source.mynonpublic.com/gfutures/$(FLASH_PARTITONS_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/gfutures/$(FLASH_PARTITONS_SRC)
 
 #
 # disk

@@ -53,7 +53,7 @@ KERNEL_PATCHES  = \
 			fix-never-be-null_outside-array-bounds-gcc-12.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -98,7 +98,7 @@ DRIVER_SRC 		= bre2zet2c-drivers-$(DRIVER_VER)-6.3.0-$(DRIVER_DATE).zip
 DRIVER_URL		= http://source.mynonpublic.com/broadmedia
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) $(DRIVER_URL)/$(DRIVER_SRC)
+	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel

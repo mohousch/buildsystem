@@ -42,7 +42,7 @@ FFMPEG_EXTRA_CFLAGS  = -I$(TARGET_INCLUDE_DIR)/libxml2
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VER).tar.xz
 
 $(ARCHIVE)/$(FFMPEG_SOURCE):
-	$(WGET) http://www.ffmpeg.org/releases/$(FFMPEG_SOURCE)
+	$(DOWNLOAD) http://www.ffmpeg.org/releases/$(FFMPEG_SOURCE)
 
 $(D)/ffmpeg: $(D)/bootstrap $(FFMPEG_DEPS) $(ARCHIVE)/$(FFMPEG_SOURCE)
 	$(START_BUILD)

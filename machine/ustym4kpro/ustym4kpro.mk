@@ -34,7 +34,7 @@ KERNEL_PATCHES = \
 		4.4.35_fix-multiple-defs-yyloc.patch
 		
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -109,31 +109,31 @@ WIFI2_SRC = main.zip
 WIFI2 = RTL8822C.zip
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) http://source.mynonpublic.com/uclan/$(DRIVER_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/uclan/$(DRIVER_SRC)
 
 $(ARCHIVE)/$(HILIB_SRC):
-	$(WGET) http://source.mynonpublic.com/uclan/$(HILIB_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/uclan/$(HILIB_SRC)
 
 $(ARCHIVE)/$(LIBGLES_SRC):
-	$(WGET) http://source.mynonpublic.com/uclan/$(LIBGLES_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/uclan/$(LIBGLES_SRC)
 
 $(ARCHIVE)/$(LIBREADER_SRC):
-	$(WGET) http://source.mynonpublic.com/uclan/$(LIBREADER_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/uclan/$(LIBREADER_SRC)
 
 $(ARCHIVE)/$(HIHALT_SRC):
-	$(WGET) http://source.mynonpublic.com/uclan/$(HIHALT_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/uclan/$(HIHALT_SRC)
 
 $(ARCHIVE)/$(TNTFS_SRC):
-	$(WGET) http://source.mynonpublic.com/tntfs/$(TNTFS_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/tntfs/$(TNTFS_SRC)
 
 $(ARCHIVE)/$(LIBJPEG_SRC):	
-	$(WGET) https://github.com/oe-alliance/oe-alliance-core/raw/5.3/meta-brands/meta-uclan/recipes-graphics/files/$(LIBJPEG_SRC)
+	$(DOWNLOAD) https://github.com/oe-alliance/oe-alliance-core/raw/5.3/meta-brands/meta-uclan/recipes-graphics/files/$(LIBJPEG_SRC)
 
 $(ARCHIVE)/$(WIFI_SRC):
-	$(WGET) https://github.com/zukon/RTL8192EU/archive/refs/heads/$(WIFI_SRC) -O $(ARCHIVE)/$(WIFI)
+	$(DOWNLOAD) https://github.com/zukon/RTL8192EU/archive/refs/heads/$(WIFI_SRC) -O $(ARCHIVE)/$(WIFI)
 
 $(ARCHIVE)/$(WIFI2_SRC):
-	$(WGET) https://github.com/zukon/RTL8822C/archive/refs/heads/$(WIFI2_SRC) -O $(ARCHIVE)/$(WIFI2)
+	$(DOWNLOAD) https://github.com/zukon/RTL8822C/archive/refs/heads/$(WIFI2_SRC) -O $(ARCHIVE)/$(WIFI2)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -213,7 +213,7 @@ $(D)/install-wifi2: $(D)/bootstrap $(D)/kernel $(ARCHIVE)/$(WIFI2_SRC)
 FLASH_PARTITONS_SRC = $(BOXTYPE)-partitions-20220326.zip
 
 $(ARCHIVE)/$(FLASH_PARTITONS_SRC):
-	$(WGET) http://source.mynonpublic.com/uclan/$(FLASH_PARTITONS_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/uclan/$(FLASH_PARTITONS_SRC)
 
 #
 # release

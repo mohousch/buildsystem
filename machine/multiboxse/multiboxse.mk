@@ -38,7 +38,7 @@ KERNEL_PATCHES = \
 		4.4.35_fix-multiple-defs-yyloc.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -92,16 +92,16 @@ MALI_MODULE_SRC = $(MALI_MODULE_VER).tgz
 MALI_MODULE_PATCH = 0001-hi3798mv200-support.patch
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) http://source.mynonpublic.com/maxytec/$(DRIVER_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(DRIVER_SRC)
 
 $(ARCHIVE)/$(PLAYERLIB_SRC):
-	$(WGET) http://source.mynonpublic.com/maxytec/$(PLAYERLIB_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(PLAYERLIB_SRC)
 
 $(ARCHIVE)/$(LIBGLES_SRC):
-	$(WGET) http://downloads.mutant-digital.net/$(KERNEL_TYPE)/$(LIBGLES_SRC)
+	$(DOWNLOAD) http://downloads.mutant-digital.net/$(KERNEL_TYPE)/$(LIBGLES_SRC)
 
 $(ARCHIVE)/$(MALI_MODULE_SRC):
-	$(WGET) https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/$(MALI_MODULE_SRC);name=driver
+	$(DOWNLOAD) https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/$(MALI_MODULE_SRC);name=driver
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -223,11 +223,11 @@ BLOCK_SIZE = 512
 BLOCK_SECTOR = 2
 
 $(ARCHIVE)/$(FLASH_BOOTARGS_SRC):
-	$(WGET) http://source.mynonpublic.com/maxytec/$(FLASH_BOOTARGS_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(FLASH_BOOTARGS_SRC)
 
 $(ARCHIVE)/$(FLASH_PARTITONS_SRC):
-	$(WGET) http://source.mynonpublic.com/maxytec/$(FLASH_PARTITONS_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(FLASH_PARTITONS_SRC)
 	
 $(ARCHIVE)/$(FLASH_RECOVERY_SRC):
-	$(WGET) http://source.mynonpublic.com/maxytec/$(FLASH_RECOVERY_SRC)
+	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(FLASH_RECOVERY_SRC)
 

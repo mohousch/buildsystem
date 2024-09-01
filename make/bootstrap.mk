@@ -38,7 +38,7 @@ HOST_PKGCONFIG_VER = 0.29.2
 HOST_PKGCONFIG_SOURCE = pkg-config-$(HOST_PKGCONFIG_VER).tar.gz
 
 $(ARCHIVE)/$(HOST_PKGCONFIG_SOURCE):
-	$(WGET) https://pkgconfig.freedesktop.org/releases/$(HOST_PKGCONFIG_SOURCE)
+	$(DOWNLOAD) https://pkgconfig.freedesktop.org/releases/$(HOST_PKGCONFIG_SOURCE)
 
 $(D)/host_pkgconfig: $(D)/directories $(ARCHIVE)/$(HOST_PKGCONFIG_SOURCE)
 	$(START_BUILD)
@@ -66,7 +66,7 @@ HOST_MODULE_INIT_TOOLS_SOURCE = module-init-tools-$(HOST_MODULE_INIT_TOOLS_VER).
 HOST_MODULE_INIT_TOOLS_PATCH = module-init-tools-$(HOST_MODULE_INIT_TOOLS_VER).patch
 
 $(ARCHIVE)/$(HOST_MODULE_INIT_TOOLS_SOURCE):
-	$(WGET) http://distro.ibiblio.org/fatdog/source/600/m/$(HOST_MODULE_INIT_TOOLS_SOURCE)
+	$(DOWNLOAD) http://distro.ibiblio.org/fatdog/source/600/m/$(HOST_MODULE_INIT_TOOLS_SOURCE)
 
 $(D)/host_module_init_tools: $(D)/directories $(ARCHIVE)/$(HOST_MODULE_INIT_TOOLS_SOURCE)
 	$(START_BUILD)
@@ -93,7 +93,7 @@ HOST_MTD_UTILS_PATCH = host-mtd-utils-$(HOST_MTD_UTILS_VER).patch
 HOST_MTD_UTILS_PATCH += host-mtd-utils-$(HOST_MTD_UTILS_VER)-sysmacros.patch
 
 $(ARCHIVE)/$(HOST_MTD_UTILS_SOURCE):
-	$(WGET) ftp://ftp.infradead.org/pub/mtd-utils/$(HOST_MTD_UTILS_SOURCE)
+	$(DOWNLOAD) ftp://ftp.infradead.org/pub/mtd-utils/$(HOST_MTD_UTILS_SOURCE)
 
 $(D)/host_mtd_utils: $(D)/directories $(ARCHIVE)/$(HOST_MTD_UTILS_SOURCE)
 	$(START_BUILD)
@@ -114,7 +114,7 @@ HOST_MKCRAMFS_SOURCE = cramfs-$(HOST_MKCRAMFS_VER).tar.gz
 HOST_MKCRAMFS_PATCH = cramfs-$(HOST_MKCRAMFS_VER)-sysmacros.patch
 
 $(ARCHIVE)/$(HOST_MKCRAMFS_SOURCE):
-	$(WGET) https://sourceforge.net/projects/cramfs/files/cramfs/$(HOST_MKCRAMFS_VER)/$(HOST_MKCRAMFS_SOURCE)
+	$(DOWNLOAD) https://sourceforge.net/projects/cramfs/files/cramfs/$(HOST_MKCRAMFS_VER)/$(HOST_MKCRAMFS_SOURCE)
 
 $(D)/host_mkcramfs: $(D)/directories $(ARCHIVE)/$(HOST_MKCRAMFS_SOURCE)
 	$(START_BUILD)
@@ -135,7 +135,7 @@ HOST_MKSQUASHFS_VER = 3.3
 HOST_MKSQUASHFS_SOURCE = squashfs$(HOST_MKSQUASHFS_VER).tar.gz
 
 $(ARCHIVE)/$(HOST_MKSQUASHFS_SOURCE):
-	$(WGET) https://sourceforge.net/projects/squashfs/files/OldFiles/$(HOST_MKSQUASHFS_SOURCE)
+	$(DOWNLOAD) https://sourceforge.net/projects/squashfs/files/OldFiles/$(HOST_MKSQUASHFS_SOURCE)
 
 $(D)/host_mksquashfs: directories $(ARCHIVE)/$(HOST_MKSQUASHFS_SOURCE)
 	$(START_BUILD)
@@ -159,10 +159,10 @@ LZMA_VER = 4.65
 LZMA_SOURCE = lzma-$(LZMA_VER).tar.bz2
 
 $(ARCHIVE)/$(HOST_MKSQUASHFS_LZMA_SOURCE):
-	$(WGET) https://sourceforge.net/projects/squashfs/files/squashfs/squashfs$(HOST_MKSQUASHFS_LZMA_VER)/$(HOST_MKSQUASHFS_LZMA_SOURCE)
+	$(DOWNLOAD) https://sourceforge.net/projects/squashfs/files/squashfs/squashfs$(HOST_MKSQUASHFS_LZMA_VER)/$(HOST_MKSQUASHFS_LZMA_SOURCE)
 
 $(ARCHIVE)/$(LZMA_SOURCE):
-	$(WGET) http://downloads.openwrt.org/sources/$(LZMA_SOURCE)
+	$(DOWNLOAD) http://downloads.openwrt.org/sources/$(LZMA_SOURCE)
 
 $(D)/host_mksquashfs_lzma: directories $(ARCHIVE)/$(LZMA_SOURCE) $(ARCHIVE)/$(HOST_MKSQUASHFS_LZMA_SOURCE)
 	$(START_BUILD)
@@ -189,7 +189,7 @@ HOST_E2FSPROGS_VER = 1.45.6
 HOST_E2FSPROGS_SOURCE = e2fsprogs-$(HOST_E2FSPROGS_VER).tar.gz
 
 $(ARCHIVE)/$(HOST_E2FSPROGS_SOURCE):
-	$(WGET) https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(HOST_E2FSPROGS_VER)/$(HOST_E2FSPROGS_SOURCE)
+	$(DOWNLOAD) https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(HOST_E2FSPROGS_VER)/$(HOST_E2FSPROGS_SOURCE)
 
 $(D)/host_resize2fs: $(D)/directories $(ARCHIVE)/$(HOST_E2FSPROGS_SOURCE)
 	$(START_BUILD)
@@ -219,7 +219,7 @@ HOST_PARTED_SOURCE = parted-$(HOST_PARTED_VER).tar.xz
 HOST_PARTED_PATCH = parted-$(HOST_PARTED_VER)-device-mapper.patch
 
 $(ARCHIVE)/$(HOST_PARTED_SOURCE):
-	$(WGET) https://ftp.gnu.org/gnu/parted/$(HOST_PARTED_SOURCE)
+	$(DOWNLOAD) https://ftp.gnu.org/gnu/parted/$(HOST_PARTED_SOURCE)
 
 $(D)/host_parted: $(D)/directories $(ARCHIVE)/$(HOST_PARTED_SOURCE)
 	$(START_BUILD)
@@ -295,7 +295,7 @@ $(D)/buildimage: $(D)/bootstrap
 BUILDIMAGE_SRC = buildimage.zip
 
 $(ARCHIVE)/$(BUILDIMAGE_SRC):
-	$(WGET) https://github.com/oe-alliance/oe-alliance-core/raw/5.0/meta-brands/meta-octagon/recipes-bsp/octagon-buildimage/$(BUILDIMAGE_SRC)
+	$(DOWNLOAD) https://github.com/oe-alliance/oe-alliance-core/raw/5.0/meta-brands/meta-octagon/recipes-bsp/octagon-buildimage/$(BUILDIMAGE_SRC)
 	
 $(D)/buildimage-tool: $(ARCHIVE)/$(BUILDIMAGE_SRC)
 	$(START_BUILD)

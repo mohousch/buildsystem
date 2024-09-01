@@ -36,7 +36,7 @@ KERNEL_PATCHES = \
 		fix-multiple-defs-yyloc.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -87,13 +87,13 @@ LIBGLES_HEADERS = hd-v3ddriver-headers.tar.gz
 LIBGLES_URL = http://downloads.mutant-digital.net/v3ddriver
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) $(DRIVER_URL)/$(DRIVER_SRC)
+	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 $(ARCHIVE)/$(LIBGLES_SRC):
-	$(WGET) $(LIBGLES_URL)/$(LIBGLES_SRC)
+	$(DOWNLOAD) $(LIBGLES_URL)/$(LIBGLES_SRC)
 
 $(ARCHIVE)/$(LIBGLES_HEADERS):
-	$(WGET) $(LIBGLES_URL)/$(LIBGLES_HEADERS)
+	$(DOWNLOAD) $(LIBGLES_URL)/$(LIBGLES_HEADERS)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel

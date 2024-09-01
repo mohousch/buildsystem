@@ -62,7 +62,7 @@ KERNEL_PATCHES = \
 		compile-with-gcc9.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -108,7 +108,7 @@ DRIVER_SRC = vuplus-dvb-proxy-vuduo2-$(DRIVER_VER)-$(DRIVER_DATE).$(DRIVER_REV).
 DRIVER_URL = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) $(DRIVER_URL)/$(DRIVER_SRC)
+	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -130,7 +130,7 @@ UTIL_SRC = platform-util-vuduo2-$(UTIL_VER)-$(UTIL_DATE).$(UTIL_REV).tar.gz
 UTIL_URL = http://code.vuplus.com/download/release/platform-util
 
 $(ARCHIVE)/$(UTIL_SRC):
-	$(WGET) $(UTIL_URL)/$(UTIL_SRC)
+	$(DOWNLOAD) $(UTIL_URL)/$(UTIL_SRC)
 
 $(D)/platform_util: $(D)/bootstrap $(ARCHIVE)/$(UTIL_SRC)
 	$(START_BUILD)
@@ -149,7 +149,7 @@ INITRD_NAME = vmlinuz-initrd-7425b0
 INITRD_FILE = initrd_cfe_auto.bin
 
 $(ARCHIVE)/$(INITRD_SRC):
-	$(WGET) $(INITRD_URL)/$(INITRD_SRC)
+	$(DOWNLOAD) $(INITRD_URL)/$(INITRD_SRC)
 
 $(D)/vmlinuz_initrd: $(D)/bootstrap $(ARCHIVE)/$(INITRD_SRC)
 	$(START_BUILD)

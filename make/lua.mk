@@ -11,7 +11,7 @@ LUAPOSIX_URL = https://github.com/luaposix/luaposix.git
 LUAPOSIX_PATCH = lua-$(LUA_VER)-luaposix-$(LUAPOSIX_VER).patch
 
 $(ARCHIVE)/$(LUA_SOURCE):
-	$(WGET) https://www.lua.org/ftp/$(LUA_SOURCE)
+	$(DOWNLOAD) https://www.lua.org/ftp/$(LUA_SOURCE)
 
 $(ARCHIVE)/$(LUAPOSIX_SOURCE):
 	$(SCRIPTS_DIR)/get-git-archive.sh $(LUAPOSIX_URL) release-v$(LUAPOSIX_VER) $(notdir $@) $(ARCHIVE)
@@ -65,7 +65,7 @@ LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
 LUAEXPAT_PATCH = luaexpat-$(LUAEXPAT_VER).patch
 
 $(ARCHIVE)/$(LUAEXPAT_SOURCE):
-	$(WGET) https://src.fedoraproject.org/lookaside/pkgs/lua-expat/luaexpat-1.3.0.tar.gz/3c20b5795e7107f847f8da844fbfe2da/$(LUAEXPAT_SOURCE)
+	$(DOWNLOAD) https://src.fedoraproject.org/lookaside/pkgs/lua-expat/luaexpat-1.3.0.tar.gz/3c20b5795e7107f847f8da844fbfe2da/$(LUAEXPAT_SOURCE)
 
 $(D)/luaexpat: $(D)/bootstrap $(D)/lua $(D)/expat $(ARCHIVE)/$(LUAEXPAT_SOURCE)
 	$(START_BUILD)
@@ -127,7 +127,7 @@ LUASOAP_SOURCE = luasoap-$(LUASOAP_VER).tar.gz
 LUASOAP_PATCH = luasoap-$(LUASOAP_VER).patch
 
 $(ARCHIVE)/$(LUASOAP_SOURCE):
-	$(WGET) https://github.com/downloads/tomasguisasola/luasoap/$(LUASOAP_SOURCE)
+	$(DOWNLOAD) https://github.com/downloads/tomasguisasola/luasoap/$(LUASOAP_SOURCE)
 
 $(D)/luasoap: $(D)/bootstrap $(D)/lua $(ARCHIVE)/$(LUASOAP_SOURCE)
 	$(START_BUILD)
@@ -143,7 +143,7 @@ $(D)/luasoap: $(D)/bootstrap $(D)/lua $(ARCHIVE)/$(LUASOAP_SOURCE)
 # luajson
 #
 $(ARCHIVE)/json.lua:
-	$(WGET) https://github.com/swiboe/swiboe/raw/master/term_gui/json.lua
+	$(DOWNLOAD) https://github.com/swiboe/swiboe/raw/master/term_gui/json.lua
 
 $(D)/luajson: $(D)/bootstrap $(D)/lua $(ARCHIVE)/json.lua
 	$(START_BUILD)

@@ -392,9 +392,9 @@ ifeq ($(BOXARCH), sh4)
 	rm -f $(RELEASE_DIR)/usr/bin/avahi-*
 	rm -f $(RELEASE_DIR)/usr/bin/easy_install*
 	rm -f $(RELEASE_DIR)/usr/bin/glib-*
-endif
 	rm -f $(addprefix $(RELEASE_DIR)/usr/bin/,dvdnav-config gio-querymodules gobject-query gtester gtester-report)
 	rm -f $(addprefix $(RELEASE_DIR)/usr/bin/,livestreamer mailmail manhole)
+endif
 	rm -rf $(RELEASE_DIR)/usr/lib/m4-nofpu/
 	rm -rf $(RELEASE_DIR)/usr/lib/gcc
 	rm -f $(RELEASE_DIR)/usr/lib/libc.so

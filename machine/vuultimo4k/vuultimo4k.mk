@@ -53,7 +53,7 @@ KERNEL_PATCHES = \
 		fix-multiple-defs-yyloc.patch
 
 $(ARCHIVE)/$(KERNEL_SRC):
-	$(WGET) $(KERNEL_URL)/$(KERNEL_SRC)
+	$(DOWNLOAD) $(KERNEL_URL)/$(KERNEL_SRC)
 
 $(D)/kernel.do_prepare: $(ARCHIVE)/$(KERNEL_SRC) $(BASE_DIR)/machine/$(BOXTYPE)/files/$(KERNEL_CONFIG)
 	$(START_BUILD)
@@ -99,7 +99,7 @@ DRIVER_SRC = vuplus-dvb-proxy-vuultimo4k-$(DRIVER_VER)-$(DRIVER_DATE).$(DRIVER_R
 DRIVER_URL = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 
 $(ARCHIVE)/$(DRIVER_SRC):
-	$(WGET) $(DRIVER_URL)/$(DRIVER_SRC)
+	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -122,7 +122,7 @@ UTIL_SRC = platform-util-vuultimo4k-$(UTIL_VER)-$(UTIL_DATE).$(UTIL_REV).tar.gz
 UTIL_URL = http://code.vuplus.com/download/release/platform-util
 
 $(ARCHIVE)/$(UTIL_SRC):
-	$(WGET) $(UTIL_URL)/$(UTIL_SRC)
+	$(DOWNLOAD) $(UTIL_URL)/$(UTIL_SRC)
 
 $(D)/platform_util: $(D)/bootstrap $(ARCHIVE)/$(UTIL_SRC)
 	$(START_BUILD)
@@ -141,7 +141,7 @@ GLES_SRC = libgles-vuultimo4k-$(GLES_VER)-$(GLES_DATE).$(GLES_REV).tar.gz
 GLES_URL = http://code.vuplus.com/download/release/libgles
 
 $(ARCHIVE)/$(GLES_SRC):
-	$(WGET) $(GLES_URL)/$(GLES_SRC)
+	$(DOWNLOAD) $(GLES_URL)/$(GLES_SRC)
 
 $(D)/libgles: $(D)/bootstrap $(ARCHIVE)/$(GLES_SRC)
 	$(START_BUILD)
@@ -163,7 +163,7 @@ INITRD_NAME = vmlinuz-initrd-7445d0
 INITRD_FILE = initrd_auto.bin
 
 $(ARCHIVE)/$(INITRD_SRC):
-	$(WGET) $(INITRD_URL)/$(INITRD_SRC)
+	$(DOWNLOAD) $(INITRD_URL)/$(INITRD_SRC)
 
 $(D)/vmlinuz_initrd: $(D)/bootstrap $(ARCHIVE)/$(INITRD_SRC)
 	$(START_BUILD)
