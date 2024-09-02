@@ -62,7 +62,8 @@ GIT_NAME             ?= mohousch
 # backwards compatibility
 DEPDIR                = $(D)
 
-SUDOCMD               = echo $(SUDOPASSWD) | sudo -S
+#SUDOCMD               = echo $(SUDOPASSWD) | sudo -S
+SUDOCMD			= fakeroot
 
 MAINTAINER           ?= $(shell whoami)
 MAIN_ID               = $(shell echo -en "\x74\x68\x6f\x6d\x61\x73")
