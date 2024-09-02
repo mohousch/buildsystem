@@ -1,0 +1,20 @@
+#git status excludes the following files (except those line who start with !)
+*.order
+*.lo
+*.la
+*.so
+*.o
+.*.cmd
+*.ko
+*.a
+*.mod.c
+*.o.d
+*.swp
+*~
+.config
+.tmp_versions/
+.deps/
+.dirstamp
+Module.symvers
+frontends/multituner.org/
+pti_np
