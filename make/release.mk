@@ -382,18 +382,16 @@ ifeq ($(BOXARCH), sh4)
 	rm -f $(RELEASE_DIR)/usr/bin/gdbus
 	rm -f $(RELEASE_DIR)/usr/bin/dbus*
 	rm -f $(RELEASE_DIR)/usr/bin/python*
-endif
-ifeq ($(BOXARCH), $(filter $(BOXARCH), arm mips))
-	rm -rf $(RELEASE_DIR)/dev.static
-	rm -rf $(RELEASE_DIR)/ram
-	rm -rf $(RELEASE_DIR)/root
-endif
-ifeq ($(BOXARCH), sh4)
 	rm -f $(RELEASE_DIR)/usr/bin/avahi-*
 	rm -f $(RELEASE_DIR)/usr/bin/easy_install*
 	rm -f $(RELEASE_DIR)/usr/bin/glib-*
 	rm -f $(addprefix $(RELEASE_DIR)/usr/bin/,dvdnav-config gio-querymodules gobject-query gtester gtester-report)
 	rm -f $(addprefix $(RELEASE_DIR)/usr/bin/,livestreamer mailmail manhole)
+endif
+ifeq ($(BOXARCH), $(filter $(BOXARCH), arm mips))
+	rm -rf $(RELEASE_DIR)/dev.static
+	rm -rf $(RELEASE_DIR)/ram
+	rm -rf $(RELEASE_DIR)/root
 endif
 	rm -rf $(RELEASE_DIR)/usr/lib/m4-nofpu/
 	rm -rf $(RELEASE_DIR)/usr/lib/gcc
