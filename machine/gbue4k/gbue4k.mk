@@ -109,8 +109,20 @@ DRIVER_DATE = 20200723
 DRIVER_SRC = platform-util-gb7252-${KERNEL_SRC_VER}-$(DRIVER_DATE).r1.zip
 DRIVER_URL = http://source.mynonpublic.com/gigablue/drivers
 
+LIBGLES_DATE = 20200723
+LIBGLES_SRC  = gb7252-v3ddriver-$(LIBGLES_DATE).r0.zip
+LIBGLES_URL  = https://source.mynonpublic.com/gigablue/v3ddriver
+
+LIBGLES_HEADERS = gb-nexus-headers.zip
+
 $(ARCHIVE)/$(DRIVER_SRC):
 	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
+	
+$(ARCHIVE)/$(LIBGLES_SRC):
+	$(DOWNLOAD) $(LIBGLES_URL)/$(LIBGLES_SRC)
+
+$(ARCHIVE)/$(LIBGLES_HEADERS):
+	$(DOWNLOAD) $(LIBGLES_URL)/$(LIBGLES_HEADERS)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
@@ -125,7 +137,29 @@ $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
 	install -m 0755 $(TARGET_DIR)/usr/share/platform/dvb_init $(TARGET_DIR)/usr/bin/dvb_init
 	$(REMOVE)/platform-util-$(BOXTYPE)
 	$(DEPMOD) -ae -b $(TARGET_DIR) -r $(KERNEL_VER)
+	$(MAKE) install-v3ddriver
+	$(MAKE) install-v3ddriver-header
 	$(TOUCH)
+	
+$(D)/install-v3ddriver: $(ARCHIVE)/$(LIBGLES_SRC)
+	install -d $(TARGET_LIB_DIR)
+	unzip -o $(ARCHIVE)/$(LIBGLES_SRC) -d $(TARGET_LIB_DIR)
+	#patchelf --set-soname libv3ddriver.so $(TARGET_LIB_DIR)/libv3ddriver.so
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so.1.4
+	ln -sf libEGL.so.1.4 $(TARGET_LIB_DIR)/libEGL.so.1
+	ln -sf libEGL.so.1 $(TARGET_LIB_DIR)/libEGL.so
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv1_CM.so.1.1
+	ln -sf libGLESv1_CM.so.1.1 $(TARGET_LIB_DIR)/libGLESv1_CM.so.1
+	ln -sf libGLESv1_CM.so.1 $(TARGET_LIB_DIR)/libGLESv1_CM.so
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv2.so.2.0
+	ln -sf libGLESv2.so.2.0 $(TARGET_LIB_DIR)/libGLESv2.so.2
+	ln -sf libGLESv2.so.2 $(TARGET_LIB_DIR)/libGLESv2.so
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libgbm.so.1
+	ln -sf libgbm.so.1 $(TARGET_LIB_DIR)/libgbm.so
+
+$(D)/install-v3ddriver-header: $(ARCHIVE)/$(LIBGLES_HEADERS)
+	install -d $(TARGET_INCLUDE_DIR)
+	unzip -o $(ARCHIVE)/$(LIBGLES_HEADERS) -d $(TARGET_INCLUDE_DIR)
 
 #
 # release
