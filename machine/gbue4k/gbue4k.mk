@@ -144,18 +144,6 @@ $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
 $(D)/install-v3ddriver: $(ARCHIVE)/$(LIBGLES_SRC)
 	install -d $(TARGET_LIB_DIR)
 	unzip -o $(ARCHIVE)/$(LIBGLES_SRC) -d $(TARGET_LIB_DIR)
-	#patchelf --set-soname libv3ddriver.so $(TARGET_LIB_DIR)/libv3ddriver.so
-	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so.1.4
-	ln -sf libEGL.so.1.4 $(TARGET_LIB_DIR)/libEGL.so.1
-	ln -sf libEGL.so.1 $(TARGET_LIB_DIR)/libEGL.so
-	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv1_CM.so.1.1
-	ln -sf libGLESv1_CM.so.1.1 $(TARGET_LIB_DIR)/libGLESv1_CM.so.1
-	ln -sf libGLESv1_CM.so.1 $(TARGET_LIB_DIR)/libGLESv1_CM.so
-	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv2.so.2.0
-	ln -sf libGLESv2.so.2.0 $(TARGET_LIB_DIR)/libGLESv2.so.2
-	ln -sf libGLESv2.so.2 $(TARGET_LIB_DIR)/libGLESv2.so
-	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libgbm.so.1
-	ln -sf libgbm.so.1 $(TARGET_LIB_DIR)/libgbm.so
 
 $(D)/install-v3ddriver-header: $(ARCHIVE)/$(LIBGLES_HEADERS)
 	install -d $(TARGET_INCLUDE_DIR)
