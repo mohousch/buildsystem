@@ -1,6 +1,4 @@
 # set up environment for other makefiles
-# print '+' before each executed command
-# SHELL := $(SHELL) -x
 
 CONFIG_SITE =
 export CONFIG_SITE
@@ -20,7 +18,6 @@ DRIVER_DIR            = $(BASE_DIR)/driver
 PATCHES               = $(BASE_DIR)/patches
 SCRIPTS_DIR           = $(BASE_DIR)/scripts
 SKEL_ROOT             = $(BASE_DIR)/root
-PACKAGES	      = $(BASE_DIR)/packages
 
 # BOXTYPE
 -include $(BASE_DIR)/.config
