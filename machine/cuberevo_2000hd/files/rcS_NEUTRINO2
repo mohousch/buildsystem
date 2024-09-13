@@ -143,8 +143,8 @@ if [ ! -e /var/etc/.firstboot ]; then
     fi
     
     killall -9 showiframe
-   /bin/fp_control -t "NG2"
-   echo "starting neutrino2 ->"
+   /bin/fp_control -t "NeutrinoNG"
+   echo "starting NeutrinoNG ->"
 
    until false
    do

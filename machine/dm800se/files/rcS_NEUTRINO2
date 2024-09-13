@@ -71,26 +71,26 @@ fi
 
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
-modprobe stb-core
-modprobe helper
-modprobe lcd
-modprobe tmp100
-modprobe tu1216
-modprobe cxd1981
-modprobe cu1216mk3
-modprobe lnb_ctrl
-modprobe si2166b
-modprobe si2169c
-modprobe bcm4506
-modprobe alps_bsbe1
-modprobe alps_bsbe1_c01a
-modprobe alps_bsbe2
-modprobe dreambox_rc2
-modprobe dreambox_keyboard
-modprobe bcm7405
+modprobe --force stb-core
+modprobe --force helper
+modprobe --force lcd
+modprobe --force tmp100
+modprobe --force tu1216
+modprobe --force cxd1981
+modprobe --force cu1216mk3
+modprobe --force lnb_ctrl
+modprobe --force si2166b
+modprobe --force si2169c
+modprobe --force bcm4506
+modprobe --force alps_bsbe1
+modprobe --force alps_bsbe1_c01a
+modprobe --force alps_bsbe2
+modprobe --force dreambox_rc2
+modprobe --force dreambox_keyboard
+modprobe --force bcm7405
 
 echo 255 > /proc/stb/fp/oled_brightness
-echo "Booting... DDT" > /dev/dbox/oled0
+echo "Booting NeutrinoNG" > /dev/dbox/oled0
 
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`

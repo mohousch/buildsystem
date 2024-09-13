@@ -100,7 +100,7 @@ if [ ! -e /var/etc/.firstboot ]; then
    find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
    
    echo "NG2" >/dev/vfd
-   echo "starting neutrino2 ->"
+   echo "starting NeutrinoNG ->"
    
    # rcS.local
    if [ -e /var/etc/rcS.local ]; then 

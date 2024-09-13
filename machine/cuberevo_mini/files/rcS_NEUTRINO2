@@ -87,9 +87,6 @@ if [ ! -e /var/etc/.firstboot ]; then
    insmod $MODDIR/boxtype.ko
 fi
 
-# Module aus modules.extra laden
-   [ -f /var/etc/modules.extra ] && eval `sed -e 's/#.*//' -e '/^\s*$/d' -e 's/^\(.*\)/insmod \0;/' < /var/etc/modules.extra`
-
 if [ ! -e /var/etc/.firstboot ]; then
    /etc/init.d/mountall start
    /etc/init.d/hostname start
@@ -127,8 +124,8 @@ if [ ! -e /var/etc/.firstboot ]; then
     fi
    
    killall -9 showiframe
-   echo "NG2" > /dev/dbox/fp0
-   echo "starting neutrino2 ->"
+   echo "NeutrinoNG" > /dev/dbox/fp0
+   echo "starting NeutrinoNG ->"
    
    until false
    do

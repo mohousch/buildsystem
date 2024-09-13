@@ -31,6 +31,7 @@ RELEASE_DEPS += $(D)/mtd_utils
 RELEASE_DEPS += $(D)/gptfdisk
 RELEASE_DEPS += $(D)/dvb-apps
 RELEASE_DEPS += $(D)/dvbsnoop
+ifneq ($(BOXTYPE), dm800se)
 RELEASE_DEPS += $(D)/minisatip
 RELEASE_DEPS += $(D)/f2fs-tools
 RELEASE_DEPS += $(D)/mc
@@ -44,6 +45,7 @@ RELEASE_DEPS += $(D)/avahi
 RELEASE_DEPS += $(D)/shairport
 RELEASE_DEPS += $(D)/autofs
 RELEASE_DEPS += $(D)/dosfstools
+endif
 endif
 #
 # tools
@@ -127,7 +129,7 @@ release-common: $(RELEASE_DEPS)
 ifeq ($(BOXARCH), sh4)
 	install -d $(RELEASE_DIR)/lib/udev
 endif
-	install -d $(RELEASE_DIR)/lib/modules/$(KERNEL_VER)
+#	install -d $(RELEASE_DIR)/lib/modules/$(KERNEL_VER)
 	install -d $(RELEASE_DIR)/media/{hdd,dvd,nfs,usb,sda1,sdb1}
 	install -d $(RELEASE_DIR)/mnt/{hdd,nfs,usb}
 	install -d $(RELEASE_DIR)/mnt/mnt{0..7}

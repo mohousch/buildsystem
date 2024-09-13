@@ -99,7 +99,7 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
-echo "starting NG2"
+echo "starting NeutrinoNG"
 
 until false
 do

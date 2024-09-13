@@ -89,9 +89,6 @@ if [ ! -e /var/etc/.firstboot ]; then
 #   rm /f /dev/dvb/adapter0/ca1
 #   mknod /dev/dvb/adapter0/ca1 c 212 22
 
-# Module aus modules.extra laden
-   [ -f /var/etc/modules.extra ] && eval `sed -e 's/#.*//' -e '/^\s*$/d' -e 's/^\(.*\)/insmod \0;/' < /var/etc/modules.extra`
-
    stfbcontrol a 255
 
    # start automounter with umount timeout of 5 seconds
@@ -139,8 +136,8 @@ if [ ! -e /var/etc/.firstboot ]; then
    #tuner workaround
    export FE_OFFSET=1
 
-   echo "NG2" > /dev/vfd
-   echo "starting neutrino2"
+   echo "NeutrinoNG" > /dev/vfd
+   echo "starting NeutrinoNG"
 
    until false
    do

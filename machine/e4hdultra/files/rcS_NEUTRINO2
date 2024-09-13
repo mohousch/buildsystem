@@ -81,7 +81,7 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
-echo "[rcS] starting neutrino GUI ->"
+echo "[rcS] starting NeutrinoNG ->"
 
 until false
 do

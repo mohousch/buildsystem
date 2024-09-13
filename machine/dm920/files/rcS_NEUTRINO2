@@ -91,7 +91,7 @@ modprobe dreambox_rc2
 modprobe dreambox_keyboard
 
 echo 255 > /proc/stb/fp/oled_brightness
-echo "Booting NG2" > /dev/dbox/oled0
+echo "Booting NeutrinoNG" > /dev/dbox/oled0
 
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`

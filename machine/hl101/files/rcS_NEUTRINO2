@@ -146,7 +146,7 @@ mdev -s
 # coldplug modules
 find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
 
-echo "[rcS] Starting neutrino2 ->"
+echo "[rcS] Starting NeutrinoNG ->"
 
 until false
 do

@@ -28,14 +28,14 @@ find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 m
 echo "starting interface"
 /etc/init.d/mountall start
 
-insmod /lib/modules/$(uname -r)/extra/avl6261.ko
-insmod /lib/modules/$(uname -r)/extra/avl6862.ko
-insmod /lib/modules/$(uname -r)/extra/si2183.ko
-insmod /lib/modules/$(uname -r)/extra/ci.ko
-insmod /lib/modules/$(uname -r)/extra/brcmstb-osmio4k.ko
+modprobe avl6261
+modprobe avl6862
+modprobe si2183
+modprobe ci
+modprobe brcmstb-osmio4k
 
 if [ -e /lib/modules/$(uname -r)/extra/wlan.ko ]; then
-  insmod /lib/modules/$(uname -r)/extra/wlan.ko
+  modprobe wlan
 fi
 
 echo "setup network"

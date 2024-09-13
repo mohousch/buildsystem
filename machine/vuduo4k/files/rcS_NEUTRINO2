@@ -48,9 +48,6 @@ if [ -e /sys/class/net/sys0 ]; then
 	/sbin/ifconfig sys0 up
 fi
 
-# load moduls from modules.extra ( kerneloptions )
-[ -f /var/etc/modules.extra ] && eval `awk '{ if ($1) print "insmod /lib/modules/" $1 ".ko " $2,$3,$4,$5,$6,$7,$8,$9 "; "}' < /var/etc/modules.extra`
-
 echo "[rcS] setup network"
 NFS=$(grep -c nfs /proc/cmdline)
 if [ "$NFS" -eq "1" ]; then
@@ -121,7 +118,7 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
-echo "[rcS] starting neutrino2 ->"
+echo "[rcS] starting NeutrinoNG ->"
 
 until false
 do

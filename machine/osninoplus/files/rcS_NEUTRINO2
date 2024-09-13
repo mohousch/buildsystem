@@ -101,7 +101,7 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
-echo "[rcS] starting neutrino2 ->"
+echo "[rcS] starting NeutrinoNG ->"
 
 until false
 do
