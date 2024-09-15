@@ -1,6 +1,8 @@
 #!/bin/sh
 
-read model < /etc/model
+. /etc/profile
+echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
+SYSDATE=`date +"%Y%m%d"`
 
 if [ -e /var/etc/.firstboot ]; then
 /usr/bin/passwd root <<EOF
