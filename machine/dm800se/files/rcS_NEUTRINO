@@ -4,8 +4,6 @@
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
 SYSDATE=`date +"%Y%m%d"`
 
-read model < /etc/model
-
 if [ -e /var/etc/.firstboot ]; then
 /usr/bin/passwd root <<EOF
 root
@@ -138,10 +136,4 @@ do
 			;;
 	esac
 done
-echo "      *-*       " > /dev/dbox/oled0
-
-#never reached
-echo "REBOOT $model" > /dev/dbox/oled0
-echo "REBOOT $model"
-reboot -f
 
