@@ -1,6 +1,7 @@
 #!/bin/sh
 
 . /etc/profile
+
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
 SYSDATE=`date +"%Y%m%d"`
 
@@ -25,12 +26,14 @@ mdev -s
 # coldplug modules
 find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
 
+#
 echo "[rcS] starting mountall"
 /etc/init.d/mountall start
 
 # for start from power off
 /etc/mdev/ttyUSB-check.sh
 
+#
 echo "[rcS] setup network"
 NFS=$(grep -c nfs /proc/cmdline)
 if [ "$NFS" -eq "1" ]; then
@@ -55,6 +58,7 @@ fi
 # rpc.statd for nfs
 /etc/init.d/nfs-common start
 
+#
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
 modprobe e4hd_1
@@ -81,7 +85,8 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
-echo "[rcS] starting neutrino GUI ->"
+#
+echo "[rcS] starting Neutrino-DDT ->"
 
 until false
 do

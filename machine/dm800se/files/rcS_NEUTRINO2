@@ -69,6 +69,7 @@ fi
 # rpc.statd for nfs
 /etc/init.d/nfs-common start
 
+#
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
 #modprobe --force stb-core
@@ -107,9 +108,6 @@ insmod /lib/modules/$(uname -r)/extra/dreambox_rc2.ko
 insmod /lib/modules/$(uname -r)/extra/dreambox_keyboard.ko
 insmod /lib/modules/$(uname -r)/extra/bcm7405.ko
 
-echo 255 > /proc/stb/fp/oled_brightness
-echo "Booting NeutrinoNG" > /dev/dbox/oled0
-
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`
 if [ "$SYSDATE" == "$NTPDATE" ];then
@@ -124,6 +122,9 @@ else
 fi
 
 #
+echo 255 > /proc/stb/fp/oled_brightness
+echo "Booting NeutrinoNG" > /dev/dbox/oled0
+
 until false
 do
 	/usr/bin/neutrino2

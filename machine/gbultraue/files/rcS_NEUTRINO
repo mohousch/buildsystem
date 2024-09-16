@@ -1,6 +1,7 @@
 #!/bin/sh
 
 . /etc/profile
+
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
 SYSDATE=`date +"%Y%m%d"`
 
@@ -93,6 +94,7 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
+# start GUI
 echo "[rcS] starting neutrino-DDT"
 
 until false
@@ -114,5 +116,4 @@ do
 		   init 6;;
       	esac
 done
-
 

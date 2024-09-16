@@ -1,6 +1,7 @@
 #!/bin/sh
 
 . /etc/profile
+
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
 SYSDATE=`date +"%Y%m%d"`
 
@@ -67,28 +68,44 @@ fi
 # rpc.statd for nfs
 /etc/init.d/nfs-common start
 
+#
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
-modprobe stb-core
-modprobe helper
-modprobe lcd
-modprobe tmp100
-modprobe tu1216
-modprobe cxd1981
-modprobe cu1216mk3
-modprobe lnb_ctrl
-modprobe si2166b
-modprobe si2169c
-modprobe bcm4506
-modprobe alps_bsbe1
-modprobe alps_bsbe1_c01a
-modprobe alps_bsbe2
-modprobe dreambox_rc2
-modprobe dreambox_keyboard
-modprobe bcm7405
+#modprobe --force stb-core
+#modprobe --force helper
+#modprobe --force lcd
+#modprobe --force tmp100
+#modprobe --force tu1216
+#modprobe --force cxd1981
+#modprobe --force cu1216mk3
+#modprobe --force lnb_ctrl
+#modprobe --force si2166b
+#modprobe --force si2169c
+#modprobe --force bcm4506
+#modprobe --force alps_bsbe1
+#modprobe --force alps_bsbe1_c01a
+#modprobe --force alps_bsbe2
+#modprobe --force dreambox_rc2
+#modprobe --force dreambox_keyboard
+#modprobe --force bcm7405
 
-echo 255 > /proc/stb/fp/oled_brightness
-echo "Booting... DDT" > /dev/dbox/oled0
+insmod /lib/modules/$(uname -r)/extra/stb-core.ko
+insmod /lib/modules/$(uname -r)/extra/helper.ko
+insmod /lib/modules/$(uname -r)/extra/lcd.ko
+insmod /lib/modules/$(uname -r)/extra/tmp100.ko
+insmod /lib/modules/$(uname -r)/extra/tu1216.ko
+insmod /lib/modules/$(uname -r)/extra/cxd1981.ko
+insmod /lib/modules/$(uname -r)/extra/cu1216mk3.ko
+insmod /lib/modules/$(uname -r)/extra/lnb_ctrl.ko
+insmod /lib/modules/$(uname -r)/extra/si2166b.ko
+insmod /lib/modules/$(uname -r)/extra/si2169c.ko
+insmod /lib/modules/$(uname -r)/extra/bcm4506.ko
+insmod /lib/modules/$(uname -r)/extra/alps_bsbe1.ko
+insmod /lib/modules/$(uname -r)/extra/alps_bsbe1_c01a.ko
+insmod /lib/modules/$(uname -r)/extra/alps_bsbe2.ko
+insmod /lib/modules/$(uname -r)/extra/dreambox_rc2.ko
+insmod /lib/modules/$(uname -r)/extra/dreambox_keyboard.ko
+insmod /lib/modules/$(uname -r)/extra/bcm7405.ko
 
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`
@@ -104,6 +121,9 @@ else
 fi
 
 #
+echo 255 > /proc/stb/fp/oled_brightness
+echo "Booting... DDT" > /dev/dbox/oled0
+
 until false
 do
 	echo "[rcS] starting GUI ->"
