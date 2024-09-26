@@ -1267,6 +1267,7 @@ $(D)/samba: $(D)/bootstrap $(ARCHIVE)/$(SAMBA_SOURCE)
 		$(call apply_patches, $(SAMBA_PATCH)); \
 		cd source3; \
 		./autogen.sh; \
+		$(call apply_patches, samba-autoconf.patch); \
 		$(BUILDENV) \
 		ac_cv_lib_attr_getxattr=no \
 		ac_cv_search_getxattr=no \

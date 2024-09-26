@@ -405,6 +405,7 @@ endif
 	ln -s /tmp $(RELEASE_DIR)/var/log
 	ln -s /tmp $(RELEASE_DIR)/var/run
 	ln -s /tmp $(RELEASE_DIR)/var/tmp
+	ln -s /tmp $(RELEASE_DIR)/var/empty
 	
 #
 # release

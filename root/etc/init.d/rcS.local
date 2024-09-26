@@ -2,6 +2,11 @@
 
 . /etc/profile
 
+/etc/init.d/openvpn start
+/etc/init.d/openssh start
+/etc/init.d/dropbear start
+/etc/init.d/samba start
+
 # add your own stuff here
 
 

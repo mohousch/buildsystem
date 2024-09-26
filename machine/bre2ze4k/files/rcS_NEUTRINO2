@@ -79,8 +79,8 @@ else
 fi
 
 # rcS.local
-if [ -e /var/etc/rcS.local ]; then 
-	/var/etc/rcS.local
+if [ -e /var/etc/init.d/rcS.local ]; then 
+	/var/etc/init.d/rcS.local
 fi
 
 #

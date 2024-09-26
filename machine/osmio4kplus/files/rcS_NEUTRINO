@@ -63,11 +63,11 @@ NFS=$(grep -c nfs /proc/cmdline)
 date -s "2017-01-01 00:00"
 
 # rcS.local
-if [ -e /var/etc/rcS.local ]; then 
-	/var/etc/rcS.local
+if [ -e /var/etc/init.d/rcS.local ]; then 
+	/var/etc/init.d/rcS.local
 fi
 
-echo "[rcS] starting neutrino ->"
+echo "[rcS] starting Neutrino-DDT ->"
 
 until false
 do

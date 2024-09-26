@@ -120,6 +120,11 @@ else
 	rm -f /tmp/ntpd.pid
 fi
 
+# rcS.local
+if [ -e /var/etc/init.d/rcS.local ]; then 
+	/var/etc/init.d/rcS.local
+fi
+
 #
 echo 255 > /proc/stb/fp/oled_brightness
 echo "Booting... DDT" > /dev/dbox/oled0

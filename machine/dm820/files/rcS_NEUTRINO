@@ -93,9 +93,6 @@ modprobe ble
 modprobe dreambox_rc2
 modprobe dreambox_keyboard
 
-echo 255 > /proc/stb/fp/oled_brightness
-echo "Booting DDT" > /dev/dbox/oled0
-
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`
 if [ "$SYSDATE" == "$NTPDATE" ];then
@@ -109,7 +106,15 @@ else
 	rm -f /tmp/ntpd.pid
 fi
 
+# rcS.local
+if [ -e /var/etc/init.d/rcS.local ]; then 
+	/var/etc/init.d/rcS.local
+fi
+
 #
+echo 255 > /proc/stb/fp/oled_brightness
+echo "Booting Neutrino-DDT" > /dev/dbox/oled0
+
 until false
 do
 	echo "[rcS] starting GUI ->"

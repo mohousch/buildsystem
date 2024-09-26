@@ -1,7 +1,5 @@
 #!/bin/sh
 
-. /etc/init.d/globals
-
 ETCDIR=/etc/dropbear
 
 genkeys() {
