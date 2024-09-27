@@ -53,13 +53,13 @@ esac
 case "$1" in
   start)
 	cd /	# daemons should have root dir as cwd
-	printf "[nfs-common] Starting $DESC:"
-	printf " statd"
+	echo "[nfs-common] Starting $DESC:"
+	echo " statd"
 	start-stop-daemon --start --quiet \
 	    --exec $PREFIX/sbin/rpc.statd -- $STATDOPTS
 	if [ "$NEED_LOCKD" = yes ]
 	then
-	    printf " lockd"
+	    echo " lockd"
 	    start-stop-daemon --start --quiet \
 		--exec $PREFIX/sbin/rpc.lockd  || true
 	fi
@@ -67,14 +67,14 @@ case "$1" in
 	;;
 
   stop)
-	printf "[nfs-common] Stopping $DESC:"
+	echo "[nfs-common] Stopping $DESC:"
 	if [ "$NEED_LOCKD" = yes ]
 	then
-	    printf " lockd"
+	    echo " lockd"
 	    start-stop-daemon --stop --oknodo --quiet \
 		--name rpc.lockd --user 0  || true
 	fi
-	printf " statd"
+	echo " statd"
 	start-stop-daemon --stop --oknodo --quiet \
 	    --name rpc.statd --user 0
 	echo "."

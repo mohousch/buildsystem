@@ -72,16 +72,16 @@ case "$1" in
 	cd /	# daemons should have root dir as cwd
 	if grep -q '^/' /etc/exports
 	then
-		printf "[nfs-kernel-server] Exporting directories for $DESC..."
+		echo "[nfs-kernel-server] Exporting directories for $DESC..."
 		$PREFIX/sbin/exportfs -r
 		echo "done."
 
-		printf "[nfs-kernel-server] Starting $DESC:"
-		printf " nfsd"
+		echo "[nfs-kernel-server] Starting $DESC:"
+		echo " nfsd"
 		start-stop-daemon --start --quiet \
 		    --exec $PREFIX/sbin/rpc.nfsd -- $RPCNFSDCOUNT
 
-		printf " mountd"
+		echo " mountd"
 
 		# make sure 127.0.0.1 is a valid source for requests
 		ClearAddr=
@@ -107,21 +107,21 @@ case "$1" in
 	;;
 
   stop)
-	printf "[nfs-kernel-server] Stopping $DESC: mountd"
+	echo "[nfs-kernel-server] Stopping $DESC: mountd"
 	start-stop-daemon --stop --oknodo --quiet \
 	    --name rpc.mountd --user 0
-	printf " nfsd"
+	echo " nfsd"
 	start-stop-daemon --stop --oknodo --quiet \
 	    --name nfsd --user 0 --signal 2
 	echo "."
 
-	printf "[nfs-kernel-server] Unexporting directories for $DESC..."
+	echo "[nfs-kernel-server] Unexporting directories for $DESC..."
 	$PREFIX/sbin/exportfs -au
 	echo "done."
 	;;
 
   reload | force-reload)
-	printf "[nfs-kernel-server] Re-exporting directories for $DESC..."
+	echo "[nfs-kernel-server] Re-exporting directories for $DESC..."
 	$PREFIX/sbin/exportfs -r
 	echo "done."
 	;;
