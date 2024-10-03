@@ -7,6 +7,11 @@ LD_LIBRARY_PATH =
 export LD_LIBRARY_PATH
 
 #
+# BS version
+#
+export BS_CYCLE		:= 501
+
+#
 BASE_DIR             := $(shell pwd)
 
 #

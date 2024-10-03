@@ -140,10 +140,7 @@ endif
 	cp -a $(TARGET_DIR)/usr/bin/* $(RELEASE_DIR)/usr/bin/
 	cp -a $(TARGET_DIR)/sbin/* $(RELEASE_DIR)/sbin/
 	cp -a $(TARGET_DIR)/usr/sbin/* $(RELEASE_DIR)/usr/sbin/
-#	echo buildsystem_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d%m%Y-%H%M%S') > $(RELEASE_DIR)/etc/imageversion
-	echo "RELEASE_CYCLE=$(shell git log | grep "^commit" | wc -l)" > $(RELEASE_DIR)/etc/imageversion
-	echo "RELEASE_DATE=$(shell date '+%d %m %Y')" >> $(RELEASE_DIR)/etc/imageversion
-	echo "RELEASE_TIME=$(shell date '+%H:%M:%S')" >> $(RELEASE_DIR)/etc/imageversion
+	echo "version=1$(BS_CYCLE)$(shell date '+%Y%m%d')$(shell date '+%H%M')" > $(RELEASE_DIR)/etc/imageversion
 	echo 
 	ln -sf /.version $(RELEASE_DIR)/var/etc/.version
 	ln -sf /proc/mounts $(RELEASE_DIR)/etc/mtab
