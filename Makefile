@@ -300,7 +300,7 @@ help:
 	@echo " make print-targets		- show all available targets"
 	@echo ""
 	@echo "later, you might find these useful:"
-	@echo " make update			- update the build system"
+	@echo " make update			- update the buildsystem"
 	@echo ""
 	@echo "release:"
 	@echo " make release-neutrino2		- build neutrino2 release  with full release dir"
@@ -342,10 +342,7 @@ include make/flashimage.mk
 include make/packages.mk
 
 update:
-	@if test -d $(BASE_DIR); then \
-		cd $(BASE_DIR)/; \
-		git stash && git stash show -p > ./pull-stash-cdk.patch || true && git pull || true; \
-	fi
+	git stash && git stash show -p > ./pull-stash-buildsystem.patch || true && git pull || true;
 	@echo;
 
 all:
@@ -354,12 +351,11 @@ all:
 # print all present targets...
 print-targets:
 	@sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' \
-		`ls -1 make/*.mk|grep -v make/buildenv.mk` | \
-		sort -u | fold -s -w 65
+	@ls make/*.mk | grep -v make/buildenv.mk | sort -u | fold -s -w 65
 		
 # print all supported boards ...
 print-boards:
-	@ls machine | sed 's/.mk//g' 
+	@ls -1C machine | sed 's/.mk//g' 
 
 # for local extensions, e.g. special plugins or similar...
 # put them into $(BASE_DIR)/local since that is ignored in .gitignore

@@ -995,3 +995,4 @@ config.local
 /tools/streamproxy/stamp-h1
 /tools/streamproxy/streamproxy
 /tools/streamproxy/streamproxy.o
+/pull-stash-buildsystem.patch
