@@ -521,6 +521,9 @@ endif
 #
 # delete unnecessary files
 #
+	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/services.xml
+	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/bouquets.xml
+	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/ubouquets.xml
 ifeq ($(BOXARCH), sh4)
 	[ -e $(RELEASE_DIR)/usr/bin/neutrino2 ] && rm -rf $(RELEASE_DIR)/usr/bin/neutrino2 || true
 	[ -d $(RELEASE_DIR)/var/tuxbox/locale/de/LC_MESSAGES/neutrino2.mo ] && rm -rf $(RELEASE_DIR)/var/tuxbox/locale || true

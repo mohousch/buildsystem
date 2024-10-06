@@ -280,6 +280,9 @@ release-neutrino2: $(RELEASE_DEPS) $(D)/neutrino2 $(D)/neutrino2-plugins release
 #
 # delete unnecessary files
 #
+	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/services.xml
+	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/bouquets.xml
+	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/ubouquets.xml
 	[ -e $(RELEASE_DIR)/var/tuxbox/config/nhttpd.conf ] && rm -rf $(RELEASE_DIR)/var/tuxbox/config/nhttpd.conf || true
 ifeq ($(BOXARCH), sh4)
 	[ -e $(RELEASE_DIR)/usr/bin/titan ] && rm -rf $(RELEASE_DIR)/usr/bin/titan || true
