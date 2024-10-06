@@ -9,6 +9,7 @@ export LD_LIBRARY_PATH
 #
 # BS version
 #
+export BS_NAME		:= NG Buildsystem
 export BS_CYCLE		:= 201
 
 #
