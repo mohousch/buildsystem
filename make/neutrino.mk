@@ -19,7 +19,7 @@ NEUTRINO_PLUGINS_PATCHES = neutrino-ddt-plugins.patch
 #
 $(TARGET_DIR)/.version:
 	echo "distro=buildsystem" > $@
-	echo "imagename=`sed -n 's/\#define PACKAGE_NAME "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
+	echo "imagename=NG Buildsystem" >> $@
 	echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
 	echo "homepage=https://github.com/Duckbox-Developers" >> $@
 	echo "creator=$(MAINTAINER)" >> $@
