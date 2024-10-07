@@ -2,7 +2,7 @@
 
 if [ ! -z $1 ] ; then
 	mkdir -p buildlogs
-	BOXTYPE=$(cat config | grep "BOXTYPE=" | awk -F "=" '{print $2}')
+	BOXTYPE=$(cat .config | grep "BOXTYPE=" | awk -F "=" '{print $2}')
 	LOGFILE=buildlogs/make_$(echo $BOXTYPE).log
 
 	echo "--- DISTRIBUTION ---" > $LOGFILE
@@ -16,7 +16,7 @@ if [ ! -z $1 ] ; then
 
 	echo >> $LOGFILE
 	echo "--- MAKE  CONFIG ---" >> $LOGFILE
-	cat config >> $LOGFILE
+	cat .config >> $LOGFILE
 
 	echo >> $LOGFILE
 	echo "--- MAKE TARGETS ---" >> $LOGFILE
