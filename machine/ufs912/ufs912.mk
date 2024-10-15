@@ -237,4 +237,10 @@ endif
 	cp $(SKEL_ROOT)/lib/firmware/component_7111_mb618.fw $(RELEASE_DIR)/lib/firmware/component.fw
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	cp $(BASE_DIR)/machine/$(BOXTYPE)/files/fw_env.config $(RELEASE_DIR)/etc/
+	
+#
+# image
+#
+image-ufs912:
+	$(MAKE) ufs912-image-$(BOXTYPE)
 

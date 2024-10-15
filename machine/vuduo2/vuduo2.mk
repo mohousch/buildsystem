@@ -165,7 +165,7 @@ release-vuduo2:
 	cp -pa $(TARGET_DIR)/lib/modules/$(KERNEL_VER) $(RELEASE_DIR)/lib/modules
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = vuplus/duo2
 
@@ -179,4 +179,7 @@ UBINIZE_ARGS = -m 2048 -p 128KiB
 BOOTLOGO_FILENAME = splash.bin
 BOOT_UPDATE_TEXT = "This file forces a reboot after the update."
 BOOT_UPDATE_FILE = reboot.update
+
+image-vuduo2:
+	$(MAKE) ubi-image-$(BOXTYPE)
 

@@ -142,7 +142,7 @@ release-dm800se: $(D)/dm800se_2nd
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 	
 #
-# flashimage
+# image
 #
 #FLASHSIZE = 64
 ROOTFS_FILE = rootfs.ubi
@@ -158,4 +158,7 @@ FLASH_SIZE = 0x4000000
 LOADER_SIZE = 0x40000
 BOOT_SIZE = 0x3C0000
 ROOT_SIZE = 0x3C00000
+
+image-dm800se:
+	$(MAKE) dm-nfi-image-$(BOXTYPE)
 

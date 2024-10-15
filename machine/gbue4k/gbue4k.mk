@@ -158,7 +158,7 @@ release-gbue4k:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = gigablue/ue4k
 
@@ -167,4 +167,7 @@ INITRD_SRC = initrd_$(BOXTYPE)_$(INITRD_SRCDATE).zip
 
 $(ARCHIVE)/$(INITRD_SRC):
 	$(WGET) https://source.mynonpublic.com/gigablue/initrd/$(INITRD_SRC)
+	
+image-gbue4k:
+	$(MAKE) gbue4k-flash-image
 

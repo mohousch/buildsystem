@@ -202,7 +202,7 @@ release-multiboxse:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASH_IMAGE_NAME = disk
 FLASH_BOOT_IMAGE = bootoptions.img
@@ -230,4 +230,7 @@ $(ARCHIVE)/$(FLASH_PARTITONS_SRC):
 	
 $(ARCHIVE)/$(FLASH_RECOVERY_SRC):
 	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(FLASH_RECOVERY_SRC)
+	
+image-multiboxse:
+	$(MAKE) hdfastboot8gb-disk-image-$(BOXTYPE) hdfastboot8gb-rootfs-image-$(BOXTYPE) hdfastboot8gb-online-image-$(BOXTYPE)
 

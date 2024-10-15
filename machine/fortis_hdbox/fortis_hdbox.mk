@@ -236,4 +236,11 @@ endif
 	cp $(SKEL_ROOT)/boot/audio_7100.elf $(RELEASE_DIR)/lib/firmware/audio.elf
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	cp $(BASE_DIR)/machine/$(BOXTYPE)/files/fw_env.config $(RELEASE_DIR)/etc/
+	
+#
+# image
+#
+image-fortis_hdbox:
+	$(MAKE) nor-image-$(BOXTYPE)
+	
 		

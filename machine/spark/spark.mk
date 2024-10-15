@@ -240,4 +240,10 @@ endif
 	cp -dp $(BASE_DIR)/machine/$(BOXTYPE)/files/lircd.conf $(RELEASE_DIR)/etc/
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	cp $(BASE_DIR)/machine/$(BOXTYPE)/files/fw_env.config $(RELEASE_DIR)/etc/
+	
+#
+# image
+#
+image-spark:
+	$(MAKE) spark-image-$(BOXTYPE)
 

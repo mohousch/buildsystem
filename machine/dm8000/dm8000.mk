@@ -158,3 +158,9 @@ LOADER_SIZE = 0x100000
 BOOT_SIZE = 0x700000
 ROOT_SIZE = 0xF800000
 
+#
+# image
+#
+image-dm8000:
+	$(MAKE) dm-nfi-image-$(BOXTYPE)
+

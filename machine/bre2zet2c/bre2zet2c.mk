@@ -117,7 +117,7 @@ release-bre2zet2c:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = bre2ze_t2c
 
@@ -131,4 +131,7 @@ UBINIZE_ARGS = -m 2048 -p 128KiB
 BOOTLOGO_FILENAME = splash.bin
 BOOT_UPDATE_TEXT = "rename this file to 'force' to force an update without confirmation"
 BOOT_UPDATE_FILE = noforce
+
+image-bre2zet2c:
+	$(MAKE) ubi-image-$(BOXTYPE)
 

@@ -188,7 +188,7 @@ release-vuuno4kse:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = vuplus/uno4kse
 	
@@ -201,4 +201,7 @@ BOOT_UPDATE_TEXT = "rename this file to 'force' to force an update without confi
 BOOT_UPDATE_FILE = noforce
 PART_TEXT = This file forces creating partitions.
 PART_FILE = mkpart.update
+
+image-vuuno4kse:
+	$(MAKE) vuplus-rootfs-image-$(BOXTYPE) vuplus-multi-rootfs-image-$(BOXTYPE) vuplus-online-image-$(BOXTYPE)
 

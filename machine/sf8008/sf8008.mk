@@ -229,8 +229,11 @@ release-$(BOXTYPE): $(ARCHIVE)/$(FLASH_PARTITONS_SRC)
 	cd $(RELEASE_DIR)/etc/rc.d/rc6.d; ln -sf ../../init.d/libreader ./S05libreader
 
 #
-# flashimage
+# image
 #
 FLASH_IMAGE_NAME = disk
 ROOTFS_SIZE = 320k #2*128k + 64k
+
+image-sf8008:
+	$(MAKE) octagon-disk-image-$(BOXTYPE) octagon-rootfs-image-$(BOXTYPE) octagon-online-image-$(BOXTYPE)
 

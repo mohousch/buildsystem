@@ -163,7 +163,7 @@ release-osmio4k:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 IMAGE_NAME = emmc
 IMAGE_LINK = $(IMAGE_NAME).ext4
@@ -191,4 +191,7 @@ KERNEL4_PARTITION_OFFSET = $(shell expr $(ROOTFS3_PARTITION_OFFSET) + $(ROOTFS_P
 ROOTFS4_PARTITION_OFFSET = $(shell expr $(KERNEL4_PARTITION_OFFSET) + $(KERNEL_PARTITION_SIZE))
 
 SWAP_PARTITION_OFFSET = $(shell expr $(ROOTFS4_PARTITION_OFFSET) + $(ROOTFS_PARTITION_SIZE))
+
+image-osmio4k:
+	$(MAKE) edision-disk-image-$(BOXTYPE) edision-rootfs-image-$(BOXTYPE) edision-online-image-$(BOXTYPE)
 

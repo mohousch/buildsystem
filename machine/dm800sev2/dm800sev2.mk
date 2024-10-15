@@ -159,3 +159,6 @@ LOADER_SIZE = 0x100000
 BOOT_SIZE = 0x700000
 ROOT_SIZE = 0x3F800000
 
+image-dm800sev2:
+	$(MAKE) dm-nfi-image-$(BOXTYPE)
+

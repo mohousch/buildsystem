@@ -125,7 +125,7 @@ release-vuduo:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = vuplus/duo
 
@@ -139,4 +139,7 @@ UBINIZE_ARGS = -m 2048 -p 128KiB
 BOOTLOGO_FILENAME = splash_cfe_auto.bin
 BOOT_UPDATE_TEXT = "This file forces a reboot after the update."
 BOOT_UPDATE_FILE = reboot.update
+
+image-vuduo:
+	$(MAKE) ubi-image-$(BOXTYPE)
 

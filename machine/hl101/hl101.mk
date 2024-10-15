@@ -241,3 +241,9 @@ endif
 	cp -dp $(BASE_DIR)/machine/$(BOXTYPE)/files/lircd.conf $(RELEASE_DIR)/etc/lircd.conf
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 
+#
+# image
+#	
+image-hl101:
+	$(MAKE) usb-image-$(BOXTYPE)
+

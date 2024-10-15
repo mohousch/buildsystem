@@ -139,7 +139,7 @@ release-bre2ze4k:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = $(BOXTYPE)
 
@@ -178,4 +178,8 @@ FOURTH_ROOTFS_PARTITION_OFFSET = $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET) 
 
 SWAP_PARTITION_OFFSET = $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
 STORAGE_PARTITION_OFFSET = $(shell expr $(SWAP_PARTITION_OFFSET) \+ $(SWAP_PARTITION_SIZE))
+
+image-bre2ze4k:
+	$(MAKE) gfuture-disk-image-$(BOXTYPE) gfuture-multi-rootfs-image-$(BOXTYPE) gfuture-online-image-$(BOXTYPE)
+
 

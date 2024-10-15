@@ -94,7 +94,7 @@ release-osninoplus:
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = edision/osninoplus
 
@@ -108,4 +108,7 @@ UBINIZE_ARGS = -m 2048 -p 128KiB
 BOOTLOGO_FILENAME = splash.bin
 BOOT_UPDATE_TEXT = "rename this file to 'force' to force an update without confirmation"
 BOOT_UPDATE_FILE = noforce
+
+image-osninoplus:
+	$(MAKE) ubi-image-$(BOXTYPE)
 

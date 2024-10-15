@@ -142,7 +142,7 @@ release-dm7020hd: $(D)/dm7020hd_2nd
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 	
 #
-# flashimage
+# image
 #
 #FLASHSIZE = 100
 ROOTFS_FILE = rootfs.ubi
@@ -158,4 +158,7 @@ FLASH_SIZE = 0x4000000
 LOADER_SIZE = 0x100000
 BOOT_SIZE = 0x700000
 ROOT_SIZE = 0x3F800000
+
+image-dm7020hd:
+	$(MAKE) dm-nfi-image-$(BOXTYPE)
 

@@ -330,50 +330,6 @@ endif
 #
 image-neutrino2: release-neutrino2
 	$(START_BUILD)
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), fortis_hdbox octagon1008 cuberevo cuberevo_mini cuberevo_mini2 cuberevo_2000hd))
-	$(MAKE) nor-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), spark spark7162))
-	$(MAKE) spark-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), atevio7500))
-	$(MAKE) atevio-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), ufs912))
-	$(MAKE) ufs912-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), hl101)
-	$(MAKE) usb-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), vuduo vuduo2 gb800se gbultraue bre2zet2c osnino osninoplus osninopro))
-	$(MAKE) ubi-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), dm8000 dm7020hd dm800se dm800sev2))
-	$(MAKE) dm-nfi-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), dm900 dm920))
-	$(MAKE) dm-rootfs-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), dm820 dm7080))
-	$(MAKE) usb-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
-	$(MAKE) vuplus-rootfs-image-$(BOXTYPE) vuplus-multi-rootfs-image-$(BOXTYPE) vuplus-online-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), sf8008 ustym4kpro))
-	$(MAKE) octagon-disk-image-$(BOXTYPE) octagon-rootfs-image-$(BOXTYPE) octagon-online-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), osmini4k osmio4k osmio4kplus))
-	$(MAKE) edision-disk-image-$(BOXTYPE) edision-rootfs-image-$(BOXTYPE) edision-online-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), bre2ze4k hd51 protek4k h7 e4hdultra))
-	$(MAKE) gfuture-disk-image-$(BOXTYPE) gfuture-multi-rootfs-image-$(BOXTYPE) gfuture-online-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), hd60 multiboxse))
-	$(MAKE) hdfastboot8gb-disk-image-$(BOXTYPE) hdfastboot8gb-rootfs-image-$(BOXTYPE) hdfastboot8gb-online-image-$(BOXTYPE)
-endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), gbue4k))
-	$(MAKE) gbue4k-flash-image
-endif
+	$(MAKE) image-$(BOXTYPE)
 	$(END_BUILD)
 

@@ -103,10 +103,16 @@ $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
 	$(TOUCH)
 
 #
-# release-dm820
+# release-dm900
 #
-release-$(BOXTYPE):
+release-dm900:
 	cp -pa $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-$(BOXTYPE) $(RELEASE_DIR)/lib/modules
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
+	
+#
+# image
+#
+image-dm900:
+	$(MAKE) dm-rootfs-image-$(BOXTYPE)
 

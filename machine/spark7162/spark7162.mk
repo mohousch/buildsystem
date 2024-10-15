@@ -240,4 +240,10 @@ endif
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	install -m 0644 $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/init.d/
 	cp $(BASE_DIR)/machine/$(BOXTYPE)/files/fw_env.config $(RELEASE_DIR)/etc/
+	
+#
+# image
+#
+image-spark7162:
+	$(MAKE) spark-image-$(BOXTYPE)
 

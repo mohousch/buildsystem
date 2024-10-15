@@ -134,14 +134,14 @@ $(D)/install-v3ddriver-header: $(ARCHIVE)/$(LIBGLES_HEADERS)
 #
 # release
 #
-release-$(BOXTYPE):
+release-protek4k:
 	cp -pa $(TARGET_DIR)/lib/modules/$(KERNEL_VER) $(RELEASE_DIR)/lib/modules
 #	install -m 0755 $(SKEL_ROOT)/etc/init.d/mmcblk-by-name $(RELEASE_DIR)/etc/init.d/mmcblk-by-name
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = $(BOXTYPE)
 
@@ -180,4 +180,7 @@ FOURTH_ROOTFS_PARTITION_OFFSET = $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET) 
 
 SWAP_PARTITION_OFFSET = $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
 STORAGE_PARTITION_OFFSET = $(shell expr $(SWAP_PARTITION_OFFSET) \+ $(SWAP_PARTITION_SIZE))
+
+image-protek4k:
+	$(MAKE) gfuture-disk-image-$(BOXTYPE) gfuture-multi-rootfs-image-$(BOXTYPE) gfuture-online-image-$(BOXTYPE)
 

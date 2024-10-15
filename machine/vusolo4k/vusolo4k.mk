@@ -174,7 +174,7 @@ release-vusolo4k:
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = vuplus/solo4k
 
@@ -187,4 +187,7 @@ BOOT_UPDATE_TEXT = "rename this file to 'force' to force an update without confi
 BOOT_UPDATE_FILE = noforce
 PART_TEXT = This file forces creating partitions.
 PART_FILE = mkpart.update
+
+image-vusolo4k:
+	$(MAKE) vuplus-rootfs-image-$(BOXTYPE) vuplus-multi-rootfs-image-$(BOXTYPE) vuplus-online-image-$(BOXTYPE)
 

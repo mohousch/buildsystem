@@ -239,4 +239,10 @@ endif
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	install -m 0777 $(BASE_DIR)/machine/$(BOXTYPE)/files/reboot $(RELEASE_DIR)/etc/init.d/
 	cp $(BASE_DIR)/machine/$(BOXTYPE)/files/fw_env.config $(RELEASE_DIR)/etc/
+	
+#
+# image
+#
+image-cuberevo_2000hd:
+	$(MAKE) nor-image-$(BOXTYPE)
 
