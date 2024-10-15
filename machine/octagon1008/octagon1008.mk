@@ -141,7 +141,7 @@ $(D)/driver: $(D)/bootstrap $(D)/kernel
 #
 # release
 #
-release-$(BOXTYPE):
+release-octagon1008:
 	cp $(TARGET_DIR)/boot/uImage $(RELEASE_DIR)/boot/
 	rm -rf $(RELEASE_DIR)/lib/modules/$(KERNEL_VER)
 #

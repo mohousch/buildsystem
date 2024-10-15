@@ -100,7 +100,7 @@ release-hd51:
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 
 #
-# flashimage
+# image
 #
 FLASHIMAGE_PREFIX = $(BOXTYPE)
 

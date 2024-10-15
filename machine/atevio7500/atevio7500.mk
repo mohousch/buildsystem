@@ -138,7 +138,7 @@ $(D)/driver: $(D)/bootstrap $(D)/kernel
 #
 # release
 #
-release-$(BOXTYPE):
+release-atevio7500:
 	cp $(TARGET_DIR)/boot/uImage $(RELEASE_DIR)/boot/
 	rm -rf $(RELEASE_DIR)/lib/modules/$(KERNEL_VER)
 #

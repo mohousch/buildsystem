@@ -214,7 +214,7 @@ $(ARCHIVE)/$(FLASH_PARTITONS_SRC):
 #
 # release
 #
-release-$(BOXTYPE): $(ARCHIVE)/$(FLASH_PARTITONS_SRC)
+release-sf8008: $(ARCHIVE)/$(FLASH_PARTITONS_SRC)
 	cp -pa $(TARGET_DIR)/lib/modules/$(KERNEL_VER) $(RELEASE_DIR)/lib/modules
 	install -m 0755 $(SKEL_ROOT)/etc/init.d/mmcblk-by-name $(RELEASE_DIR)/etc/init.d/mmcblk-by-name
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
