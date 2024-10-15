@@ -37,8 +37,8 @@ endif
 #
 RELEASE_DEPS += $(D)/tools-aio-grab
 RELEASE_DEPS += $(D)/tools-showiframe
-RELEASE_DEPS += $(LIRC)
 ifeq ($(BOXARCH), sh4)
+RELEASE_DEPS += $(LIRC)
 RELEASE_DEPS += $(D)/tools-devinit
 RELEASE_DEPS += $(D)/tools-evremote2
 RELEASE_DEPS += $(D)/tools-fp_control

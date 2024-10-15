@@ -517,7 +517,7 @@ $(D)/freetype: $(D)/bootstrap $(D)/zlib $(D)/libpng $(ARCHIVE)/$(FREETYPE_SOURCE
 #
 # lirc
 #
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), cuberevo cuberevo_mini cuberevo_mini2 cuberevo_250hd cuberevo_2000hd hl101 spark spark7162))
+ifeq ($(BOXTYPE), $(filter $(BOXTYPE), cuberevo cuberevo_mini cuberevo_mini2 cuberevo_2000hd hl101 spark spark7162))
 
 LIRC_VER = 0.9.0
 LIRC_SOURCE = lirc-$(LIRC_VER).tar.bz2
