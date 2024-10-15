@@ -364,7 +364,7 @@ BOOTSTRAP += $(D)/host_mkcramfs
 BOOTSTRAP += $(D)/host_mksquashfs_lzma
 BOOTSTRAP += host_u_boot_tools
 endif
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), dm8000 dm7020hd dm800se dm800sev2))
+ifeq ($(BOXTYPE), $(filter $(BOXTYPE), dm8000 dm7020hd dm7020hdv2 dm800se dm800sev2))
 BOOTSTRAP += $(D)/buildimage
 endif
 ifeq ($(BOXTYPE), $(filter $(BOXTYPE), hd60 multiboxse))
