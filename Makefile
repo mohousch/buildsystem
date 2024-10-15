@@ -93,8 +93,9 @@ init:
 	@echo "   113)  dm900"
 	@echo "   114)  dm920"
 	@echo "   115)  dm7020hd"
-	@echo "   116)  dm7080"
-	@echo "   117)  dm8000"
+	@echo "   116)  dm7020hdv2"
+	@echo "   117)  dm7080"
+	@echo "   118)  dm8000"
 	@echo ""
 	@echo "  Maxytec"
 	@echo "   120)  multiboxse"
@@ -151,8 +152,9 @@ init:
 		113) BOXTYPE="dm900";; \
 		114) BOXTYPE="dm920";; \
 		115) BOXTYPE="dm7020hd";; \
-		116) BOXTYPE="dm7080";; \
-		117) BOXTYPE="dm8000";; \
+		116) BOXTYPE="dm7020hdv2";; \
+		117) BOXTYPE="dm7080";; \
+		118) BOXTYPE="dm8000";; \
 		120) BOXTYPE="multiboxse";; \
 		130) BOXTYPE="sf8008";; \
 		140) BOXTYPE="protek4k";; \
