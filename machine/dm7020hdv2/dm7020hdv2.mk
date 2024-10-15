@@ -88,15 +88,15 @@ $(D)/kernel.do_compile: $(D)/kernel.do_prepare
 		$(MAKE) -C $(KERNEL_DIR) ARCH=mips oldconfig
 		$(MAKE) -C $(KERNEL_DIR) ARCH=mips CROSS_COMPILE=$(TARGET)- vmlinux modules
 		$(MAKE) -C $(KERNEL_DIR) ARCH=mips CROSS_COMPILE=$(TARGET)- DEPMOD=$(DEPMOD) INSTALL_MOD_PATH=$(TARGET_DIR) modules_install
-		$(DEPMOD) -ae -b $(TARGET_DIR) -F $(KERNEL_DIR)/System.map -r $(KERNEL_VER)-$(BOXTYPE)
+		$(DEPMOD) -ae -b $(TARGET_DIR) -F $(KERNEL_DIR)/System.map -r $(KERNEL_VER)-dm7020hd
 	@touch $@
 
 $(D)/kernel: $(D)/bootstrap $(D)/kernel.do_compile
 	install -m 644 $(KERNEL_DIR)/vmlinux $(TARGET_DIR)/boot/
-	install -m 644 $(KERNEL_DIR)/System.map $(TARGET_DIR)/boot/System.map-$(BOXARCH)-$(KERNEL_VER)-$(BOXTYPE)
+	install -m 644 $(KERNEL_DIR)/System.map $(TARGET_DIR)/boot/System.map-$(BOXARCH)-$(KERNEL_VER)-dm7020hd
 	gzip -9c < $(TARGET_DIR)/boot/vmlinux > $(TARGET_DIR)/boot/$(KERNEL_FILE)
-	rm $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-$(BOXTYPE)/build || true
-	rm $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-$(BOXTYPE)/source || true
+	rm $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-dm7020hd/build || true
+	rm $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-dm7020hd/source || true
 	$(TOUCH)
 	
 #
@@ -104,7 +104,7 @@ $(D)/kernel: $(D)/bootstrap $(D)/kernel.do_compile
 #
 DRIVER_VER = 3.2
 DRIVER_DATE = 20161019
-DRIVER_SRC = dreambox-dvb-modules-$(BOXTYPE)-$(DRIVER_VER)-$(BOXTYPE)-$(DRIVER_DATE).tar.bz2
+DRIVER_SRC = dreambox-dvb-modules-dm7020hd-$(DRIVER_VER)-dm7020hd-$(DRIVER_DATE).tar.bz2
 
 $(ARCHIVE)/$(DRIVER_SRC):
 	$(DOWNLOAD) https://github.com/oe-mirrors/dreambox/raw/main/$(DRIVER_SRC)
@@ -112,10 +112,10 @@ $(ARCHIVE)/$(DRIVER_SRC):
 driver: $(D)/driver	
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
 	$(START_BUILD)
-	install -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-$(BOXTYPE)/extra
-	tar -xf $(ARCHIVE)/$(DRIVER_SRC) -C $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-$(BOXTYPE)/extra
+	install -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-dm7020hd/extra
+	tar -xf $(ARCHIVE)/$(DRIVER_SRC) -C $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-dm7020hd/extra
 #	tar -xf $(ARCHIVE)/grautec.tar.gz -C $(TARGET_DIR)/
-	$(DEPMOD) -ae -b $(TARGET_DIR) -r $(KERNEL_VER)-$(BOXTYPE)
+	$(DEPMOD) -ae -b $(TARGET_DIR) -r $(KERNEL_VER)-dm7020hd
 	$(TOUCH)
 
 #
@@ -137,7 +137,7 @@ $(D)/dm7020hd_2nd: $(ARCHIVE)/$(DM7020HD_2ND_SOURCE)
 # release-dm7020hd
 #
 release-dm7020hdv2: $(D)/dm7020hd_2nd
-	cp -pa $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-$(BOXTYPE) $(RELEASE_DIR)/lib/modules
+	cp -pa $(TARGET_DIR)/lib/modules/$(KERNEL_VER)-dm7020hd $(RELEASE_DIR)/lib/modules
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/halt $(RELEASE_DIR)/etc/init.d/
 	cp -f $(BASE_DIR)/machine/$(BOXTYPE)/files/fstab $(RELEASE_DIR)/etc/
 	
