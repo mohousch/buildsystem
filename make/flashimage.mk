@@ -650,6 +650,14 @@ gbue4k-flash-image: $(ARCHIVE)/$(INITRD_SRC)
 	rm -rf $(IMAGE_BUILD_DIR)
 	
 #
+# image
+#
+image: release
+	$(START_BUILD)
+	$(MAKE) image-$(BOXTYPE)
+	$(END_BUILD)
+	
+#
 # image-clean
 #
 image-clean:

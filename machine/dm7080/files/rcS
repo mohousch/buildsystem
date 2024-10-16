@@ -1,7 +1,6 @@
 #!/bin/sh
 
 . /etc/profile
-
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
 SYSDATE=`date +"%Y%m%d"`
 
@@ -26,11 +25,10 @@ mdev -s
 # coldplug modules
 find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
 
-# mountall (fstab)
 echo "[rcS] starting mountall"
 /etc/init.d/mountall start
 
-# setup network
+#
 if [ -e /sys/class/net/lo ]; then
 	/sbin/ifconfig lo up
 fi
@@ -44,6 +42,7 @@ if [ -e /sys/class/net/sys0 ]; then
 	/sbin/ifconfig sys0 up
 fi
 
+#
 echo "[rcS] setup network"
 NFS=$(grep -c nfs /proc/cmdline)
 if [ "$NFS" -eq "1" ]; then
@@ -57,7 +56,6 @@ else
 		/etc/init.d/networking start
 	fi
 fi
-
 /sbin/ifconfig lo 127.0.0.1 up
 
 # get net-time
@@ -71,16 +69,30 @@ fi
 
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
-modprobe dvb
-
-while [ ! -c /dev/fb0 ]; do
-	usleep 100000
-done
+modprobe fp_hwmon
+modprobe tu1216
+modprobe stb-core
+modprobe lcd
+modprobe cxd1981
+modprobe cu1216mk3
+modprobe lnb_ctrl
+modprobe si2166b
+modprobe si2183
+modprobe bcm4501
+modprobe bcm4506
+modprobe alps_bsbe1
+modprobe alps_bsbe1_c01a
+modprobe alps_bsbe2
+modprobe bcm7435
+modprobe ble
+modprobe dreambox_rc2
+modprobe dreambox_keyboard
 
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`
 if [ "$SYSDATE" == "$NTPDATE" ];then
 	date -s "2017-01-01 00:00"
+	#date -s "200901011200"
 	echo "no ntp-date"
 	killall -9 ntpd
 	rm -f /tmp/ntpd.pid
@@ -95,25 +107,5 @@ if [ -e /var/etc/init.d/rcS.local ]; then
 fi
 
 #
-echo "[rcS] starting neutrino-DDT"
-
-until false
-do
-	/usr/bin/neutrino
-	rtv=$?
-	echo "GUI ended <- RTV: " $rtv
-	case "$rtv" in
-		0)
-		   echo "SHUTDOWN"
-		   init 0;;
-		1)
-		   echo "REBOOT"
-		   init 6;;
-		3)
-		   echo "RESTART";;
-		*)
-		   echo "ERROR"
-		   init 6;;
-      	esac
-done
+echo 255 > /proc/stb/fp/oled_brightness
 

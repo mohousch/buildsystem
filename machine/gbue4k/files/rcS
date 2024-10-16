@@ -63,15 +63,20 @@ fi
 # get net-time
 (ntpd -n -q -p time.fu-berlin.de) &
 
+#
 /etc/init.d/hostname start
 /etc/init.d/portmap start
 /usr/sbin/inetd
 # rpc.statd for nfs
 /etc/init.d/nfs-common start
 
+#
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
-modprobe dvb
+export B_REFSW_BOXMODE=5
+modprobe nexus
+/usr/bin/nxserver &
+/usr/bin/dvb_init /lib/modules/$(uname -r)/extra/dvb.ko &
 
 while [ ! -c /dev/fb0 ]; do
 	usleep 100000
@@ -81,6 +86,7 @@ done
 NTPDATE=`date +"%Y%m%d"`
 if [ "$SYSDATE" == "$NTPDATE" ];then
 	date -s "2017-01-01 00:00"
+	#date -s "200901011200"
 	echo "no ntp-date"
 	killall -9 ntpd
 	rm -f /tmp/ntpd.pid
@@ -95,25 +101,4 @@ if [ -e /var/etc/init.d/rcS.local ]; then
 fi
 
 #
-echo "[rcS] starting neutrino-DDT"
-
-until false
-do
-	/usr/bin/neutrino
-	rtv=$?
-	echo "GUI ended <- RTV: " $rtv
-	case "$rtv" in
-		0)
-		   echo "SHUTDOWN"
-		   init 0;;
-		1)
-		   echo "REBOOT"
-		   init 6;;
-		3)
-		   echo "RESTART";;
-		*)
-		   echo "ERROR"
-		   init 6;;
-      	esac
-done
 

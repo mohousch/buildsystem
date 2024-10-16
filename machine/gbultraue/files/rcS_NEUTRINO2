@@ -95,7 +95,7 @@ if [ -e /var/etc/init.d/rcS.local ]; then
 	/var/etc/init.d/rcS.local
 fi
 
-# start GUI
+#
 echo "starting NeutrinoNG"
 
 until false

@@ -1,7 +1,6 @@
 #!/bin/sh
 
 . /etc/profile
-
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
 SYSDATE=`date +"%Y%m%d"`
 
@@ -26,11 +25,9 @@ mdev -s
 # coldplug modules
 find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
 
-# mountall (fstab)
 echo "[rcS] starting mountall"
 /etc/init.d/mountall start
 
-# setup network
 if [ -e /sys/class/net/lo ]; then
 	/sbin/ifconfig lo up
 fi
@@ -54,10 +51,14 @@ else
 	if [ -e /etc/network/interfaces ]; then
 		ip addr flush eth0
 		/etc/init.d/networking stop
+		#DHCP=$(grep -c dhcp /etc/network/interfaces)
+		#if [ "$DHCP" -eq "1" ]; then
+		#	echo "Starting dhcp"
+		#	/etc/init.d/udhcpc start
+		#fi
 		/etc/init.d/networking start
 	fi
 fi
-
 /sbin/ifconfig lo 127.0.0.1 up
 
 # get net-time
@@ -71,7 +72,13 @@ fi
 
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
-modprobe dvb
+modprobe multiboxse_1
+modprobe multiboxse_2
+modprobe multiboxse_3
+modprobe multiboxse_4
+
+#modprobe hi_play
+#modprobe mali
 
 while [ ! -c /dev/fb0 ]; do
 	usleep 100000
@@ -81,6 +88,7 @@ done
 NTPDATE=`date +"%Y%m%d"`
 if [ "$SYSDATE" == "$NTPDATE" ];then
 	date -s "2017-01-01 00:00"
+	#date -s "200901011200"
 	echo "no ntp-date"
 	killall -9 ntpd
 	rm -f /tmp/ntpd.pid
@@ -95,25 +103,4 @@ if [ -e /var/etc/init.d/rcS.local ]; then
 fi
 
 #
-echo "[rcS] starting neutrino-DDT"
-
-until false
-do
-	/usr/bin/neutrino
-	rtv=$?
-	echo "GUI ended <- RTV: " $rtv
-	case "$rtv" in
-		0)
-		   echo "SHUTDOWN"
-		   init 0;;
-		1)
-		   echo "REBOOT"
-		   init 6;;
-		3)
-		   echo "RESTART";;
-		*)
-		   echo "ERROR"
-		   init 6;;
-      	esac
-done
 

@@ -26,24 +26,14 @@ mdev -s
 # coldplug modules
 find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
 
-# mountall (fstab)
+#
 echo "[rcS] starting mountall"
 /etc/init.d/mountall start
 
-# setup network
-if [ -e /sys/class/net/lo ]; then
-	/sbin/ifconfig lo up
-fi
-if [ -e /sys/class/net/eth0 ]; then
-	/sbin/ifconfig eth0 up
-fi
-if [ -e /sys/class/net/eth1 ]; then
-	/sbin/ifconfig eth1 up
-fi
-if [ -e /sys/class/net/sys0 ]; then
-	/sbin/ifconfig sys0 up
-fi
+# for start from power off
+/etc/mdev/ttyUSB-check.sh
 
+#
 echo "[rcS] setup network"
 NFS=$(grep -c nfs /proc/cmdline)
 if [ "$NFS" -eq "1" ]; then
@@ -57,7 +47,6 @@ else
 		/etc/init.d/networking start
 	fi
 fi
-
 /sbin/ifconfig lo 127.0.0.1 up
 
 # get net-time
@@ -69,13 +58,13 @@ fi
 # rpc.statd for nfs
 /etc/init.d/nfs-common start
 
+#
 echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
 
-modprobe dvb
-
-while [ ! -c /dev/fb0 ]; do
-	usleep 100000
-done
+modprobe e4hd_1
+modprobe e4hd_2
+modprobe e4hd_3
+modprobe e4hd_4
 
 # set dummy time
 NTPDATE=`date +"%Y%m%d"`
@@ -95,25 +84,4 @@ if [ -e /var/etc/init.d/rcS.local ]; then
 fi
 
 #
-echo "[rcS] starting neutrino-DDT"
-
-until false
-do
-	/usr/bin/neutrino
-	rtv=$?
-	echo "GUI ended <- RTV: " $rtv
-	case "$rtv" in
-		0)
-		   echo "SHUTDOWN"
-		   init 0;;
-		1)
-		   echo "REBOOT"
-		   init 6;;
-		3)
-		   echo "RESTART";;
-		*)
-		   echo "ERROR"
-		   init 6;;
-      	esac
-done
 
