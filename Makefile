@@ -165,26 +165,24 @@ init:
 	@echo ""		
 # Gstreamer
 	@echo -e "\nGstreamer as mediaplayer for neutrino2 (only for mipsel / arm)"
-	@echo -e "   \033[01;32m1) no\033[00m"
-	@echo "   2) yes"
+	@echo "   1) yes"
+	@echo -e "   \033[01;32m2) no\033[00m"
 	@read -p "Select Gstreamer (1-2)?" GSTREAMER; \
 	GSTREAMER=$${GSTREAMER}; \
 	case "$$GSTREAMER" in \
-		1) echo "GSTREAMER=" >> .config;; \
-		2) echo "GSTREAMER=gstreamer" >> .config;; \
-		*) echo "GSTREAMER=" >> .config;; \
+		1) echo "GSTREAMER=gstreamer" >> .config;; \
+		2|*) echo "GSTREAMER=" >> .config;; \
 	esac; \
 	echo ""
 # python
 	@echo -e "\npython plugins support in neutrino2 (experimental and only for mipsel / arm)?:"
-	@echo -e "   \033[01;32m1)  no\033[00m"
-	@echo "   2)  yes"
+	@echo "   1)  yes"
+	@echo -e "   \033[01;32m2)  no\033[00m"
 	@read -p "Select python support (1-2)?" PYTHON; \
 	PYTHON=$${PYTHON}; \
 	case "$$PYTHON" in \
-		1) echo "PYTHON=" >> .config;; \
-		2) echo "PYTHON=python" >> .config;; \
-		*) echo "PYTHON=" >> .config;; \
+		1) echo "PYTHON=python" >> .config;; \
+		2|*) echo "PYTHON=" >> .config;; \
 	esac; \
 	echo ""
 # GraphLCD
@@ -201,14 +199,14 @@ init:
 	echo ""
 # LCD4Linux
 	@echo -e "\nLCD4linux (neutrino-DDT):"
-	@echo -e "   \033[01;32m1)  yes\033[00m"
-	@echo "   2) no"
+	@echo -e "   \033[01;32m1)  no\033[00m"
+	@echo "   2) yes"
 	@read -p "Select  LCD4Linux (1-2)?" LCD4LINUX; \
 	LCD4LINUX=$${LCD4LINUX}; \
 	case "$$LCD4LINUX" in \
-		1) echo "LCD4LINUX=lcd4linux" >> .config;; \
-		2) echo "LCD4LINUX=" >> .config;; \
-		*) echo "LCD4LINUX=lcd4linux" >> .config;; \
+		1) echo "LCD4LINUX=" >> .config;; \
+		2) echo "LCD4LINUX=lcd4linux" >> .config;; \
+		*) echo "LCD4LINUX=" >> .config;; \
 	esac; \
 	echo ""	
 #	
