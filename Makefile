@@ -319,7 +319,11 @@ help:
 	@echo " make package_name-ipk		- build package."
 	@echo " make packages			- build all feed packages."
 	@echo " make packges-clean		- clean all packages."
-	@echo
+	@echo ""
+	@echo "for development:"
+	@echo " make release			- build release without any GUI."
+	@echo " make image			- build image without any GUI."
+	@echo ""
 
 ifeq ($(BOXARCH), sh4)
 include make/crosstool-sh4.mk
