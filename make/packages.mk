@@ -347,7 +347,7 @@ endif
 	install -d $(BUILD_TMP)/libflac/control
 	touch $(BUILD_TMP)/libflac/control/control
 	echo Package: libflac > $(BUILD_TMP)/libflac/control/control
-	echo Version: $(LIBFLAC_VER) >> $(BUILD_TMP)/libflac/control/control
+	echo Version: $(FLAC_VER) >> $(BUILD_TMP)/libflac/control/control
 	echo Section: base/libraries >> $(BUILD_TMP)/libflac/control/control
 ifeq ($(BOXARCH), mips)
 	echo Architecture: $(BOXARCH)el >> $(BUILD_TMP)/libflac/control/control 
@@ -363,7 +363,7 @@ endif
 	echo '	/sbin/ldconfig' >> $(BUILD_TMP)/libflac/control/preint
 	echo 'fi' >> $(BUILD_TMP)/libflac/control/preint
 	pushd $(BUILD_TMP)/libflac/control && chmod +x * && tar --numeric-owner --group=0 --owner=0 -czf $(PKGS_DIR)/$@/control.tar.gz ./* && popd
-	pushd $(PKGS_DIR)/$@ && echo 2.0 > debian-binary && ar rv $(PKGS_DIR)/libflac-$(LIBFLAC_VER)_$(BOXARCH)_all.ipk ./data.tar.gz ./control.tar.gz ./debian-binary && popd && rm -rf data.tar.gz control.tar.gz debian-binary
+	pushd $(PKGS_DIR)/$@ && echo 2.0 > debian-binary && ar rv $(PKGS_DIR)/libflac-$(FLAC_VER)_$(BOXARCH)_all.ipk ./data.tar.gz ./control.tar.gz ./debian-binary && popd && rm -rf data.tar.gz control.tar.gz debian-binary
 	rm -rf $(BUILD_TMP)/libflac
 	rm -rf $(PKGPREFIX)
 	rm -rf $(PKGS_DIR)/$@

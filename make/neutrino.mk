@@ -395,7 +395,7 @@ endif
 	echo Depends: >> $(BUILD_TMP)/libstb-hal/control/control
 	pushd $(BUILD_TMP)/libstb-hal/control && chmod +x * && tar --numeric-owner --group=0 --owner=0 -czf $(PKGS_DIR)/$@/control.tar.gz ./* && popd
 	pushd $(PKGS_DIR)/$@ && echo 2.0 > debian-binary && ar rv $(PKGS_DIR)/libstb-hal-`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/libstb-hal/config.h | sed 's/"//'`_$(BOXARCH)_all.ipk ./data.tar.gz ./control.tar.gz ./debian-binary && popd && rm -rf data.tar.gz control.tar.gz debian-binary
-	rm -rf $(BUILD_TMP)/libstb-hal
+#	rm -rf $(BUILD_TMP)/libstb-hal
 	rm -rf $(PKGPREFIX)
 	rm -rf $(PKGS_DIR)/$@
 	$(END_BUILD)
@@ -415,7 +415,7 @@ $(PKGPREFIX)/.version:
 	echo "git=`git log | grep "^commit" | wc -l`" >> $@
 	
 neutrino-ipk: $(D)/neutrino.do_compile libstb-hal-ipk \
-	libflac-ipk libvorbisidec-ipk libogg-ipk libsigc-ipk libdvbsi-ipk pugixml-ipk libid3tag-ipk libmad-ipk
+	libflac-ipk libvorbisidec-ipk libogg-ipk libsigc-ipk libdvbsi-ipk pugixml-ipk libid3tag-ipk libmad-ipk pugixml-ipk libsigc-ipk
 	$(START_BUILD)
 	rm -rf $(PKGPREFIX)
 	install -d $(PKGPREFIX)
@@ -454,7 +454,7 @@ endif
 	echo '/var/tuxbox/config/encoding.conf' >> $(BUILD_TMP)/neutrino/control/conffiles
 	pushd $(BUILD_TMP)/neutrino/control && chmod +x * && tar --numeric-owner --group=0 --owner=0 -czf $(PKGS_DIR)/$@/control.tar.gz ./* && popd
 	pushd $(PKGS_DIR)/$@ && echo 2.0 > debian-binary && ar rv $(PKGS_DIR)/neutrino-`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`_$(BOXARCH)_all.ipk ./data.tar.gz ./control.tar.gz ./debian-binary && popd && rm -rf data.tar.gz control.tar.gz debian-binary
-	rm -rf $(BUILD_TMP)/neutrino
+#	rm -rf $(BUILD_TMP)/neutrino
 	rm -rf $(PKGPREFIX)
 	rm -rf $(PKGS_DIR)/$@
 	$(END_BUILD)
