@@ -126,7 +126,6 @@ if [ ! -e /var/etc/.firstboot ]; then
 	/var/etc/init.d/rcS.local
    fi
     
-   killall -9 showiframe
    /bin/fp_control -t "Neutrino-DDT"
    echo "starting Neutrino-DDT ->"
 

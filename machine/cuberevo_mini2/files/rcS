@@ -125,8 +125,6 @@ if [ ! -e /var/etc/.firstboot ]; then
    if [ -e /var/etc/init.d/rcS.local ]; then 
 	/var/etc/init.d/rcS.local
    fi
-    
-   killall -9 showiframe
    
    #
 fi

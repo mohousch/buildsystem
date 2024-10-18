@@ -123,8 +123,6 @@ if [ ! -e /var/etc/.firstboot ]; then
 	/var/etc/rcS.local
     fi
    
-   killall -9 showiframe
-   
    #
 fi
 
