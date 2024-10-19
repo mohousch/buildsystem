@@ -144,7 +144,7 @@ release-dm7020hd: $(D)/dm7020hd_2nd
 #
 # image
 #
-#FLASHSIZE = 100
+FLASHSIZE = 64
 ROOTFS_FILE = rootfs.ubi
 IMAGE_FSTYPES ?= ubifs
 IMAGE_NAME = rootfs

@@ -144,7 +144,7 @@ release-dm800se: $(D)/dm800se_2nd
 #
 # image
 #
-#FLASHSIZE = 64
+FLASHSIZE = 64
 ROOTFS_FILE = rootfs.ubi
 IMAGE_FSTYPES ?= ubifs
 IMAGE_NAME = rootfs
