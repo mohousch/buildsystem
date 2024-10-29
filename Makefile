@@ -285,7 +285,7 @@ help:
 	@echo ""
 	@echo "image:"
 	@echo " make image-neutrino2		- build neutrino2 image"
-	@echo " make image-neutrino		- build neutrino image"
+	@echo " make image-neutrino		- build neutrino-DDT image"
 	@echo ""
 	@echo "show board configuration:"
 	@echo " make printenv			- show board build configuration"

@@ -431,5 +431,5 @@ $(D)/ccache: directories
 	touch $@
 
 # hack to make sure they are always copied
-PHONY += ccache
+PHONY += ccache crosstool-ng crosstool
 
