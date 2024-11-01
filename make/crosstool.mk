@@ -65,6 +65,7 @@ endif
 # crosstool-backup
 #
 crosstool-backup:
+	rm -rf $(CROSSTOOL_NG_BACKUP); \
 	cd $(CROSS_DIR); \
 	tar czvf $(CROSSTOOL_NG_BACKUP) *
 
