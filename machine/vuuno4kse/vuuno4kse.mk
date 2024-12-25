@@ -203,5 +203,5 @@ PART_TEXT = This file forces creating partitions.
 PART_FILE = mkpart.update
 
 image-vuuno4kse:
-	$(MAKE) vuplus-rootfs-image-$(BOXTYPE) vuplus-multi-rootfs-image-$(BOXTYPE) vuplus-rootfs-image-$(BOXTYPE)
+	$(MAKE) vuplus-rootfs-image-$(BOXTYPE) vuplus-multi-rootfs-image-$(BOXTYPE)
 
