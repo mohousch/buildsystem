@@ -193,5 +193,5 @@ ROOTFS4_PARTITION_OFFSET = $(shell expr $(KERNEL4_PARTITION_OFFSET) + $(KERNEL_P
 SWAP_PARTITION_OFFSET = $(shell expr $(ROOTFS4_PARTITION_OFFSET) + $(ROOTFS_PARTITION_SIZE))
 
 image-osmio4k:
-	$(MAKE) edision-disk-image-$(BOXTYPE) edision-rootfs-image-$(BOXTYPE) edision-online-image-$(BOXTYPE)
+	$(MAKE) edision-disk-image-$(BOXTYPE) edision-rootfs-image-$(BOXTYPE)
 

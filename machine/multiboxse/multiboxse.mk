@@ -232,5 +232,5 @@ $(ARCHIVE)/$(FLASH_RECOVERY_SRC):
 	$(DOWNLOAD) http://source.mynonpublic.com/maxytec/$(FLASH_RECOVERY_SRC)
 	
 image-multiboxse:
-	$(MAKE) hdfastboot8gb-disk-image-$(BOXTYPE) hdfastboot8gb-rootfs-image-$(BOXTYPE) hdfastboot8gb-online-image-$(BOXTYPE)
+	$(MAKE) hdfastboot8gb-disk-image-$(BOXTYPE) hdfastboot8gb-rootfs-image-$(BOXTYPE)
 

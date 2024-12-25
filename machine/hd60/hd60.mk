@@ -199,5 +199,5 @@ $(ARCHIVE)/$(FLASH_PARTITONS_SRC):
 	$(DOWNLOAD) http://source.mynonpublic.com/gfutures/$(FLASH_PARTITONS_SRC)
 
 image-hd60:
-	$(MAKE) hdfastboot8gb-disk-image-$(BOXTYPE) hdfastboot8gb-rootfs-image-$(BOXTYPE) hdfastboot8gb-online-image-$(BOXTYPE)
+	$(MAKE) hdfastboot8gb-disk-image-$(BOXTYPE) hdfastboot8gb-rootfs-image-$(BOXTYPE)
 

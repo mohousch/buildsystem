@@ -180,6 +180,6 @@ SWAP_PARTITION_OFFSET = $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOT
 STORAGE_PARTITION_OFFSET = $(shell expr $(SWAP_PARTITION_OFFSET) \+ $(SWAP_PARTITION_SIZE))
 
 image-bre2ze4k:
-	$(MAKE) gfuture-disk-image-$(BOXTYPE) gfuture-rootfs-image-$(BOXTYPE) gfuture-online-image-$(BOXTYPE)
+	$(MAKE) gfuture-disk-image-$(BOXTYPE) gfuture-rootfs-image-$(BOXTYPE)
 
 

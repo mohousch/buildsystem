@@ -194,14 +194,14 @@ vuplus-multi-rootfs-image-$(BOXTYPE):
 	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d%m%Y-%H%M%S') > $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/imageversion
 	#
 	cd $(IMAGE_BUILD_DIR) && \
-	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_multi.zip $(FLASHIMAGE_PREFIX)/rootfs*.tar.bz2 $(FLASHIMAGE_PREFIX)/$(INITRD_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL1_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL2_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL3_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL4_FILE) $(FLASHIMAGE_PREFIX)/$(BOOT_UPDATE_FILE) $(FLASHIMAGE_PREFIX)/$(PART_FILE) $(FLASHIMAGE_PREFIX)/imageversion
+	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_multi_usb.zip $(FLASHIMAGE_PREFIX)/rootfs*.tar.bz2 $(FLASHIMAGE_PREFIX)/$(INITRD_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL1_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL2_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL3_FILE) $(FLASHIMAGE_PREFIX)/$(KERNEL4_FILE) $(FLASHIMAGE_PREFIX)/$(BOOT_UPDATE_FILE) $(FLASHIMAGE_PREFIX)/$(PART_FILE) $(FLASHIMAGE_PREFIX)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 	
 #
-# vuplus-online-image
+# vuplus-rootfs-image
 #
-vuplus-online-image-$(BOXTYPE):
+vuplus-rootfs-image-$(BOXTYPE):
 	# Create final USB-image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)
@@ -218,8 +218,8 @@ vuplus-online-image-$(BOXTYPE):
 	echo This file forces creating partitions. > $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/mkpart.update
 	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d%m%Y-%H%M%S') > $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/imageversion
 	#
-	cd $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX) && \
-	tar -cvzf $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_online.tgz rootfs.tar.bz2 initrd_auto.bin kernel_auto.bin *.update imageversion
+	cd $(IMAGE_BUILD_DIR) && \
+	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_usb.zip $(FLASHIMAGE_PREFIX)/rootfs.tar.bz2 $(FLASHIMAGE_PREFIX)/initrd_auto.bin $(FLASHIMAGE_PREFIX)/kernel_auto.bin $(FLASHIMAGE_PREFIX)/*.update $(FLASHIMAGE_PREFIX)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 	
@@ -278,27 +278,6 @@ octagon-rootfs-image-$(BOXTYPE):
 	#
 	cd $(IMAGE_BUILD_DIR) && \
 	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_usb.zip $(BOXTYPE)/rootfs.tar.bz2 $(BOXTYPE)/uImage $(BOXTYPE)/imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-
-#
-# octagon-online-image
-#	
-octagon-online-image-$(BOXTYPE):
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXTYPE)
-	mkdir -p $(IMAGE_DIR)
-	# kernel
-	cp $(TARGET_DIR)/boot/uImage $(IMAGE_BUILD_DIR)/$(BOXTYPE)/uImage
-	# rootfs
-	cd $(RELEASE_DIR); \
-	tar -cvf $(IMAGE_BUILD_DIR)/$(BOXTYPE)/rootfs.tar --exclude=uImage* . > /dev/null 2>&1; \
-	bzip2 $(IMAGE_BUILD_DIR)/$(BOXTYPE)/rootfs.tar
-	#
-	echo "$(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d.%m.%Y-%H.%M')" > $(IMAGE_BUILD_DIR)/$(BOXTYPE)/imageversion
-	#
-	cd $(IMAGE_BUILD_DIR) && \
-	tar -cvzf $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_online.tgz $(BOXTYPE)/rootfs.tar.bz2 $(BOXTYPE)/uImage $(BOXTYPE)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
@@ -373,29 +352,6 @@ edision-rootfs-image-$(BOXTYPE):
 	#
 	cd $(IMAGE_BUILD_DIR) && \
 	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_usb.zip $(BOXTYPE)/rootfs.tar.bz2 $(BOXTYPE)/kernel.bin $(BOXTYPE)/imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-	
-#
-# edision-online-image
-#
-edision-online-image-$(BOXTYPE):
-	# Create final USB-image
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXTYPE)
-	mkdir -p $(IMAGE_DIR)
-	# kernel
-	cp $(TARGET_DIR)/boot/zImage $(IMAGE_BUILD_DIR)/$(BOXTYPE)/kernel.bin
-	# rootfs
-	cd $(RELEASE_DIR) && \
-	tar -cvf $(IMAGE_BUILD_DIR)/$(BOXTYPE)/rootfs.tar . >/dev/null 2>&1; \
-	bzip2 $(IMAGE_BUILD_DIR)/$(BOXTYPE)/rootfs.tar
-	#
-	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d%m%Y-%H%M%S') > $(IMAGE_BUILD_DIR)/$(BOXTYPE)/imageversion
-	echo "rename this file to 'force' to force an update without confirmation" > $(IMAGE_BUILD_DIR)/$(BOXTYPE)/noforce; \
-	#
-	cd $(IMAGE_BUILD_DIR)/$(BOXTYPE) && \
-	tar -cvzf $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_online.tgz rootfs.tar.bz2 kernel.bin imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 	
@@ -507,31 +463,6 @@ endif
 	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_usb.zip $(FLASHIMAGE_PREFIX)/rootfs.tar.bz2 $(FLASHIMAGE_PREFIX)/$(KERNEL_FILE) $(FLASHIMAGE_PREFIX)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
-	
-#
-# gfuture-online-image
-#
-gfuture-online-image-$(BOXTYPE):
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)
-	mkdir -p $(IMAGE_DIR)
-	# kernel
-ifneq ($(KERNEL_DTB_VER),)
-	cp $(TARGET_DIR)/boot/zImage.dtb $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/$(KERNEL_FILE)
-else
-	cp $(TARGET_DIR)/boot/zImage $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/$(KERNEL_FILE)
-endif
-	# rootfs
-	cd $(RELEASE_DIR); \
-	tar -cvf $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/rootfs.tar --exclude=zImage* . > /dev/null 2>&1; \
-	bzip2 $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/rootfs.tar
-	#
-	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d.%m.%Y-%H.%M') > $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)/imageversion
-	#
-	cd $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX) && \
-	tar -cvzf $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_online.tgz rootfs.tar.bz2 $(KERNEL_FILE) imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
 
 #
 # hdfastboot8gb-disk-image
@@ -597,27 +528,6 @@ hdfastboot8gb-rootfs-image-$(BOXTYPE):
 	#
 	cd $(IMAGE_BUILD_DIR) && \
 	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_usb.zip $(BOXTYPE)/unforce_$(BOXTYPE).txt $(BOXTYPE)/force_$(BOXTYPE)_READ.ME $(BOXTYPE)/rootfs.tar.bz2 $(BOXTYPE)/$(KERNEL_FILE) $(BOXTYPE)/imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-
-#
-# hdfastboot8gb-online-image
-#
-hdfastboot8gb-online-image-$(BOXTYPE):
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXTYPE)
-	mkdir -p $(IMAGE_DIR)
-	#
-	cp $(TARGET_DIR)/boot/$(KERNEL_FILE) $(IMAGE_BUILD_DIR)/$(BOXTYPE)/
-	#
-	cd $(RELEASE_DIR); \
-	tar -cvf $(IMAGE_BUILD_DIR)/$(BOXTYPE)/rootfs.tar --exclude=$(KERNEL_FILE)* . > /dev/null 2>&1; \
-	bzip2 $(IMAGE_BUILD_DIR)/$(BOXTYPE)/rootfs.tar
-	#
-	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d%m%Y-%H%M%S') > $(IMAGE_BUILD_DIR)/$(BOXTYPE)/imageversion
-	#
-	cd $(IMAGE_BUILD_DIR) && \
-	tar -cvzf $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_online.tgz $(BOXTYPE)/rootfs.tar.bz2 $(BOXTYPE)/$(KERNEL_FILE) $(BOXTYPE)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
