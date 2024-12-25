@@ -1828,9 +1828,6 @@ $(D)/f2fs-tools: $(D)/bootstrap $(D)/util_linux $(ARCHIVE)/$(F2FS-TOOLS_SOURCE)
 	$(TOUCH)
 
 #
-# dev-apps
-#
-#
 # gdb-remote
 #
 GDB_VER = 7.8
@@ -1840,7 +1837,6 @@ GDB_PATCH = gdb-$(GDB_VER)-remove-builddate.patch
 $(ARCHIVE)/$(GDB_SOURCE):
 	$(DOWNLOAD) ftp://sourceware.org/pub/gdb/releases/$(GDB_SOURCE)
 
-# gdb-remote built for local-PC or target
 $(D)/gdb-remote: $(ARCHIVE)/$(GDB_SOURCE)
 	$(START_BUILD)
 	$(REMOVE)/gdb-$(GDB_VER)
@@ -1861,7 +1857,8 @@ $(D)/gdb-remote: $(ARCHIVE)/$(GDB_SOURCE)
 #
 # gdb
 #
-# gdb built for target or local-PC
+GDB_PATCH = gdb-7.8-remove-builddate.patch
+
 $(D)/gdb: $(D)/bootstrap $(D)/ncurses $(D)/zlib $(ARCHIVE)/$(GDB_SOURCE)
 	$(START_BUILD)
 	$(REMOVE)/gdb-$(GDB_VER)

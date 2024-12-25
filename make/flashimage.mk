@@ -484,9 +484,9 @@ endif
 	rm -rf $(IMAGE_BUILD_DIR)
 
 #
-# gfuture-multi-rootfs-image
+# gfuture-rootfs-image
 #
-gfuture-multi-rootfs-image-$(BOXTYPE):
+gfuture-rootfs-image-$(BOXTYPE):
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(FLASHIMAGE_PREFIX)
 	mkdir -p $(IMAGE_DIR)
