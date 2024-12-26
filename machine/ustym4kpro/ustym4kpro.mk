@@ -235,8 +235,6 @@ release-ustym4kpro: $(ARCHIVE)/$(FLASH_PARTITONS_SRC)
 #
 # image
 #
-FLASH_IMAGE_NAME = disk
-ROOTFS_SIZE = 320k #2*128k + 64k
 
 image-ustym4kpro:
 	$(MAKE) octagon-disk-image-$(BOXTYPE) octagon-rootfs-image-$(BOXTYPE)
