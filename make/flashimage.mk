@@ -526,8 +526,6 @@ hdfastboot8gb-disk-image-$(BOXTYPE): $(ARCHIVE)/$(FLASH_BOOTARGS_SRC) $(ARCHIVE)
 	unzip -o $(ARCHIVE)/$(FLASH_BOOTARGS_SRC) -d $(IMAGE_BUILD_DIR)
 #	unzip -o $(ARCHIVE)/$(FLASH_PARTITONS_SRC) -d $(IMAGE_BUILD_DIR)
 	#
-	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d%m%Y-%H%M%S') > $(IMAGE_BUILD_DIR)/$(BOXTYPE)/imageversion
-	#
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HDFASTBOOT8GB_FLASH_IMAGE_LINK) seek=$(shell expr $(HDFASTBOOT8GB_FLASH_IMAGE_ROOTFS_SIZE) \* $(HDFASTBOOT8GB_BLOCK_SECTOR)) count=0 bs=$(HDFASTBOOT8GB_BLOCK_SIZE)
 	$(HOST_DIR)/bin/mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(HDFASTBOOT8GB_FLASH_IMAGE_LINK) -d $(RELEASE_DIR)
 	# Error codes 0-3 indicate successfull operation of fsck (no errors or errors corrected)
@@ -553,6 +551,8 @@ ifeq ($(BOXTYPE), $(filter $(BOXTYPE), hd60))
 endif
 	mv $(IMAGE_BUILD_DIR)/$(BOXTYPE)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/$(BOXTYPE)/bootargs.bin
 	cp $(TARGET_DIR)/boot/$(KERNEL_FILE) $(IMAGE_BUILD_DIR)/$(BOXTYPE)/
+	#
+	echo $(BS_NAME)_$(BS_CYCLE)_$(BOXTYPE)_$(shell date '+%d%m%Y-%H%M%S') > $(IMAGE_BUILD_DIR)/$(BOXTYPE)/imageversion
 	#
 	cd $(IMAGE_BUILD_DIR) && \
 	zip -r $(IMAGE_DIR)/$(BOXTYPE)_$(shell git log | grep "^commit" | wc -l)_$(shell date '+%d.%m.%Y-%H.%M')_recovery_emmc.zip *
