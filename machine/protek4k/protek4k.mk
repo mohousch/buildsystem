@@ -3,7 +3,7 @@
 #
 BOXARCH = arm
 CICAM = ci-cam
-LCD = 4-digits
+LCD = tftlcd
 FKEYS =
 
 #
