@@ -4,7 +4,7 @@
 BOXARCH = arm
 CICAM = ci-cam
 SCART = scart
-LCD = tftlcd
+LCD = lcd
 FKEYS =
 
 #
