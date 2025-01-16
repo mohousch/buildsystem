@@ -22,7 +22,7 @@ GSTREAMER_PATCH += gstreamer-fix-builds-with-make-4.3.patch
 $(ARCHIVE)/$(GSTREAMER_SOURCE):
 	$(DOWNLOAD) https://gstreamer.freedesktop.org/src/gstreamer/$(GSTREAMER_SOURCE)
 
-$(D)/gstreamer: $(D)/bootstrap $(D)/libglib2 $(D)/libxml2 $(D)/glib_networking $(ARCHIVE)/$(GSTREAMER_SOURCE)
+$(D)/gstreamer: $(D)/bootstrap $(D)/libglib2 $(D)/libxml2 $(ARCHIVE)/$(GSTREAMER_SOURCE)
 	$(START_BUILD)
 	$(REMOVE)/gstreamer-$(GSTREAMER_VER)
 	$(UNTAR)/$(GSTREAMER_SOURCE)
