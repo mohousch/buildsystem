@@ -1129,7 +1129,7 @@ $(D)/libiconv: $(D)/bootstrap $(ARCHIVE)/$(LIBICONV_SOURCE)
 #
 # expat
 #
-EXPAT_VER = 2.6.4
+EXPAT_VER = 2.7.1
 EXPAT_SOURCE = expat-$(EXPAT_VER).tar.bz2
 EXPAT_PATCH  = expat-$(EXPAT_VER)-libtool-tag.patch
 
@@ -1518,12 +1518,13 @@ endif
 #
 # libpopt
 #
-LIBPOPT_VER = 1.16
+LIBPOPT_VER = 1.19
 LIBPOPT_SOURCE = popt-$(LIBPOPT_VER).tar.gz
 
 $(ARCHIVE)/$(LIBPOPT_SOURCE):
 #	$(DOWNLOAD) ftp://anduin.linuxfromscratch.org/BLFS/popt/$(LIBPOPT_SOURCE)
-	$(DOWNLOAD) http://ftp.lip6.fr/pub/linux/rpm/mirror/popt/$(LIBPOPT_SOURCE)
+#	$(DOWNLOAD) http://ftp.lip6.fr/pub/linux/rpm/mirror/popt/$(LIBPOPT_SOURCE)
+	$(DOWNLOAD) http://ftp.rpm.org/popt/releases/popt-1.x/$(LIBPOPT_SOURCE)
 
 $(D)/libpopt: $(D)/bootstrap $(ARCHIVE)/$(LIBPOPT_SOURCE)
 	$(START_BUILD)
