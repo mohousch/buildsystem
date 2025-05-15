@@ -370,7 +370,7 @@ $(D)/neutrino-plugins-mediathek:
 #
 # libstb-hal-ipk
 #
-libstb-hal-ipk: $(D)/libstb-hal.do_compile libass-ipk
+libstb-hal-ipk: $(D)/libstb-hal.do_compile
 	$(START_BUILD)
 	rm -rf $(PKGPREFIX)
 	install -d $(PKGPREFIX)
@@ -414,8 +414,7 @@ $(PKGPREFIX)/.version:
 	echo "version=0200`date +%Y%m%d%H%M`" >> $@
 	echo "git=`git log | grep "^commit" | wc -l`" >> $@
 	
-neutrino-ipk: $(D)/neutrino.do_compile libstb-hal-ipk \
-	libflac-ipk libvorbisidec-ipk libogg-ipk libsigc-ipk libdvbsi-ipk pugixml-ipk libid3tag-ipk libmad-ipk pugixml-ipk libsigc-ipk
+neutrino-ipk: $(D)/neutrino.do_compile libstb-hal-ipk
 	$(START_BUILD)
 	rm -rf $(PKGPREFIX)
 	install -d $(PKGPREFIX)
