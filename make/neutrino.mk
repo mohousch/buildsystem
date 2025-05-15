@@ -60,6 +60,7 @@ ifeq ($(BOXARCH), sh4)
 NEUTRINO_CPPFLAGS    += -I$(KERNEL_DIR)/include
 NEUTRINO_CPPFLAGS    += -I$(DRIVER_DIR)/include
 NEUTRINO_CPPFLAGS    += -I$(DRIVER_DIR)/bpamem
+NEUTRINO_CPPFLAGS    += -std=c++98
 endif
 
 NEUTRINO_CPPFLAGS    += -ffunction-sections -fdata-sections
