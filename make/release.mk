@@ -106,7 +106,7 @@ RELEASE_DEPS += $(D)/lcd4linux
 endif
 
 #
-# neutrino / neutrinoNG deps
+# neutrino / neutrinoNG deps (optional)
 #
 RELEASE_DEPS += $(D)/ncurses  
 RELEASE_DEPS += $(D)/libcurl

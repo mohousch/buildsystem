@@ -16,7 +16,7 @@ KERNEL_SRC             = linux-$(KERNEL_VER)-arm.tar.gz
 KERNEL_URL             = http://source.mynonpublic.com/gfutures
 KERNEL_CONFIG          = defconfig
 KERNEL_DIR             = $(BUILD_TMP)/linux-$(KERNEL_VER)
-KERNEL_DTB         = bcm7445-bcm97445svmb.dtb
+KERNEL_DTB             = bcm7445-bcm97445svmb.dtb
 KERNEL_FILE	       = kernel.bin
 
 KERNEL_PATCHES = \
