@@ -17,14 +17,20 @@
 
 SHELL = /bin/bash
 UID := $(shell id -u)
+
 ifeq ($(UID), 0)
 warn:
 	@echo "You are running as root. Do not do this, it is dangerous."
 	@echo "Aborting the build. Log in as a regular user and retry."
-else
-LC_ALL:=C
-LANG:=C
-export TOPDIR LC_ALL LANG
+	@exit 1
+endif
+
+LC_ALL := C
+LANG := C
+
+export LC_ALL LANG
+
+all: init
 
 # Boxtype
 init:
@@ -350,9 +356,6 @@ update:
 	git stash && git stash show -p > ./pull-stash-buildsystem.patch || true && git pull || true;
 	@echo;
 
-all:
-	@echo "'make all' is not a valid target. Please read the documentation."
-
 # print all present targets...
 print-targets:
 	@sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' \
@@ -382,5 +385,5 @@ PHONY += update
 # parallel, which is useful on multi-processor / multi-core machines
 .NOTPARALLEL:
 
-endif
+#endif
 
