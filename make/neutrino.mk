@@ -439,7 +439,7 @@ else
 	echo Architecture: $(BOXARCH) >> $(BUILD_TMP)/neutrino/control/control 
 endif
 	echo Maintainer: $(MAINTAINER)  >> $(BUILD_TMP)/neutrino/control/control 
-	echo Depends: "libdvbsi, pugixml (>= 1.9), libid3tag (>= 0.15), libmad (>= 0.15), libstb-hal"  >> $(BUILD_TMP)/neutrino/control/control
+	echo Depends: "libstb-hal"  >> $(BUILD_TMP)/neutrino/control/control
 	touch $(BUILD_TMP)/neutrino/control/preint
 	echo '#!/bin/sh' > $(BUILD_TMP)/neutrino/control/preint
 	echo 'if test -x /usr/bin/neutrino; then' >> $(BUILD_TMP)/neutrino/control/preint
