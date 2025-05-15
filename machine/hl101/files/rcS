@@ -147,4 +147,7 @@ mdev -s
 find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
 
 #
-
+# rcS.gui
+if [ -e /var/etc/init.d/rcS.gui ]; then
+	/var/etc/init.d/rcS.gui
+fi

@@ -67,5 +67,9 @@ date -s "2018-01-01 00:00"
 if [ -e /var/etc/init.d/rcS.local ]; then 
 	/var/etc/init.d/rcS.local
 fi
-#
+
+# rcS.gui
+if [ -e /var/etc/init.d/rcS.gui ]; then
+	/var/etc/init.d/rcS.gui
+fi
 

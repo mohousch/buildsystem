@@ -1,90 +1,7 @@
 #!/bin/sh
 
-. /etc/profile
-
-echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` start"
-SYSDATE=`date +"%Y%m%d"`
-
-if [ -e /var/etc/.firstboot ]; then
-/usr/bin/passwd root <<EOF
-root
-root
-EOF
-  rm /var/etc/.firstboot
-fi
-
-mount -t proc proc /proc
-mount -t sysfs sys /sys
-mount -t tmpfs tmp /tmp
-mkdir -p /dev/pts
-mount -t devpts devpts /dev/pts
-
 #
-echo /sbin/mdev >/proc/sys/kernel/hotplug
-mdev -s
-# coldplug modules
-find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
-
-#
-echo "[rcS] starting mountall"
-/etc/init.d/mountall start
-
-#
-echo "[rcS] add mmcblks in /dev/block"
-/etc/init.d/mmcblk-by-name
-
-#
-echo "[rcS] setup network"
-NFS=$(grep -c nfs /proc/cmdline)
-if [ "$NFS" -eq "1" ]; then
-	echo "Booting from nfs, don't set network"
-elif [ -e /var/tuxbox/config/.bootargs ]; then
-	echo "using ip set via bootargs, don't reset network"
-else
-	if [ -e /etc/network/interfaces ]; then
-		ip addr flush eth0
-		/etc/init.d/networking stop
-		/etc/init.d/networking start
-	fi
-fi
-/sbin/ifconfig lo 127.0.0.1 up
-
-# get net-time
-(ntpd -n -q -p time.fu-berlin.de) &
-
-/etc/init.d/hostname start
-/etc/init.d/portmap start
-/usr/sbin/inetd
-# rpc.statd for nfs
-/etc/init.d/nfs-common start
-
-#
-echo "[rcS] `date +'%d.%m.%Y %H:%M:%S'` load modules"
-
-modprobe bre2ze4k_1
-modprobe bre2ze4k_2
-modprobe bre2ze4k_3
-modprobe bre2ze4k_4
-
-# set dummy time
-NTPDATE=`date +"%Y%m%d"`
-if [ "$SYSDATE" == "$NTPDATE" ];then
-	date -s "2017-01-01 00:00"
-	echo "no ntp-date"
-	killall -9 ntpd
-	rm -f /tmp/ntpd.pid
-else
-	echo "[rcS] ntp-date is set > `date +'%d.%m.%Y %H:%M'`"
-	rm -f /tmp/ntpd.pid
-fi
-
-# rcS.local
-if [ -e /var/etc/init.d/rcS.local ]; then 
-	/var/etc/init.d/rcS.local
-fi
-
-#
-echo "starting NeutrinoNG ->"
+echo "starting NeutrinoNG"
 
 until false
 do
@@ -94,23 +11,19 @@ do
 	case "$rtv" in
 		0) echo "$rtv"
 			echo "RESTART"
-			echo "RESTART" > /dev/dbox/oled0
 			sync
 			;;
 		1) echo "$rtv"
 			echo "SHUTDOWN"
-			echo "SHUTDOWN" > /dev/dbox/oled0
 			init 0
 			;;
 		2) echo "$rtv"
 			echo "REBOOT"
-			echo "RBOOT" > /dev/dbox/oled0
 			init 6
 			;;
 		*) echo "*"
 			echo -e "\033[01;31mERROR: $rtv\033[00m"
-			echo "ERROR: $rtv" > /dev/dbox/oled0
-			#init 6
+			init 6
 			;;
 	esac
 done

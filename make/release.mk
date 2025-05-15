@@ -105,6 +105,28 @@ ifeq ($(LCD4LINUX), lcd4linux)
 RELEASE_DEPS += $(D)/lcd4linux
 endif
 
+#
+# neutrino / neutrinoNG deps
+#
+RELEASE_DEPS += $(D)/ncurses  
+RELEASE_DEPS += $(D)/libcurl
+RELEASE_DEPS += $(D)/libpng 
+RELEASE_DEPS += $(D)/libjpeg 
+RELEASE_DEPS += $(D)/giflib 
+RELEASE_DEPS += $(D)/freetype
+RELEASE_DEPS += $(D)/alsa_utils 
+RELEASE_DEPS += $(D)/ffmpeg
+RELEASE_DEPS += $(D)/libfribidi 
+RELEASE_DEPS += $(D)/libsigc 
+RELEASE_DEPS += $(D)/libdvbsi 
+RELEASE_DEPS += $(D)/pugixml 
+RELEASE_DEPS += $(D)/libopenthreads
+RELEASE_DEPS += $(D)/libid3tag
+RELEASE_DEPS += $(D)/libmad
+RELEASE_DEPS += $(D)/flac
+RELEASE_DEPS += $(D)/openssl
+RELEASE_DEPS += $(D)/libass
+
 release-common: $(RELEASE_DEPS)
 	rm -rf $(RELEASE_DIR) || true
 	install -d $(RELEASE_DIR)

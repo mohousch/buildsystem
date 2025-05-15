@@ -111,3 +111,8 @@ fi
 #
 echo 255 > /proc/stb/fp/oled_brightness
 
+# rcS.gui
+if [ -e /var/etc/init.d/rcS.gui ]; then
+	/var/etc/init.d/rcS.gui
+fi
+

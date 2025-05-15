@@ -1,72 +1,7 @@
 #!/bin/sh
 
-. /etc/profile
-
-if [ -e /var/etc/.firstboot ]; then
-/usr/bin/passwd root <<EOF
-root
-root
-EOF
-  rm /var/etc/.firstboot
-fi
-
-mount -t proc proc /proc
-mount -t sysfs sys /sys
-mount -t tmpfs tmp /tmp
-mkdir -p /dev/pts
-mount -t devpts devpts /dev/pts
-
 #
-echo "[rcS] starting mdev"
-echo /sbin/mdev >/proc/sys/kernel/hotplug
-mdev -s
-# coldplug modules
-find /sys/ -name modalias -print0 | xargs -0 sort -u | tr '\n' '\0' | xargs -0 modprobe -abq
-
-echo "starting interface"
-/etc/init.d/mountall start
-
-echo "rcS loading modules"
-modprobe h7_1
-modprobe h7_2
-modprobe h7_3
-modprobe h7_4
-
-echo "[rcS] add mmcblks in /dev/block"
-/etc/init.d/mmcblk-by-name
-
-echo "setup network"
-/etc/init.d/hostname start
-/etc/init.d/portmap start
-/usr/sbin/inetd
-NFS=$(grep -c nfs /proc/cmdline)
-  if [ "$NFS" -eq "1" ]; then
-    echo "Booting from nfs, don't set network"
-    elif [ -e /var/tuxbox/config/.bootargs ]; then
-    echo "using ip set via bootargs, don't reset network"
-  else
-    if [ -e /etc/network/interfaces ]; then
-      ip addr flush eth0
-      /etc/init.d/networking stop
-      DHCP=$(grep -c dhcp /etc/network/interfaces)
-      if [ "$DHCP" -eq "1" ]; then
-        echo "Starting dhcp"
-        /etc/init.d/udhcpc start
-      fi
-      /etc/init.d/networking start
-    fi
-  fi
-/sbin/ifconfig lo 127.0.0.1 up
-
-# set dummy time
-date -s "2017-01-01 00:00"
-
-# rcS.local
-if [ -e /var/etc/init.d/rcS.local ]; then 
-	/var/etc/init.d/rcS.local
-fi
-
-echo "[rcS] starting NeutrinoNG ->"
+echo "starting NeutrinoNG"
 
 until false
 do
@@ -76,22 +11,18 @@ do
 	case "$rtv" in
 		0) echo "$rtv"
 			echo "RESTART"
-			echo "RESTART" > /dev/dbox/oled0
 			sync
 			;;
 		1) echo "$rtv"
 			echo "SHUTDOWN"
-			echo "SHUTDOWN" > /dev/dbox/oled0
 			init 0
 			;;
 		2) echo "$rtv"
 			echo "REBOOT"
-			echo "RBOOT" > /dev/dbox/oled0
 			init 6
 			;;
 		*) echo "*"
 			echo -e "\033[01;31mERROR: $rtv\033[00m"
-			echo "ERROR: $rtv" > /dev/dbox/oled0
 			init 6
 			;;
 	esac

@@ -103,5 +103,8 @@ if [ -e /var/etc/rcS.local ]; then
 	/var/etc/rcS.local
 fi
 
-#
+# rcS.gui
+if [ -e /var/etc/init.d/rcS.gui ]; then
+	/var/etc/init.d/rcS.gui
+fi
 
