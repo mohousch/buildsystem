@@ -10,7 +10,7 @@ export LD_LIBRARY_PATH
 # BS version
 #
 export BS_NAME	     := NG_Buildsystem
-export BS_CYCLE	     := 202
+export BS_CYCLE	     := 203
 
 #
 BASE_DIR             := $(shell pwd)
