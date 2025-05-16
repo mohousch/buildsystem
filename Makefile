@@ -385,5 +385,3 @@ PHONY += update
 # parallel, which is useful on multi-processor / multi-core machines
 .NOTPARALLEL:
 
-#endif
-
