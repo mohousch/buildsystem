@@ -126,6 +126,7 @@ RELEASE_DEPS += $(D)/libmad
 RELEASE_DEPS += $(D)/flac
 RELEASE_DEPS += $(D)/openssl
 RELEASE_DEPS += $(D)/libass
+RELEASE_DEPS += $(D)/libdvbcsa
 
 release-common: $(RELEASE_DEPS)
 	rm -rf $(RELEASE_DIR) || true
@@ -184,6 +185,7 @@ endif
 	cp -aR $(SKEL_ROOT)/usr/share/zoneinfo/* $(RELEASE_DIR)/usr/share/zoneinfo/
 	cp -aR $(SKEL_ROOT)/usr/share/fonts $(RELEASE_DIR)/usr/share/
 	cp -aR $(TARGET_DIR)/etc/init.d/* $(RELEASE_DIR)/etc/init.d/
+	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/rcS $(RELEASE_DIR)/etc/init.d/rcS
 	install -m 0755 $(SKEL_ROOT)/etc/init.d/rcS.local $(RELEASE_DIR)/etc/init.d/rcS.local
 	cp -aR $(TARGET_DIR)/etc/* $(RELEASE_DIR)/etc/
 	echo "$(BOXTYPE)" > $(RELEASE_DIR)/etc/hostname
@@ -436,8 +438,7 @@ endif
 #
 release: release-common release-$(BOXTYPE)
 	$(START_BUILD)
-	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/rcS $(RELEASE_DIR)/etc/init.d/rcS
-	#
+#
 # delete unnecessary files
 #
 	rm -rf $(RELEASE_DIR)/var/tuxbox/config/zapit/services.xml
