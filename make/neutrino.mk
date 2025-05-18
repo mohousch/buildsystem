@@ -427,6 +427,9 @@ neutrino-ipk: $(D)/neutrino.do_compile libstb-hal-ipk
 ifneq ($(OPTIMIZATIONS), $(filter $(OPTIMIZATIONS), kerneldebug debug normal))
 	find $(PKGPREFIX)/ -name '*' -exec $(TARGET)-strip --strip-unneeded {} &>/dev/null \;
 endif
+	rm -rf $(PKGPREFIX)/var/tuxbox/config/zapit/services.xml
+	rm -rf $(PKGPREFIX)/var/tuxbox/config/zapit/bouquets.xml
+	rm -rf $(PKGPREFIX)/var/tuxbox/config/zapit/ubouquets.xml
 	install -d $(PKGPREFIX)/var/etc/init.d
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/rcS_NEUTRINO $(PKGPREFIX)/var/etc/init.d/rcS.gui
 	pushd $(PKGPREFIX) && tar --numeric-owner --group=0 --owner=0 -czf $(PKGS_DIR)/$@/data.tar.gz ./* && popd
