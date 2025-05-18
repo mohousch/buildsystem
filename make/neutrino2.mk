@@ -193,6 +193,8 @@ neutrino2-ipk: $(D)/neutrino2.do_compile
 ifneq ($(OPTIMIZATIONS), $(filter $(OPTIMIZATIONS), kerneldebug debug normal))
 	find $(PKGPREFIX)/ -name '*' -exec $(TARGET)-strip --strip-unneeded {} &>/dev/null \;
 endif
+	install -d $(PKGPREFIX)/var/etc/init.d
+	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/rcS_NEUTRINO2 $(PKGPREFIX)/var/etc/init.d/rcS.gui
 	pushd $(PKGPREFIX) && tar --numeric-owner --group=0 --owner=0 -czf $(PKGS_DIR)/$@/data.tar.gz ./* && popd
 	install -d $(BUILD_TMP)/neutrino2/control
 	touch $(BUILD_TMP)/neutrino2/control/control
