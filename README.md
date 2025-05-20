@@ -29,7 +29,7 @@ $:~ make init
 $:~ make image-neutrino2
 ```
 
-or if you want to build neutrino-DDT image
+if you want to build neutrino-DDT image
 
 ```bash
 $:~ make image-neutrino
