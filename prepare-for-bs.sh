@@ -136,7 +136,7 @@ if ([ "$UBUNTU" == 1  ] &&  [ "$UBUNTU_VERSION" -ge "12" ]) || ([ "$UBUNTU" == 2
 	";
 fi
 # ubuntu / linuxmint
-if ([ "$UBUNTU" == 1  ] &&  [ "$UBUNTU_VERSION" -ge "23" ]) || ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "21" ]); then
+if ([ "$UBUNTU" == 1  ] &&  [ "$UBUNTU_VERSION" -ge "25" ]) || ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "22" ]); then
 	PACKAGES="$PACKAGES \
 	${UBUNTU:+libtool-bin} \
 	${UBUNTU:+gtk-doc-tools}

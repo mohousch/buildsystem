@@ -41,6 +41,39 @@ busyboxmenuconfig: $(D)/bootstrap $(ARCHIVE)/$(BUSYBOX_SOURCE) $(PATCHES)/$(BUSY
 		$(MAKE) menuconfig
 
 #
+# sysvinit
+#
+SYSVINIT_VER = 3.06
+SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
+SYSVINIT_PATCH  = sysvinit-$(SYSVINIT_VER)-crypt-lib.patch
+SYSVINIT_PATCH += sysvinit-$(SYSVINIT_VER)-change-INIT_FIFO.patch
+SYSVINIT_PATCH += sysvinit-$(SYSVINIT_VER)-remove-killall5.patch
+
+$(ARCHIVE)/$(SYSVINIT_SOURCE):
+	$(DOWNLOAD) https://github.com/slicer69/sysvinit/releases/download/$(SYSVINIT_VER)/$(SYSVINIT_SOURCE)
+
+$(D)/sysvinit: $(D)/bootstrap $(ARCHIVE)/$(SYSVINIT_SOURCE)
+	$(START_BUILD)
+	$(REMOVE)/sysvinit-$(SYSVINIT_VER)
+	$(UNTAR)/$(SYSVINIT_SOURCE)
+	$(CHDIR)/sysvinit-$(SYSVINIT_VER); \
+		$(call apply_patches, $(SYSVINIT_PATCH)); \
+		sed -i -e 's/\ sulogin[^ ]*//' -e 's/pidof\.8//' -e '/ln .*pidof/d' \
+		-e '/bootlogd/d' -e '/utmpdump/d' -e '/mountpoint/d' -e '/mesg/d' src/Makefile; \
+		$(BUILDENV) \
+		$(MAKE) -C src SULOGINLIBS=-lcrypt; \
+		$(MAKE) install ROOT=$(TARGET_DIR) MANDIR=/.remove
+	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode runlevel telinit)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lastb)
+ifeq ($(BOXTYPE), $(filter $(BOXTYPE), fortis_hdbox octagon1008 cuberevo cuberevo_mini2 cuberevo_2000hd))
+	install -m 644 $(SKEL_ROOT)/etc/inittab_ttyAS1 $(TARGET_DIR)/etc/inittab
+else
+	install -m 644 $(SKEL_ROOT)/etc/inittab $(TARGET_DIR)/etc/inittab
+endif
+	$(REMOVE)/sysvinit-$(SYSVINIT_VER)
+	$(TOUCH)
+
+#
 # mtd_utils
 #
 MTD_UTILS_VER = 1.5.2
@@ -88,39 +121,6 @@ $(D)/module_init_tools: $(D)/bootstrap $(D)/lsb $(ARCHIVE)/$(HOST_MODULE_INIT_TO
 		$(MAKE) install sbin_PROGRAMS="depmod modinfo modprobe" bin_PROGRAMS= DESTDIR=$(TARGET_DIR)
 	$(call adapted-etc-files, $(MODULE_INIT_TOOLS_ADAPTED_ETC_FILES))
 	$(REMOVE)/module-init-tools-$(MODULE_INIT_TOOLS_VER)
-	$(TOUCH)
-
-#
-# sysvinit
-#
-SYSVINIT_VER = 3.06
-SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
-SYSVINIT_PATCH  = sysvinit-$(SYSVINIT_VER)-crypt-lib.patch
-SYSVINIT_PATCH += sysvinit-$(SYSVINIT_VER)-change-INIT_FIFO.patch
-SYSVINIT_PATCH += sysvinit-$(SYSVINIT_VER)-remove-killall5.patch
-
-$(ARCHIVE)/$(SYSVINIT_SOURCE):
-	$(DOWNLOAD) https://github.com/slicer69/sysvinit/releases/download/$(SYSVINIT_VER)/$(SYSVINIT_SOURCE)
-
-$(D)/sysvinit: $(D)/bootstrap $(ARCHIVE)/$(SYSVINIT_SOURCE)
-	$(START_BUILD)
-	$(REMOVE)/sysvinit-$(SYSVINIT_VER)
-	$(UNTAR)/$(SYSVINIT_SOURCE)
-	$(CHDIR)/sysvinit-$(SYSVINIT_VER); \
-		$(call apply_patches, $(SYSVINIT_PATCH)); \
-		sed -i -e 's/\ sulogin[^ ]*//' -e 's/pidof\.8//' -e '/ln .*pidof/d' \
-		-e '/bootlogd/d' -e '/utmpdump/d' -e '/mountpoint/d' -e '/mesg/d' src/Makefile; \
-		$(BUILDENV) \
-		$(MAKE) -C src SULOGINLIBS=-lcrypt; \
-		$(MAKE) install ROOT=$(TARGET_DIR) MANDIR=/.remove
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode runlevel telinit)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lastb)
-ifeq ($(BOXTYPE), $(filter $(BOXTYPE), fortis_hdbox octagon1008 cuberevo cuberevo_mini2 cuberevo_2000hd))
-	install -m 644 $(SKEL_ROOT)/etc/inittab_ttyAS1 $(TARGET_DIR)/etc/inittab
-else
-	install -m 644 $(SKEL_ROOT)/etc/inittab $(TARGET_DIR)/etc/inittab
-endif
-	$(REMOVE)/sysvinit-$(SYSVINIT_VER)
 	$(TOUCH)
 
 #
@@ -990,7 +990,7 @@ $(D)/avahi: $(D)/bootstrap $(D)/expat $(D)/libdaemon $(D)/dbus $(ARCHIVE)/$(AVAH
 	$(TOUCH)
 
 #
-# DOWNLOAD
+# wget
 #
 WGET_VER = 1.19.5
 WGET_SOURCE = wget-$(WGET_VER).tar.gz
