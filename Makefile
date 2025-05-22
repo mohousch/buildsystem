@@ -281,6 +281,9 @@ endif
 	@echo "Your next step could be:"
 	@echo "  make image-neutrino2"
 	@echo ""
+	@echo "if you want to build neutrino-DDT image"
+	@echo "  make image-neutrino"
+	@echo ""
 	@echo "for more details:"
 	@echo "  make help"
 
