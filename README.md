@@ -47,3 +47,14 @@ $:~ make print-boards
 
 * backed image can be found into ~/buildsystem/tufsbox/$(machine)/image.
 
+# DISCLAIMER:
+* tested Boards
+- Gigablue Ultra UE
+- Gigablue 800se
+- WWIO Bre2zt2c
+- Cuberevo Mini2 (3000HD)
+
+* all others Platforms are not tested, do it on your own risk, if you have request or issue please post it here.
+
+
+
