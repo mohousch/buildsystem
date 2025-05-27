@@ -366,7 +366,11 @@ print-targets:
 		
 # print all supported boards ...
 print-boards:
-	@ls -1C machine | sed 's/.mk//g' 
+	@ls -1C machine | sed 's/.mk//g'
+	
+# print all builds
+print-builds:
+	@ls -1 tufsbox
 
 # for local extensions, e.g. special plugins or similar...
 # put them into $(BASE_DIR)/local since that is ignored in .gitignore
