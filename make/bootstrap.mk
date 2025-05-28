@@ -272,21 +272,14 @@ $(D)/cortex_strings: $(D)/directories $(ARCHIVE)/$(CORTEX_STRINGS_SOURCE)
 #
 BUILDIMAGE_PATCH = buildimage.patch
 
-$(D)/buildimage: $(D)/bootstrap
+$(D)/buildimage:
 	$(START_BUILD)
-	$(REMOVE)/buildimage
-	set -e; if [ -d $(ARCHIVE)/buildimage.git ]; \
-		then cd $(ARCHIVE)/buildimage.git; #git pull; \
-#		else cd $(ARCHIVE); git clone https://github.com/oe-mirrors/buildimage.git buildimage.git; \
-		fi
-	cp -ra $(ARCHIVE)/buildimage.git $(BUILD_TMP)/buildimage
-	$(CHDIR)/buildimage; \
+	set -e; cd $(TOOLS_DIR)/buildimage.git; \
 		$(call apply_patches,$(BUILDIMAGE_PATCH)); \
 		autoreconf -fi; \
 		./configure; \
 		$(MAKE); \
-	install -m 755 $(BUILD_TMP)/buildimage/src/buildimage $(HOST_DIR)/bin
-	$(REMOVE)/buildimage
+	$(MAKE) install DESTDIR=$(HOST_DIR)
 	$(TOUCH)
 	
 #
