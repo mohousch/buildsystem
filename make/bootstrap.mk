@@ -275,7 +275,6 @@ BUILDIMAGE_PATCH = buildimage.patch
 $(D)/buildimage:
 	$(START_BUILD)
 	set -e; cd $(TOOLS_DIR)/buildimage.git; \
-		$(call apply_patches,$(BUILDIMAGE_PATCH)); \
 		autoreconf -fi; \
 		./configure; \
 		$(MAKE); \

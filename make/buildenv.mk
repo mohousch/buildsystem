@@ -128,7 +128,7 @@ PKG_CONFIG_PATH       = $(TARGET_LIB_DIR)/pkgconfig
 
 VPATH                 = $(D)
 
-PATH                 := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH):/sbin:/usr/sbin:/usr/local/sbin
+PATH                 := $(HOST_DIR)/bin:$(HOST_DIR)/usr/local/bin:$(CROSS_DIR)/bin:$(PATH):/sbin:/usr/sbin:/usr/local/sbin
 
 TERM_RED             := \033[00;31m
 TERM_RED_BOLD        := \033[01;31m

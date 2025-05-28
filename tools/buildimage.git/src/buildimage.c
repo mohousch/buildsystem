@@ -74,6 +74,7 @@ static const struct option options[] = {
 	{ "flash-size", required_argument, NULL, 'f' },
 	{ "help", no_argument, NULL, 'h' },
 	{ "raw", no_argument, NULL, 'r' },
+	{ "warning", no_argument, NULL, 'w' },
 	{ "sector-size", required_argument, NULL, 's' },
 	{ NULL, 0, NULL, 0 },
 };
@@ -85,6 +86,7 @@ static bool broadcom_nand;
 static bool hw_ecc;
 static bool large_page;
 static bool raw;
+static bool warning_only;
 
 /* reserve to two sectors plus 1% for badblocks, and round down */
 static inline size_t badblock_safe(size_t x)
@@ -390,8 +392,15 @@ static bool partition_append(const char *option, fnc_encode_ecc encode)
 			num_partitions, (unsigned long long)st.st_size,
 			(unsigned long long)badblock_safe(val), filename);
 	if (st.st_size > badblock_safe(val)) {
+	     if (warning_only)
+	        {
+		fprintf(stderr, "Partition #%u (%s) is too big. This doesn't work in Flash.", num_partitions, filename);
+	        }
+	     else
+	        {
 		fprintf(stderr, "Partition #%u (%s) is too big. This doesn't work. Sorry.", num_partitions, filename);
 		return false;
+	        }
 	}
 
 	f = fopen(filename, "r");
@@ -450,6 +459,7 @@ static const char usage[] =
 "    -r             --raw\n"
 "    -B             --brcmnand\n"
 "    -H             --hw-ecc (for boot partition)\n"
+"    -w             --warning on size limits\n"
 "\n"
 "  buildimage -a dm8000 -e 0x20000 -f 0x4000000 -s 2048 \\\n"
 "             -b 0x100000:secondstage-dm8000.bin -d 0x300000:boot.jffs2 \\\n"
@@ -462,7 +472,7 @@ int main(int argc, char *argv[])
 	const char *arch = NULL;
 	int opt;
 
-	while ((opt = getopt_long(argc, argv, "BHa:b:d:e:f:ho:rs:", options, NULL)) != -1) {
+	while ((opt = getopt_long(argc, argv, "BHa:b:d:e:f:ho:rws:", options, NULL)) != -1) {
 		switch (opt) {
 		case 'B':
 			broadcom_nand = true;
@@ -508,6 +518,9 @@ int main(int argc, char *argv[])
 			return EXIT_SUCCESS;
 		case 'r':
 			raw = true;
+			break;
+		case 'w':
+			warning_only = true;
 			break;
 		case 's':
 			/* minimum: 512 bytes */

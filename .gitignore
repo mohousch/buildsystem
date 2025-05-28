@@ -996,3 +996,4 @@ config.local
 /tools/streamproxy/streamproxy
 /tools/streamproxy/streamproxy.o
 /pull-stash-buildsystem.patch
+/tools/buildimage.git/compile
