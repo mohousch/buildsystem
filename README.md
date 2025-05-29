@@ -49,7 +49,7 @@ $:~ make print-boards
 
 # DISCLAIMER:
 * tested Boards:
-* Gigablue UE 4K
+- Gigablue UE 4K
 - Gigablue Ultra UE
 - Gigablue 800se
 - WWIO Bre2zt2c
