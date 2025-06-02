@@ -47,7 +47,7 @@ $:~ make print-boards
 
 * backed image can be found into ~/buildsystem/tufsbox/$(machine)/image.
 
-# DISCLAIMER:
+# DISCLAIMER
 * tested Boards:
 - Gigablue UE 4K
 - Gigablue Ultra UE
