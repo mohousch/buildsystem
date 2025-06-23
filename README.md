@@ -1,4 +1,4 @@
-# how to build image: #
+# How to build image: #
 
 ```bash
 $:~ git clone https://github.com/mohousch/buildsystem.git
@@ -35,27 +35,27 @@ if you want to build neutrino-DDT image
 $:~ make image-neutrino
 ```
 
-**for more details:**
+**For more details:**
 ```bash
 $:~ make help
 ```
 
-**supported boards:**
+**Supported boards:**
 ```bash
 $:~ make print-boards
 ```
 
-* backed image can be found into ~/buildsystem/tufsbox/$(machine)/image.
+* Backed image can be found into ~/buildsystem/tufsbox/$(machine)/image.
 
 # DISCLAIMER
-* tested STBs:
+* Tested STBs:
 - Gigablue UE 4K
 - Gigablue Ultra UE
 - Gigablue 800se
 - WWIO Bre2zt2c
 - Cuberevo Mini2 (3000HD)
 
-* all others Platforms are not tested, do it on your own risk, if you have request or issue please post it here.
+* All others platforms are not tested, do it on your own risk, if you have request or issue please post it here.
 
 
 
