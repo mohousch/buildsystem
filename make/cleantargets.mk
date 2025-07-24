@@ -58,3 +58,9 @@ kernel-clean:
 	rm -f $(D)/kernel.do_prepare
 	rm -f $(TARGET_DIR)/boot/*
 
+#
+# build clean
+#
+build-clean:
+	rm -rf $(TUFSBOX_DIR)
+
