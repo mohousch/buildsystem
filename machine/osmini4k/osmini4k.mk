@@ -72,7 +72,7 @@ $(ARCHIVE)/$(DRIVER_SRC):
 	$(DOWNLOAD) $(DRIVER_URL)/$(DRIVER_SRC)
 
 $(ARCHIVE)/$(LIBGLES_SRC):
-	$(DOWNLOAD) $(LIBGLES_URL/$(LIBGLES_SRC)
+	$(DOWNLOAD) $(LIBGLES_URL)/$(LIBGLES_SRC)
 
 driver: $(D)/driver
 $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
