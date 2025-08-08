@@ -166,7 +166,7 @@ INITRD_SRCDATE = 20181121r1
 INITRD_SRC = initrd_$(BOXTYPE)_$(INITRD_SRCDATE).zip
 
 $(ARCHIVE)/$(INITRD_SRC):
-	$(WGET) https://source.mynonpublic.com/gigablue/initrd/$(INITRD_SRC)
+	$(DOWNLOAD) https://source.mynonpublic.com/gigablue/initrd/$(INITRD_SRC)
 	
 image-gbue4k:
 	$(MAKE) gbue4k-flash-image
