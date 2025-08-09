@@ -1428,12 +1428,6 @@ $(D)/libpsl: $(D)/bootstrap
 #
 # libxml2
 #
-#LIBXML2_VER = 2.14
-#LIBXML2_SOURCE = libxml2-$(LIBXML2_VER).tar.gz
-#LIBXML2_PATCH = libxml2-$(LIBXML2_VER).patch
-
-#$(ARCHIVE)/$(LIBXML2_SOURCE):
-#	$(DOWNLOAD) ftp://xmlsoft.org/libxml2/$(LIBXML2_SOURCE)
 LIBXML2_MAJOR = 2.14
 LIBXML2_MINOR = 5
 LIBXML2_VER = $(LIBXML2_MAJOR).$(LIBXML2_MINOR)
