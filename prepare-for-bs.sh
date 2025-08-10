@@ -129,7 +129,7 @@ elif [ "$UBUNTU" == 2 ]; then
 	MINT_VERSION=`lsb_release -r | grep "Release" | cut -f2 | cut -d . -f1`
 fi
 # debian / linuxmint lmde
-if ([ "$UBUNTU" == 1  ] &&  [ "$UBUNTU_VERSION" -ge "12" ]) || ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "6" ]); then
+if ([ "$UBUNTU" == 1  ] &&  [ "$UBUNTU_VERSION" -ge "13" ]) || ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "6" ]); then
 	PACKAGES="$PACKAGES \
 	${UBUNTU:+libtool-bin} \
 	${UBUNTU:+gtk-doc-tools}

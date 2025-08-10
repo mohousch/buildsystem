@@ -79,7 +79,7 @@ $(D)/host_module_init_tools: $(D)/directories $(ARCHIVE)/$(HOST_MODULE_INIT_TOOL
 			--prefix=$(HOST_DIR) \
 			--sbindir=$(HOST_DIR)/bin \
 		; \
-		$(MAKE); \
+		$(MAKE) all; \
 		$(MAKE) install
 	$(REMOVE)/module-init-tools-$(HOST_MODULE_INIT_TOOLS_VER)
 	$(TOUCH)
