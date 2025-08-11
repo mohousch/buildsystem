@@ -352,7 +352,7 @@ BOOTSTRAP += $(D)/host_module_init_tools
 BOOTSTRAP += $(D)/host_mtd_utils
 BOOTSTRAP += $(D)/host_resize2fs
 ifeq ($(BOXARCH), sh4)
-BOOTSTRAP += $(D)/host_mkcramfs
+#BOOTSTRAP += $(D)/host_mkcramfs
 BOOTSTRAP += $(D)/host_mksquashfs_lzma
 BOOTSTRAP += host_u_boot_tools
 endif
