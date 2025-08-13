@@ -297,7 +297,7 @@ edision-disk-image-$(BOXTYPE):
 	mkdir -p $(IMAGE_DIR)
 	# Create a sparse image block
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) seek=$(shell expr $(EDISION_EMMC_IMAGE_SIZE) \* $(EDISION_BLOCK_SECTOR)) count=0 bs=$(EDISION_BLOCK_SIZE)
-	$(HOST_DIR)/bin/mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) -d $(RELEASE_DIR)
+	$(HOST_DIR)/bin/mkfs.ext4 -F -m0 $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) -d $(RELEASE_DIR)
 	# Error codes 0-3 indicate successfull operation of fsck (no errors or errors corrected)
 	$(HOST_DIR)/bin/fsck.ext4 -pfD $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) || [ $? -le 3 ]
 	dd if=/dev/zero of=$(EDISION_EMMC_IMAGE) bs=$(EDISION_BLOCK_SIZE) count=0 seek=$(shell expr $(EDISION_EMMC_IMAGE_SIZE) \* $(EDISION_BLOCK_SECTOR))
