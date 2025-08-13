@@ -225,7 +225,7 @@ octagon-disk-image-$(BOXTYPE):
 	install -d $(IMAGE_BUILD_DIR)/userdata/linuxrootfs4
 	cp -a $(RELEASE_DIR) $(IMAGE_BUILD_DIR)/userdata
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(OCTAGON_FLASH_IMAGE_NAME).rootfs.ext4 seek=$(OCTAGON_ROOTFS_SIZE) count=0 bs=1024
-	mkfs.ext4 -F -i 4096 $(IMAGE_BUILD_DIR)/$(OCTAGON_FLASH_IMAGE_NAME).rootfs.ext4 -d $(IMAGE_BUILD_DIR)/userdata
+	$(HOST_DIR)/bin/mkfs.ext4 -F -i 4096 $(IMAGE_BUILD_DIR)/$(OCTAGON_FLASH_IMAGE_NAME).rootfs.ext4 -d $(IMAGE_BUILD_DIR)/userdata
 	fsck.ext4 -pvfD $(IMAGE_BUILD_DIR)/$(OCTAGON_FLASH_IMAGE_NAME).rootfs.ext4 || [ $? -le 3 ]
 	cp $(IMAGE_BUILD_DIR)/$(BOXTYPE)/uImage $(IMAGE_BUILD_DIR)/patitions/kernel.bin
 	cp $(IMAGE_BUILD_DIR)/$(OCTAGON_FLASH_IMAGE_NAME).rootfs.ext4 $(IMAGE_BUILD_DIR)/patitions/rootfs.ext4
@@ -270,6 +270,8 @@ EDISION_EMMC_IMAGE = $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_NAME).img
 EDISION_EMMC_IMAGE_SIZE = 7634944
 
 # partition offsets/sizes
+EDISION_BLOCK_SIZE	       = 1
+EDISION_BLOCK_SECTOR	       = 1024
 EDISION_IMAGE_ROOTFS_ALIGNMENT = 1024
 EDISION_BOOT_PARTITION_SIZE    = 3072
 EDISION_KERNEL_PARTITION_SIZE  = 8192
@@ -294,11 +296,11 @@ edision-disk-image-$(BOXTYPE):
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXTYPE)
 	mkdir -p $(IMAGE_DIR)
 	# Create a sparse image block
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) seek=$(shell expr $(EDISION_EMMC_IMAGE_SIZE) \* 1024) count=0 bs=1
-	$(HOST_DIR)/bin/mkfs.ext4 -F -m0 $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) -d $(RELEASE_DIR)
+	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) seek=$(shell expr $(EDISION_EMMC_IMAGE_SIZE) \* $(EDISION_BLOCK_SECTOR)) count=0 bs=$(EDISION_BLOCK_SIZE)
+	$(HOST_DIR)/bin/mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) -d $(RELEASE_DIR)
 	# Error codes 0-3 indicate successfull operation of fsck (no errors or errors corrected)
 	$(HOST_DIR)/bin/fsck.ext4 -pfD $(IMAGE_BUILD_DIR)/$(EDISION_IMAGE_LINK) || [ $? -le 3 ]
-	dd if=/dev/zero of=$(EDISION_EMMC_IMAGE) bs=1 count=0 seek=$(shell expr $(EDISION_EMMC_IMAGE_SIZE) \* 1024)
+	dd if=/dev/zero of=$(EDISION_EMMC_IMAGE) bs=$(EDISION_BLOCK_SIZE) count=0 seek=$(shell expr $(EDISION_EMMC_IMAGE_SIZE) \* $(EDISION_BLOCK_SECTOR))
 	parted -s $(EDISION_EMMC_IMAGE) mklabel gpt
 	parted -s $(EDISION_EMMC_IMAGE) unit KiB mkpart boot fat16 $(EDISION_IMAGE_ROOTFS_ALIGNMENT) $(shell expr $(EDISION_IMAGE_ROOTFS_ALIGNMENT) + $(EDISION_BOOT_PARTITION_SIZE))
 	parted -s $(EDISION_EMMC_IMAGE) set 1 boot on
