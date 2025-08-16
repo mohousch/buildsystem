@@ -1,4 +1,4 @@
-# Makefile for NG buildsystem
+# Makefile for NeutrinoNG buildsystem
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -356,7 +356,7 @@ include make/flashimage.mk
 include make/packages.mk
 
 update:
-	git stash && git stash show -p > ./pull-stash-buildsystem.patch || true && git pull || true;
+	git stash && git stash show -p > ./pull-stash-NeutrinoNG.patch || true && git pull || true;
 	@echo;
 
 # print all present targets...
