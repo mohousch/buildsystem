@@ -1,11 +1,11 @@
 # How to build image: #
 
 ```bash
-$:~ git clone https://github.com/mohousch/buildsystem.git
+$:~ git clone https://github.com/mohousch/NeuutrinoNG.git
 ```
 
 ```bash
-cd buildsystem
+cd NeutrinoNG
 ```
 
 **for first use:**
@@ -15,13 +15,13 @@ $:~ sudo bash prepare-for-bs.sh
 
 **machine configuration:**
 ```bash
-$:~ make
+$:~ make init
 ```
 
 or
 
 ```bash
-$:~ make init
+$:~ make
 ```
 
 **build image:**
@@ -45,7 +45,7 @@ $:~ make help
 $:~ make print-boards
 ```
 
-* Backed image can be found into ~/buildsystem/tufsbox/$(machine)/image.
+* Backed image can be found into ~/NeutrinoNG/tufsbox/$(machine)/image.
 
 # DISCLAIMER
 * Tested STBs:
