@@ -1,7 +1,7 @@
 # How to build image: #
 
 ```bash
-$:~ git clone https://github.com/mohousch/NeuutrinoNG.git
+$:~ git clone https://github.com/mohousch/NeutrinoNG.git
 ```
 
 ```bash
