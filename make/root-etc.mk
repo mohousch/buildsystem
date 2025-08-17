@@ -98,7 +98,7 @@ endif
 
 #
 # Functions for copying customized etc files from /root/etc into cdkroot targets and
-# for updating init scripts in runlevel for release targets
+# for updating init scripts in runlevel for release targets (called by target: $(D)/module_init_tools)
 #
 define adapted-etc-files
 	cd root/etc && \
