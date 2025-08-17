@@ -998,3 +998,5 @@ config.local
 /pull-stash-buildsystem.patch
 /tools/buildimage.git/compile
 /pull-stash-NeutrinoNG.patch
+/tools/buildimage.git/buildimage_config.h.in~
+/tools/buildimage.git/configure~
