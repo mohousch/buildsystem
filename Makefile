@@ -253,7 +253,7 @@ endif
 	@echo "MAINTAINER       : $(MAINTAINER)"
 	@echo "BUILD            : $(BUILD)"
 ifeq ($(BOXTYPE),)
-	@echo -e "\033[00;31mBOXTYPE		 :specify a valid BOXTYPE please run 'make' or 'make init'\033[0m"
+	@echo -e "\033[00;31mBOXTYPE		 :specify a valid BOXTYPE please run 'make init' or 'make'\033[0m"
 else
 	@echo "BOXTYPE          : $(BOXTYPE)"
 endif
@@ -276,7 +276,7 @@ ifeq ($(MAINTAINER),)
 	@echo
 endif
 	@echo
-	@echo -e "\033[01;33mIf you want to create or modify the configuration, run 'make' or 'make init'\033[0m"
+	@echo -e "\033[01;33mIf you want to create or modify the configuration, run 'make init' or 'make'\033[0m"
 	@echo
 	@echo "Your next step could be:"
 	@echo "  make image-neutrino2"
