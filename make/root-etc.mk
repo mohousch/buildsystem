@@ -38,9 +38,6 @@ DIVERSE_TOOLS_ADAPTED_ETC_FILES =
 OPENRDATE_ADAPTED_ETC_FILES = \
 	init.d/rdate.sh
 
-MODULE_INIT_TOOLS_ADAPTED_ETC_FILES = \
-	modules
-
 FUSE_ADAPTED_ETC_FILES = \
 	init.d/fuse
 
@@ -95,16 +92,4 @@ INITSCRIPTS_ADAPTED_ETC_FILES += \
 	init.d/makedev \
 	init.d/mountvirtfs
 endif
-
-#
-# Functions for copying customized etc files from /root/etc into cdkroot targets and
-# for updating init scripts in runlevel for release targets (called by target: $(D)/module_init_tools)
-#
-define adapted-etc-files
-	cd root/etc && \
-	for i in $(1); do \
-		[ -f $$i ] && install -m 644 $$i $(TARGET_DIR)/etc/$$i || true; \
-		[ "$${i%%/*}" = "init.d" ] && chmod 755 $(TARGET_DIR)/etc/$$i || true; \
-	done
-endef
 

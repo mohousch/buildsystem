@@ -119,7 +119,6 @@ $(D)/module_init_tools: $(D)/bootstrap $(D)/lsb $(ARCHIVE)/$(HOST_MODULE_INIT_TO
 		; \
 		$(MAKE); \
 		$(MAKE) install sbin_PROGRAMS="depmod modinfo modprobe" bin_PROGRAMS= DESTDIR=$(TARGET_DIR)
-	$(call adapted-etc-files, $(MODULE_INIT_TOOLS_ADAPTED_ETC_FILES))
 	$(REMOVE)/module-init-tools-$(MODULE_INIT_TOOLS_VER)
 	$(TOUCH)
 

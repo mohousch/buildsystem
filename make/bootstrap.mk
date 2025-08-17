@@ -346,13 +346,11 @@ $(D)/host_atools: $(D)/directories $(ARCHIVE)/$(HAT_CORE_SOURCE) $(ARCHIVE)/$(HA
 BOOTSTRAP  = $(D)/directories
 BOOTSTRAP += $(D)/ccache
 BOOTSTRAP += $(CROSSTOOL)
-BOOTSTRAP += $(TARGET_DIR)/lib/libc.so.6
 BOOTSTRAP += $(D)/host_pkgconfig
 BOOTSTRAP += $(D)/host_module_init_tools
 BOOTSTRAP += $(D)/host_mtd_utils
 BOOTSTRAP += $(D)/host_resize2fs
 ifeq ($(BOXARCH), sh4)
-#BOOTSTRAP += $(D)/host_mkcramfs
 BOOTSTRAP += $(D)/host_mksquashfs_lzma
 BOOTSTRAP += host_u_boot_tools
 endif

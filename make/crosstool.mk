@@ -24,6 +24,12 @@ crosstool: $(D)/directories $(ARCHIVE)/$(KERNEL_SRC) $(ARCHIVE)/$(CROSSTOOL_NG_S
 			make crosstool-backup; \
 		fi; \
 	fi
+	if test -e $(CROSS_DIR)/$(TARGET)/sys-root/lib; then \
+		cp -a $(CROSS_DIR)/$(TARGET)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
+	else \
+		cp -a $(CROSS_DIR)/$(TARGET)/lib/*so* $(TARGET_DIR)/lib; \
+	fi
+endif
 
 #
 # crosstool-ng
@@ -59,7 +65,6 @@ crosstool-ng: $(D)/directories $(ARCHIVE)/$(KERNEL_SRC) $(ARCHIVE)/$(CROSSTOOL_N
 	test -e $(CROSS_DIR)/$(TARGET)/lib || ln -sf sys-root/lib $(CROSS_DIR)/$(TARGET)/
 	rm -f $(CROSS_DIR)/$(TARGET)/sys-root/lib/libstdc++.so.6.0.20-gdb.py
 	$(REMOVE)/crosstool-ng-git-$(CROSSTOOL_NG_VER)
-endif
 
 #
 # crosstool-backup
@@ -78,15 +83,6 @@ crosstool-restore: $(CROSSTOOL_NG_BACKUP)
 		mkdir -p $(CROSS_DIR); \
 	fi;
 	tar xzvf $(CROSSTOOL_NG_BACKUP) -C $(CROSS_DIR)
-	
-# 
-# crosstool-renew
-#
-crosstool-renew:
-	ccache -cCz
-	make distclean
-	rm -rf $(CROSS_DIR)
-	make crosstool
 
 #
 # crossmenuconfig
@@ -109,14 +105,4 @@ crossmenuconfig: $(D)/directories $(ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
 linuxmenuconfig: $(D)/kernel.do_prepare
 	set -e; cd $(KERNEL_DIR); \
 		$(MAKE) menuconfig
-	
-#
-# libc
-#
-$(TARGET_DIR)/lib/libc.so.6:
-	if test -e $(CROSS_DIR)/$(TARGET)/sys-root/lib; then \
-		cp -a $(CROSS_DIR)/$(TARGET)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
-	else \
-		cp -a $(CROSS_DIR)/$(TARGET)/lib/*so* $(TARGET_DIR)/lib; \
-	fi
 
