@@ -3,9 +3,6 @@
 #
 $(D)/diverse-tools:
 	$(START_BUILD)
-	( cd root/etc && for i in $(DIVERSE_TOOLS_ADAPTED_ETC_FILES); do \
-		[ -f $$i ] && install -m 644 $$i $(TARGET_DIR)/etc/$$i || true; \
-		[ "$${i%%/*}" = "init.d" ] && chmod 755 $(TARGET_DIR)/etc/$$i || true; done ) ; \
 	( cd root/etc && for i in $(INITSCRIPTS_ADAPTED_ETC_FILES); do \
 		[ -f $$i ] && install -m 644 $$i $(TARGET_DIR)/etc/$$i || true; \
 		[ "$${i%%/*}" = "init.d" ] && chmod 755 $(TARGET_DIR)/etc/$$i || true; done ) || true ; \
@@ -33,11 +30,6 @@ $(D)/diverse-tools:
 #
 # Adapted etc files and etc read-write files
 #
-DIVERSE_TOOLS_ADAPTED_ETC_FILES =
-
-OPENRDATE_ADAPTED_ETC_FILES = \
-	init.d/rdate.sh
-
 FUSE_ADAPTED_ETC_FILES = \
 	init.d/fuse
 
