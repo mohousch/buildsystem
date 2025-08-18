@@ -30,9 +30,6 @@ $(D)/diverse-tools:
 #
 # Adapted etc files and etc read-write files
 #
-FUSE_ADAPTED_ETC_FILES = \
-	init.d/fuse
-
 BASE_FILES_ADAPTED_ETC_FILES = \
 	timezone.xml \
 	hosts \
