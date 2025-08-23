@@ -28,7 +28,7 @@ LIBGCC_VER   		= 4.8.4-149
 GLIBC_VER    		= 2.14.1-59
 STM_KERNEL_HEADERS_VER 	= 2.6.32.46-48
 
-crosstool-rpminstall: \
+crosstool.do_prepare: \
 $(ARCHIVE)/stlinux24-cross-sh4-binutils-$(BINUTILS_VER).i386.rpm \
 $(ARCHIVE)/stlinux24-cross-sh4-binutils-dev-$(BINUTILS_VER).i386.rpm \
 $(ARCHIVE)/stlinux24-cross-sh4-cpp-$(GCC_VER).i386.rpm \
@@ -45,7 +45,7 @@ $(ARCHIVE)/stlinux24-sh4-libstdc++-dev-$(LIBGCC_VER).sh4.rpm
 	touch $(D)/$(notdir $@)
 
 CROSSTOOL = crosstool
-crosstool: $(D)/directories crosstool-rpminstall
+crosstool: $(D)/directories crosstool.do_prepare
 	cp $(DRIVER_DIR)/stgfb/stmfb/linux/drivers/video/stmfb.h $(TARGET_DIR)/usr/include/linux
 	cp $(DRIVER_DIR)/player2/linux/include/linux/dvb/stm_ioctls.h $(TARGET_DIR)/usr/include/linux/dvb
 	@touch $(D)/$(notdir $@)

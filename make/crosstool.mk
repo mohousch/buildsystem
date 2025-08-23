@@ -19,7 +19,7 @@ crosstool: $(D)/directories $(ARCHIVE)/$(KERNEL_SRC) $(ARCHIVE)/$(CROSSTOOL_NG_S
 	if test -e $(CROSSTOOL_NG_BACKUP); then \
 		make crosstool-restore; \
 	else \
-		make MAKEFLAGS=--no-print-directory crosstool-ng; \
+		make MAKEFLAGS=--no-print-directory crosstool.do_prepare; \
 		if [ -e $(CROSS_DIR)/build.log.bz2 ] && [ ! -e $(CROSSTOOL_NG_BACKUP) ]; then \
 			make crosstool-backup; \
 		fi; \
@@ -29,7 +29,7 @@ endif
 #
 # crosstool-ng
 #
-crosstool-ng: $(D)/directories $(ARCHIVE)/$(KERNEL_SRC) $(ARCHIVE)/$(CROSSTOOL_NG_SOURCE) kernel.do_prepare
+crosstool.do_prepare: $(D)/directories $(ARCHIVE)/$(KERNEL_SRC) $(ARCHIVE)/$(CROSSTOOL_NG_SOURCE) kernel.do_prepare
 	make $(BUILD_TMP)
 	if [ ! -e $(CROSS_DIR) ]; then \
 		mkdir -p $(CROSS_DIR); \

@@ -422,8 +422,5 @@ $(D)/ccache: directories
 	touch $@
 
 # hack to make sure they are always copied
-PHONY += ccache
-ifeq ($(BOXARCH), $(filter $(BOXARCH), arm mips))
-PHONY += crosstool-ng crosstool
-endif
+PHONY += ccache crosstool
 

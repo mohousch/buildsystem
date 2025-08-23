@@ -17,7 +17,7 @@ clean: depsclean
 	@-rm -rf $(D)/*.do_prepare
 	@-rm -rf $(D)/*.config.status
 ifeq ($(BOXARCH), sh4)
-	@touch $(D)/crosstool-rpminstall
+	@touch $(D)/crosstool.do_prepare
 endif
 	@echo -e "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
@@ -63,4 +63,10 @@ kernel-clean:
 #
 build-clean:
 	rm -rf $(TUFSBOX_DIR)
+	
+#
+#
+#
+all-build-clean:
+	rm -rf $(BASE_DIR)/tufsbox
 
