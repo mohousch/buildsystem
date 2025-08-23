@@ -111,4 +111,3 @@ $(TARGET_DIR)/lib/libc.so.6:
 		cp -a $(CROSS_DIR)/$(TARGET)/lib/*so* $(TARGET_DIR)/lib; \
 	fi
 
-
