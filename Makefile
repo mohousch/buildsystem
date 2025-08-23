@@ -370,7 +370,7 @@ print-boards:
 	
 # print all builds
 print-builds:
-	@ls -1 tufsbox
+	@ls -1C tufsbox
 
 # for local extensions, e.g. special plugins or similar...
 # put them into $(BASE_DIR)/local since that is ignored in .gitignore
