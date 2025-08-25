@@ -9,7 +9,7 @@ export LD_LIBRARY_PATH
 #
 # BS version
 #
-export BS_NAME	     := NeutrinoNG_Buildsystem
+export BS_NAME	     := NeutrinoNG
 export BS_CYCLE	     := 204
 
 #

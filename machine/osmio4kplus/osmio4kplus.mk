@@ -78,9 +78,6 @@ $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
 	$(START_BUILD)
 	install -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	unzip -o $(ARCHIVE)/$(DRIVER_SRC) -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	for i in brcmstb-$(BOXTYPE) brcmstb-decoder ci si2183 avl6862 avl6261; do \
-		echo $$i >> $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/modules.default; \
-	done
 	$(MAKE) install-v3ddriver
 #	$(MAKE) wlan-qcom
 	$(DEPMOD) -ae -b $(TARGET_DIR) -r $(KERNEL_VER)

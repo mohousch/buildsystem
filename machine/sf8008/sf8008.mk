@@ -142,7 +142,6 @@ $(D)/driver: $(ARCHIVE)/$(DRIVER_SRC) $(D)/bootstrap $(D)/kernel
 	$(MAKE) install-tntfs
 	$(MAKE) install-wifi
 	$(MAKE) install-wifi2
-	ls $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra | sed s/.ko//g > $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/modules.default
 	$(MAKE) install-hisiplayer-libs
 	$(MAKE) install-hilib
 	$(MAKE) install-libjpeg
