@@ -18,14 +18,14 @@ NEUTRINO_PLUGINS_PATCHES = neutrino-ddt-plugins.patch
 # .version
 #
 $(TARGET_DIR)/.version:
-	echo "distro=buildsystem" > $@
-	echo "imagename=NG Buildsystem" >> $@
+	echo "distro=$(BS_NAME)" > $@
+	echo "imagename=`sed -n 's/\#define PACKAGE_NAME "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
 	echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
 	echo "homepage=https://github.com/Duckbox-Developers" >> $@
 	echo "creator=$(MAINTAINER)" >> $@
 	echo "docs=https://github.com/Duckbox-Developers" >> $@
 	echo "forum=https://github.com/Duckbox-Developers/neutrino-ddt" >> $@
-	echo "version=0200`date +%Y%m%d%H%M`" >> $@
+	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $@
 	echo "git=`git log | grep "^commit" | wc -l`" >> $@
 
 NEUTRINO_DEPS  = $(D)/bootstrap
@@ -405,14 +405,14 @@ endif
 # neutrino-ipk
 #
 $(PKGPREFIX)/.version:
-	echo "distro=$(MAINTAINER)" > $@
+	echo "distro=$(BS_NAME)" > $@
 	echo "imagename=`sed -n 's/\#define PACKAGE_NAME "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
 	echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
 	echo "homepage=https://github.com/Duckbox-Developers" >> $@
 	echo "creator=$(MAINTAINER)" >> $@
 	echo "docs=https://github.com/Duckbox-Developers" >> $@
 	echo "forum=https://github.com/Duckbox-Developers/neutrino-ddt" >> $@
-	echo "version=0200`date +%Y%m%d%H%M`" >> $@
+	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $@
 	echo "git=`git log | grep "^commit" | wc -l`" >> $@
 	
 neutrino-ipk: $(D)/neutrino.do_compile libstb-hal-ipk
