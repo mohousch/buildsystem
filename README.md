@@ -55,7 +55,7 @@ $:~ make print-boards
 - WWIO Bre2zt2c
 - Cuberevo 3000HD / IPBox 910HD
 
-* All others platforms are not tested, do it on your own risk, if you have request or issue please post it here.
+* All others platforms are not tested, do it on your own risk.
 
 
 
