@@ -48,12 +48,12 @@ $:~ make print-boards
 * Backed image can be found into ~/NeutrinoNG/tufsbox/$(machine)/image.
 
 # DISCLAIMER
-* Tested STBs:
+* Tested on:
 - Gigablue UE 4K
 - Gigablue Ultra UE
 - Gigablue 800se
 - WWIO Bre2zt2c
-- Cuberevo Mini2 (3000HD)
+- Cuberevo 3000HD / IPBox 910HD
 
 * All others platforms are not tested, do it on your own risk, if you have request or issue please post it here.
 
