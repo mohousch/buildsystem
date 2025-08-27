@@ -157,6 +157,19 @@ endif
 	ln -s ../init.d/sendsigs $(RELEASE_DIR)/etc/rc.d/rc6.d/S20sendsigs
 	ln -s ../init.d/reboot $(RELEASE_DIR)/etc/rc.d/rc6.d/S90reboot
 	touch $(RELEASE_DIR)/var/etc/.firstboot
+	ln -sf /proc/mounts $(RELEASE_DIR)/etc/mtab
+#
+# imageversion
+#
+	echo "distro=$(BS_NAME)" > $(RELEASE_DIR)/etc/.version
+	echo "imagename=NeutrinoNG" >> $(RELEASE_DIR)/etc/.version
+	echo "imageversion=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $(RELEASE_DIR)/etc/.version
+	echo "homepage=https://github.com/mohousch" >> $(RELEASE_DIR)/etc/.version
+	echo "creator=$(MAINTAINER)" >> $(RELEASE_DIR)/etc/.version
+	echo "docs=https://github.com/mohousch" >> $(RELEASE_DIR)/etc/.version
+	echo "forum=https://forum.mbremer.de" >> $(RELEASE_DIR)/etc/.version
+	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $(RELEASE_DIR)/etc/.version
+	echo "git=`git log | grep "^commit" | wc -l`" >> $(RELEASE_DIR)/etc/.version
 #
 # bin/sbin/usr/bin/usr/sbin
 #
@@ -164,10 +177,6 @@ endif
 	cp -a $(TARGET_DIR)/usr/bin/* $(RELEASE_DIR)/usr/bin/
 	cp -a $(TARGET_DIR)/sbin/* $(RELEASE_DIR)/sbin/
 	cp -a $(TARGET_DIR)/usr/sbin/* $(RELEASE_DIR)/usr/sbin/
-	echo "version=1$(BS_CYCLE)$(shell date '+%Y%m%d')$(shell date '+%H%M')" > $(RELEASE_DIR)/etc/imageversion
-	echo 
-	ln -sf /.version $(RELEASE_DIR)/var/etc/.version
-	ln -sf /proc/mounts $(RELEASE_DIR)/etc/mtab
 ifeq ($(BOXARCH), sh4)
 	cp -dp $(SKEL_ROOT)/sbin/MAKEDEV $(RELEASE_DIR)/sbin/
 	ln -sf ../sbin/MAKEDEV $(RELEASE_DIR)/dev/MAKEDEV

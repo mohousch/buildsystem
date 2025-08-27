@@ -15,19 +15,8 @@ NEUTRINO_PLUGINS_BRANCH = master
 NEUTRINO_PLUGINS_PATCHES = neutrino-ddt-plugins.patch
 
 #
-# .version
+# 
 #
-$(TARGET_DIR)/.version:
-	echo "distro=$(BS_NAME)" > $@
-	echo "imagename=`sed -n 's/\#define PACKAGE_NAME "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
-	echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
-	echo "homepage=https://github.com/Duckbox-Developers" >> $@
-	echo "creator=$(MAINTAINER)" >> $@
-	echo "docs=https://github.com/Duckbox-Developers" >> $@
-	echo "forum=https://github.com/Duckbox-Developers/neutrino-ddt" >> $@
-	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $@
-	echo "git=`git log | grep "^commit" | wc -l`" >> $@
-
 NEUTRINO_DEPS  = $(D)/bootstrap
 NEUTRINO_DEPS += $(D)/e2fsprogs
 NEUTRINO_DEPS += $(D)/ncurses  
@@ -232,8 +221,8 @@ $(D)/neutrino.do_compile: $(D)/neutrino.config.status $(SOURCE_DIR)/neutrino/src
 
 $(D)/neutrino: $(D)/neutrino.do_compile
 	$(MAKE) -C $(BUILD_TMP)/neutrino install DESTDIR=$(TARGET_DIR); \
-	rm -f $(TARGET_DIR)/.version
-	make $(TARGET_DIR)/.version
+#	rm -f $(TARGET_DIR)/.version
+#	make $(TARGET_DIR)/.version
 	$(TOUCH)
 
 neutrino-clean:
@@ -403,27 +392,14 @@ endif
 	
 #
 # neutrino-ipk
-#
-$(PKGPREFIX)/.version:
-	echo "distro=$(BS_NAME)" > $@
-	echo "imagename=`sed -n 's/\#define PACKAGE_NAME "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
-	echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(BUILD_TMP)/neutrino/config.h | sed 's/"//'`" >> $@
-	echo "homepage=https://github.com/Duckbox-Developers" >> $@
-	echo "creator=$(MAINTAINER)" >> $@
-	echo "docs=https://github.com/Duckbox-Developers" >> $@
-	echo "forum=https://github.com/Duckbox-Developers/neutrino-ddt" >> $@
-	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $@
-	echo "git=`git log | grep "^commit" | wc -l`" >> $@
-	
+#	
 neutrino-ipk: $(D)/neutrino.do_compile libstb-hal-ipk
 	$(START_BUILD)
 	rm -rf $(PKGPREFIX)
 	install -d $(PKGPREFIX)
 	install -d $(PKGS_DIR)
 	install -d $(PKGS_DIR)/$@
-	$(MAKE) -C $(BUILD_TMP)/neutrino install DESTDIR=$(PKGPREFIX); \
-	rm -f $(PKGPREFIX)/.version
-	make $(PKGPREFIX)/.version
+	$(MAKE) -C $(BUILD_TMP)/neutrino install DESTDIR=$(PKGPREFIX);
 ifneq ($(OPTIMIZATIONS), $(filter $(OPTIMIZATIONS), kerneldebug debug normal))
 	find $(PKGPREFIX)/ -name '*' -exec $(TARGET)-strip --strip-unneeded {} &>/dev/null \;
 endif
@@ -521,7 +497,6 @@ endif
 	cp -aR $(TARGET_DIR)/usr/share/fonts $(RELEASE_DIR)/usr/share/
 	cp -aR $(TARGET_DIR)/usr/share/iso-codes $(RELEASE_DIR)/usr/share/
 	cp -aR $(TARGET_DIR)/var/tuxbox/* $(RELEASE_DIR)/var/tuxbox
-	cp -dp $(TARGET_DIR)/.version $(RELEASE_DIR)/
 	install -m 0755 $(BASE_DIR)/machine/$(BOXTYPE)/files/rcS_NEUTRINO $(RELEASE_DIR)/etc/init.d/rcS.gui
 #
 # delete unnecessary files
