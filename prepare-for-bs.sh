@@ -116,6 +116,7 @@ PACKAGES="\
 	${UBUNTU:+mtools}                                                                                             \
 	${UBUNTU:+u-boot-tools}                                                                                       \
 	${UBUNTU:+android-sdk-libsparse-utils}                                                                        \
+	${UBUNTU:+libpcre3-dev}											      \
 	${UBUNTU:+lua5.2}                                                                                             \
 	${UBUNTU:+liblua5.2-dev}                                                                                      \
 	${UBUNTU:+libcap-dev}
