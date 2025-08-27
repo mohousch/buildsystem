@@ -161,15 +161,15 @@ endif
 #
 # imageversion
 #
-	echo "distro=$(BS_NAME)" > $(RELEASE_DIR)/etc/.version
-	echo "imagename=NeutrinoNG" >> $(RELEASE_DIR)/etc/.version
-	echo "imageversion=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $(RELEASE_DIR)/etc/.version
-	echo "homepage=https://github.com/mohousch" >> $(RELEASE_DIR)/etc/.version
-	echo "creator=$(MAINTAINER)" >> $(RELEASE_DIR)/etc/.version
-	echo "docs=https://github.com/mohousch" >> $(RELEASE_DIR)/etc/.version
-	echo "forum=https://forum.mbremer.de" >> $(RELEASE_DIR)/etc/.version
-	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $(RELEASE_DIR)/etc/.version
-	echo "git=`git log | grep "^commit" | wc -l`" >> $(RELEASE_DIR)/etc/.version
+	echo "distro=$(BS_NAME)" > $(RELEASE_DIR)/.version
+	echo "imagename=NeutrinoNG" >> $(RELEASE_DIR)/.version
+	echo "imageversion=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $(RELEASE_DIR)/.version
+	echo "homepage=https://github.com/mohousch" >> $(RELEASE_DIR)/.version
+	echo "creator=$(MAINTAINER)" >> $(RELEASE_DIR)/.version
+	echo "docs=https://github.com/mohousch" >> $(RELEASE_DIR)/.version
+	echo "forum=https://forum.mbremer.de" >> $(RELEASE_DIR)/.version
+	echo "version=1$(BS_CYCLE)`date +%Y%m%d%H%M`" >> $(RELEASE_DIR)/.version
+	echo "git=`git log | grep "^commit" | wc -l`" >> $(RELEASE_DIR)/.version
 #
 # bin/sbin/usr/bin/usr/sbin
 #
