@@ -514,70 +514,6 @@ $(D)/ntfs_3g: $(D)/bootstrap $(ARCHIVE)/$(NTFS_3G_SOURCE)
 	$(TOUCH)
 
 #
-# mc
-#
-MC_VER = 4.8.20
-MC_SOURCE = mc-$(MC_VER).tar.xz
-MC_PATCH = mc-$(MC_VER).patch
-
-$(ARCHIVE)/$(MC_SOURCE):
-	$(DOWNLOAD) ftp.midnight-commander.org/$(MC_SOURCE)
-
-$(D)/mc: $(D)/bootstrap $(D)/ncurses $(D)/libglib2 $(ARCHIVE)/$(MC_SOURCE)
-	$(START_BUILD)
-	$(REMOVE)/mc-$(MC_VER)
-	$(UNTAR)/$(MC_SOURCE)
-	$(CHDIR)/mc-$(MC_VER); \
-		$(call apply_patches, $(MC_PATCH)); \
-		autoreconf -fi; \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--sysconfdir=/etc \
-			--with-homedir=/var/tuxbox/config/mc \
-			--without-gpm-mouse \
-			--disable-doxygen-doc \
-			--disable-doxygen-dot \
-			--disable-doxygen-html \
-			--enable-charset \
-			--disable-nls \
-			--with-screen=ncurses \
-			--without-x \
-		; \
-		$(MAKE) all; \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -rf $(TARGET_DIR)/usr/share/mc/examples
-	find $(TARGET_DIR)/usr/share/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
-	$(REMOVE)/mc-$(MC_VER)
-	$(TOUCH)
-
-#
-# nano
-#
-NANO_VER = 2.2.6
-NANO_SOURCE = nano-$(NANO_VER).tar.gz
-
-$(ARCHIVE)/$(NANO_SOURCE):
-	$(DOWNLOAD) https://www.nano-editor.org/dist/v2.2/$(NANO_SOURCE)
-
-$(D)/nano: $(D)/bootstrap $(ARCHIVE)/$(NANO_SOURCE)
-	$(START_BUILD)
-	$(REMOVE)/nano-$(NANO_VER)
-	$(UNTAR)/$(NANO_SOURCE)
-	$(CHDIR)/nano-$(NANO_VER); \
-		$(CONFIGURE) \
-			--target=$(TARGET) \
-			--prefix=/usr \
-			--disable-nls \
-			--enable-tiny \
-			--enable-color \
-		; \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/nano-$(NANO_VER)
-	$(TOUCH)
-
-#
 # rsync
 #
 RSYNC_VER = 3.1.3
@@ -1825,6 +1761,71 @@ $(D)/f2fs-tools: $(D)/bootstrap $(D)/util_linux $(ARCHIVE)/$(F2FS-TOOLS_SOURCE)
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REMOVE)/f2fs-tools-$(F2FS-TOOLS_VER)
 	$(TOUCH)
+	
+#
+# mc
+#
+MC_VER = 4.8.20
+MC_SOURCE = mc-$(MC_VER).tar.xz
+MC_PATCH = mc-$(MC_VER).patch
+
+$(ARCHIVE)/$(MC_SOURCE):
+	$(DOWNLOAD) ftp.midnight-commander.org/$(MC_SOURCE)
+
+$(D)/mc: $(D)/bootstrap $(D)/ncurses $(D)/libglib2 $(ARCHIVE)/$(MC_SOURCE)
+	$(START_BUILD)
+	$(REMOVE)/mc-$(MC_VER)
+	$(UNTAR)/$(MC_SOURCE)
+	$(CHDIR)/mc-$(MC_VER); \
+		$(call apply_patches, $(MC_PATCH)); \
+		autoreconf -fi; \
+		$(CONFIGURE) \
+			--prefix=/usr \
+			--mandir=/.remove \
+			--sysconfdir=/etc \
+			--with-homedir=/var/tuxbox/config/mc \
+			--without-gpm-mouse \
+			--disable-doxygen-doc \
+			--disable-doxygen-dot \
+			--disable-doxygen-html \
+			--enable-charset \
+			--disable-nls \
+			--with-screen=ncurses \
+			--without-x \
+		; \
+		$(MAKE) all; \
+		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	rm -rf $(TARGET_DIR)/usr/share/mc/examples
+	find $(TARGET_DIR)/usr/share/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
+	$(REMOVE)/mc-$(MC_VER)
+	$(TOUCH)
+
+#
+# nano
+#
+NANO_VER = 2.2.6
+NANO_SOURCE = nano-$(NANO_VER).tar.gz
+
+$(ARCHIVE)/$(NANO_SOURCE):
+	$(DOWNLOAD) https://www.nano-editor.org/dist/v2.2/$(NANO_SOURCE)
+
+$(D)/nano: $(D)/bootstrap $(ARCHIVE)/$(NANO_SOURCE)
+	$(START_BUILD)
+	$(REMOVE)/nano-$(NANO_VER)
+	$(UNTAR)/$(NANO_SOURCE)
+	$(CHDIR)/nano-$(NANO_VER); \
+		$(CONFIGURE) \
+			--target=$(TARGET) \
+			--prefix=/usr \
+			--disable-nls \
+			--enable-tiny \
+			--enable-color \
+		; \
+		$(MAKE); \
+		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REMOVE)/nano-$(NANO_VER)
+	$(TOUCH)
+
 
 #
 # gdb-remote

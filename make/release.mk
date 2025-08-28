@@ -91,6 +91,13 @@ RELEASE_DEPS  += $(D)/gst_plugins_subsink
 RELEASE_DEPS  += $(D)/gst_plugins_dvbmediasink
 endif
 #
+# optional
+#
+ifeq ($(BOXARCH), $(filter $(BOXARCH), arm mips))
+RELEASE_DEPS += $(D)/mc
+RELEASE_DEPS += $(D)/nano
+endif
+#
 # graphlcd
 #
 GRAPHLCD ?= graphlcd
@@ -104,7 +111,6 @@ LCD4LINUX ?= lcd4linux
 ifeq ($(LCD4LINUX), lcd4linux)
 RELEASE_DEPS += $(D)/lcd4linux
 endif
-
 #
 # neutrino / neutrinoNG deps (optional)
 #
