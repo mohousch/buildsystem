@@ -23,15 +23,7 @@ endif
 
 distclean:
 	@echo -e "$(TERM_YELLOW)---> cleaning whole build system ... $(TERM_NORMAL)"
-	@-rm -rf $(IMAGE_DIR)
-	@-rm -rf $(RELEASE_DIR)
-	@-rm -rf $(TARGET_DIR)
-	@-rm -rf $(HOST_DIR)
-	@-rm -rf $(CROSS_DIR)
-	@-rm -rf $(BUILD_TMP)
-	@-rm -rf $(SOURCE_DIR)
-	@-rm -rf $(PKGS_DIR)
-	@-rm -rf $(D)
+	@-rm -rf $(TUFSBOX_DIR)
 	@echo -e "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 %-clean:
@@ -57,16 +49,10 @@ kernel-clean:
 	rm -f $(D)/kernel.do_compile
 	rm -f $(D)/kernel.do_prepare
 	rm -f $(TARGET_DIR)/boot/*
-
-#
-# build clean
-#
-build-clean:
-	rm -rf $(TUFSBOX_DIR)
 	
 #
 #
 #
-all-build-clean:
+builds-clean:
 	rm -rf $(BASE_DIR)/tufsbox
 
