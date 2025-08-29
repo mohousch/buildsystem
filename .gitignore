@@ -1000,3 +1000,7 @@ config.local
 /pull-stash-NeutrinoNG.patch
 /tools/buildimage.git/buildimage_config.h.in~
 /tools/buildimage.git/configure~
+/tools/eplayer4/autom4te.cache/output.3
+/tools/eplayer4/autom4te.cache/traces.3
+/tools/eplayer4/config.h.in~
+/tools/eplayer4/configure~
