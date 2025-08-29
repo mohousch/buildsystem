@@ -40,7 +40,6 @@ RELEASE_DEPS += $(D)/tools-aio-grab
 RELEASE_DEPS += $(D)/tools-showiframe
 ifeq ($(BOXARCH), sh4)
 RELEASE_DEPS += $(LIRC)
-RELEASE_DEPS += $(D)/tools-devinit
 RELEASE_DEPS += $(D)/tools-evremote2
 RELEASE_DEPS += $(D)/tools-fp_control
 RELEASE_DEPS += $(D)/tools-flashtool-fup
@@ -54,6 +53,7 @@ RELEASE_DEPS += $(D)/tools-ipbox_eeprom
 endif
 ifeq ($(BOXARCH), $(filter $(BOXARCH), arm mips))
 RELEASE_DEPS += $(D)/tools-turnoff_power
+RELEASE_DEPS += $(D)/tools-eplayer4
 endif
 #
 # wlan
