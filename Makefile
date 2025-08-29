@@ -167,7 +167,7 @@ init:
 		150) BOXTYPE="ustym4kpro";; \
 		*) BOXTYPE="gbultraue";; \
 	esac; \
-	echo "BOXTYPE=$$BOXTYPE" > .config
+	echo "BOXTYPE?=$$BOXTYPE" > .config
 	@echo ""		
 # Gstreamer
 	@echo -e "\nGstreamer as mediaplayer for neutrino2 (only for mipsel / arm)"
