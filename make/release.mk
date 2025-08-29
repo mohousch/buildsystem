@@ -112,7 +112,7 @@ ifeq ($(LCD4LINUX), lcd4linux)
 RELEASE_DEPS += $(D)/lcd4linux
 endif
 #
-# neutrino / neutrinoNG deps (optional)
+# neutrino / neutrino2 deps (optional)
 #
 RELEASE_DEPS += $(D)/ncurses  
 RELEASE_DEPS += $(D)/libcurl
